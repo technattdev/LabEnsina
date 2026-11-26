@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LabEnsina • Portal de Análises Clínicas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            background: #f4f8fc;
+            color: #1e2b3c;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        .header {
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .logo h1 span {
+            font-weight: 300;
+            color: #6fc2f0;
+        }
+        .logo small {
+            display: block;
+            font-size: 0.65rem;
+            opacity: 0.7;
+            font-weight: 300;
+            margin-top: -2px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .search-box {
+            position: relative;
+            background: #fff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .search-box input {
+            border: none;
+            padding: 0.5rem 0.8rem;
+            font-size: 0.95rem;
+            width: 220px;
+            outline: none;
+            background: transparent;
+            color: #1e2b3c;
+        }
+        .search-box button {
+            background: transparent;
+            border: none;
+            color: #1a3f62;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0 6px;
+        }
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border-radius: 16px;
+            margin-top: 6px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            display: none;
+            flex-direction: column;
+            padding: 0.5rem 0;
+            z-index: 200;
+            border: 1px solid #e6edf6;
+        }
+        .search-suggestions.active {
+            display: flex;
+        }
+        .search-suggestions .sug-item {
+            padding: 0.6rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: #1e3b5a;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .search-suggestions .sug-item:hover {
+            background: #f0f6fc;
+        }
+        .sug-item i {
+            color: #0077be;
+            width: 20px;
+            text-align: center;
+        }
+        .sug-item .sug-type {
+            font-size: 0.7rem;
+            background: #eef4fa;
+            padding: 0.1rem 0.7rem;
+            border-radius: 20px;
+            color: #005a8c;
+            margin-left: auto;
+        }
+
+        .btn-chat {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-chat:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        .btn-chat i {
+            color: #6fc2f0;
+        }
+
+        .nav-bar {
+            background: #fff;
+            padding: 0.6rem 2rem;
+            border-bottom: 1px solid #dce5ef;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            position: sticky;
+            top: 70px;
+            z-index: 99;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+        }
+        .nav-bar a {
+            color: #1e3b5a;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.2rem 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .nav-bar a:hover,
+        .nav-bar a.active {
+            color: #0077be;
+            border-bottom-color: #0077be;
+        }
+        .nav-bar a i {
+            font-size: 0.85rem;
+            color: #3d7ea6;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #dce8f2, #c5d9eb);
+            padding: 3rem 2.5rem;
+            margin: 1.2rem 1.5rem;
+            border-radius: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        .hero-text {
+            flex: 1;
+            min-width: 280px;
+        }
+        .hero-text h2 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #0a2a44;
+            line-height: 1.3;
+        }
+        .hero-text .subtitle {
+            font-size: 1.1rem;
+            color: #1f3f5a;
+            margin: 0.8rem 0 1.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .hero-text .subtitle span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        .btn-primary {
+            background: #1a3f62;
+            color: #fff;
+            padding: 0.9rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 14px rgba(26, 63, 98, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary:hover {
+            background: #0f2d4a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 63, 98, 0.4);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #1a3f62;
+            color: #1a3f62;
+            padding: 0.9rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-outline:hover {
+            background: #1a3f62;
+            color: #fff;
+        }
+        .hero-image {
+            font-size: 6rem;
+            color: #1a3f62;
+            opacity: 0.3;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .stats-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 1.5rem;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 6px 20px rgba(0, 20, 40, 0.05);
+        }
+        .stat-item {
+            text-align: center;
+            min-width: 120px;
+        }
+        .stat-item .stat-icon {
+            font-size: 2.4rem;
+            margin-bottom: 0.4rem;
+        }
+        .stat-item .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0a2a44;
+        }
+        .stat-item .stat-label {
+            font-size: 0.9rem;
+            color: #3d5a78;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0a2a44;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title i {
+            color: #0077be;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin: 1.5rem 0;
+        }
+        .card-tema {
+            background: #fff;
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 6px 18px rgba(0, 20, 40, 0.06);
+            border: 1px solid #e6edf6;
+            cursor: pointer;
+            transition: 0.4s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .card-tema.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .card-tema:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 14px 30px rgba(0, 40, 70, 0.12);
+            border-color: #6fa3cc;
+        }
+        .card-tema .card-img {
+            width: 100%;
+            height: 160px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 0.8rem;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-tema:hover .card-img {
+            transform: scale(1.03);
+        }
+        .card-tema .card-img i {
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.25);
+            padding: 20px;
+            border-radius: 50%;
+            font-size: 2.5rem;
+        }
+        .card-tema h3 {
+            font-size: 1.3rem;
+            color: #0f314b;
+        }
+        .card-tema p {
+            color: #2b4b66;
+            font-size: 0.95rem;
+            margin: 0.4rem 0 0.6rem;
+        }
+        .card-tema .tag {
+            background: #eef4fa;
+            padding: 0.2rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #005a8c;
+            display: inline-block;
+        }
+
+        .destaques-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .destaque-item {
+            background: #fff;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 20, 40, 0.05);
+            border: 1px solid #e6edf6;
+            transition: 0.3s;
+            cursor: pointer;
+            flex: 1;
+            min-width: 180px;
+            text-decoration: none;
+            color: #1e2b3c;
+        }
+        .destaque-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 40, 70, 0.1);
+            border-color: #6fa3cc;
+        }
+        .destaque-item i {
+            font-size: 1.8rem;
+            color: #0077be;
+        }
+        .destaque-item span {
+            font-weight: 600;
+            color: #0f314b;
+        }
+
+        .ia-section {
+            background: linear-gradient(135deg, #e8f0f8, #d0e0f0);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .ia-section h2 {
+            font-size: 2rem;
+            color: #0a2a44;
+        }
+        .ia-section p {
+            margin: 0.8rem 0 1.5rem;
+            color: #1f3f5a;
+        }
+        .ia-section .btn-ia {
+            background: #1a3f62;
+            color: #fff;
+            padding: 0.9rem 2.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 14px rgba(26, 63, 98, 0.3);
+        }
+        .ia-section .btn-ia:hover {
+            background: #0f2d4a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 63, 98, 0.4);
+        }
+
+        .trilha-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem 1.5rem;
+            margin: 2rem 0;
+        }
+        .trilha-step {
+            background: #fff;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 20, 40, 0.05);
+            border: 2px solid #dce5ef;
+            font-weight: 600;
+            color: #1e3b5a;
+            text-align: center;
+            min-width: 120px;
+            transition: 0.3s;
+            cursor: default;
+        }
+        .trilha-step:hover {
+            border-color: #0077be;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 40, 70, 0.1);
+        }
+        .trilha-step.inicio {
+            background: #1a3f62;
+            color: #fff;
+            border-color: #1a3f62;
+        }
+        .trilha-step.fim {
+            background: #0f2d4a;
+            color: #fff;
+            border-color: #0f2d4a;
+        }
+        .trilha-arrow {
+            font-size: 1.5rem;
+            color: #3d7ea6;
+            font-weight: 700;
+        }
+
+        .caso-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 6px 20px rgba(0, 20, 40, 0.07);
+            border: 1px solid #e6edf6;
+            max-width: 600px;
+            margin: 2rem auto;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .caso-card:hover {
+            box-shadow: 0 12px 30px rgba(0, 40, 70, 0.12);
+        }
+        .caso-card h3 {
+            color: #0a2a44;
+            margin-bottom: 0.8rem;
+        }
+        .caso-card .caso-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            font-weight: 500;
+            color: #1e3b5a;
+        }
+        .caso-card .quiz-opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 1rem;
+            text-align: left;
+        }
+        .caso-card .quiz-opcao {
+            padding: 0.7rem 1rem;
+            border: 2px solid #dce5ef;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+            background: #fafbfc;
+            font-size: 0.95rem;
+        }
+        .caso-card .quiz-opcao:hover {
+            border-color: #1a3f62;
+            background: #eef4fa;
+        }
+        .caso-card .quiz-opcao.correta {
+            border-color: #27ae60;
+            background: #d5f5e3;
+            color: #1e8449;
+        }
+        .caso-card .quiz-opcao.errada {
+            border-color: #e74c3c;
+            background: #fadbd8;
+            color: #c0392b;
+        }
+        .caso-card .feedback {
+            margin-top: 1rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        .footer {
+            background: #0f263a;
+            color: #cfdde9;
+            padding: 3rem 2rem 2rem;
+            margin-top: 3rem;
+            border-radius: 40px 40px 0 0;
+        }
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        .footer-grid h4 {
+            color: #fff;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+        .footer-grid a {
+            color: #b2ccdf;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 0.4rem;
+            transition: 0.2s;
+        }
+        .footer-grid a:hover {
+            color: #fff;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .chat-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 1000;
+        }
+        .chat-toggle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(11, 42, 74, 0.4);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .chat-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 32px rgba(11, 42, 74, 0.5);
+        }
+        .chat-toggle .badge-notif {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #e74c3c;
+            color: #fff;
+            font-size: 0.6rem;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        .chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 28px;
+            width: 380px;
+            max-width: 90vw;
+            max-height: 550px;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #dce5ef;
+            z-index: 1000;
+            animation: slideUp 0.3s ease;
+        }
+        .chat-window.aberto {
+            display: flex;
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .chat-header {
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            padding: 1rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header h4 {
+            font-weight: 500;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .chat-header h4 i {
+            color: #6fc2f0;
+        }
+        .chat-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+        .chat-close:hover {
+            color: #fff;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 1rem 1.2rem;
+            overflow-y: auto;
+            max-height: 350px;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-msg {
+            margin-bottom: 0.8rem;
+            padding: 0.6rem 1rem;
+            border-radius: 16px;
+            max-width: 85%;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            animation: msgIn 0.25s ease;
+        }
+        @keyframes msgIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .chat-msg.bot {
+            background: #e3eefa;
+            color: #1e3b5a;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .chat-msg.user {
+            background: #1a3f62;
+            color: #fff;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .chat-msg .msg-time {
+            font-size: 0.6rem;
+            opacity: 0.6;
+            margin-top: 4px;
+            display: block;
+        }
+        .chat-input-area {
+            display: flex;
+            padding: 0.8rem 1rem;
+            border-top: 1px solid #e6edf6;
+            background: #fff;
+            gap: 8px;
+        }
+        .chat-input-area input {
+            flex: 1;
+            border: 1px solid #dce5ef;
+            border-radius: 30px;
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.2s;
+        }
+        .chat-input-area input:focus {
+            border-color: #0077be;
+        }
+        .chat-input-area button {
+            background: #1a3f62;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            padding: 0.6rem 1.2rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+        .chat-input-area button:hover {
+            background: #0b2a4a;
+        }
+        .chat-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 0.5rem 1rem 0.8rem;
+            background: #f8fafc;
+            border-top: 1px solid #e6edf6;
+        }
+        .chat-suggestions button {
+            background: #e3eefa;
+            border: none;
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.75rem;
+            color: #1a3f62;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .chat-suggestions button:hover {
+            background: #c5d9eb;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.8rem;
+                padding: 1rem;
+            }
+            .logo img {
+                height: 40px;
+                width: 40px;
+            }
+            .header-actions {
+                justify-content: space-between;
+            }
+            .search-box input {
+                width: 140px;
+            }
+            .nav-bar {
+                top: 120px;
+                padding: 0.5rem 1rem;
+                gap: 0.3rem 1rem;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+            .hero {
+                margin: 0.8rem 0.5rem;
+                padding: 1.5rem;
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-text h2 {
+                font-size: 1.8rem;
+            }
+            .hero-image {
+                font-size: 3rem;
+                margin-top: 0.5rem;
+            }
+            .container {
+                padding: 0 0.8rem;
+            }
+            .chat-window {
+                width: 92vw;
+                right: 4vw;
+                bottom: 90px;
+                max-height: 70vh;
+            }
+            .chat-float {
+                bottom: 16px;
+                right: 16px;
+            }
+            .chat-toggle {
+                width: 56px;
+                height: 56px;
+                font-size: 1.5rem;
+            }
+            .card-tema .card-img {
+                height: 140px;
+            }
+            .trilha-container {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+            .trilha-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="labensina.png" alt="LabEnsina Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" />
+            <div>
+                <h1>Lab<span>Ensina</span></h1>
+                <small>portal de análises clínicas</small>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="search-box" id="searchBox">
+                <input type="text" placeholder="Pesquisar..." id="searchInput" autocomplete="off" />
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+                <div class="search-suggestions" id="searchSuggestions">
+                    <!-- preenchido dinamicamente -->
+                </div>
+            </div>
+            <button class="btn-chat" onclick="toggleChat()">
+                <i class="fas fa-robot"></i> Assistente
+            </button>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <a href="#" class="active"><i class="fas fa-home"></i> Início</a>
+        <a href="hematologia.html"><i class="fas fa-microscope"></i> Hematologia</a>
+        <a href="bioquimica.html"><i class="fas fa-vial"></i> Bioquímica</a>
+        <a href="microbiologia.html"><i class="fas fa-bacteria"></i> Microbiologia</a>
+        <a href="imunologia.html"><i class="fas fa-shield-virus"></i> Imunologia</a>
+        <a href="urinalise.html"><i class="fas fa-water"></i> Urinálise</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-text">
+            <h2>Aprenda Análises Clínicas<br>do Básico ao Avançado</h2>
+            <div class="subtitle">
+                <span><i class="fas fa-file-alt"></i> Artigos completos</span>
+                <span><i class="fas fa-robot"></i> IA</span>
+                <span><i class="fas fa-tasks"></i> Exercícios</span>
+                <span><i class="fas fa-stethoscope"></i> Casos Clínicos</span>
+            </div>
+            <div class="hero-buttons">
+                <a href="#categorias" class="btn-primary"><i class="fas fa-play"></i> Começar Agora</a>
+                <a href="#categorias" class="btn-outline"><i class="fas fa-book"></i> Explorar Matérias</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <i class="fas fa-microscope"></i>
+            <i class="fas fa-atom"></i>
+            <i class="fas fa-book-open"></i>
+        </div>
+    </section>
+
+    <!-- ESTATÍSTICAS -->
+    <section class="stats-section">
+        <div class="stat-item">
+            <div class="stat-icon">📚</div>
+            <div class="stat-number">+200</div>
+            <div class="stat-label">artigos</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">👨‍🎓</div>
+            <div class="stat-number">+1000</div>
+            <div class="stat-label">estudantes</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">🧪</div>
+            <div class="stat-number">15</div>
+            <div class="stat-label">áreas</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">🤖</div>
+            <div class="stat-number">IA</div>
+            <div class="stat-label">integrada</div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- CATEGORIAS -->
+        <h2 class="section-title" id="categorias"><i class="fas fa-layer-group"></i> Categorias</h2>
+        <div class="grid-cards">
+            <a href="hematologia.html" class="card-tema" data-delay="0">
+                <div class="card-img" style="background-image: url('https://i.pinimg.com/1200x/68/37/51/683751af3d9e250996e04748802b3006.jpg'); background-color: #c0392b;">
+                    <i class="fas fa-tint"></i>
+                </div>
+                <h3>🩸 Hematologia</h3>
+                <p>Sangue, anemias, coagulação.</p>
+                <span class="tag">42 artigos</span>
+            </a>
+            <a href="bioquimica.html" class="card-tema" data-delay="100">
+                <div class="card-img" style="background-image: url('https://i.pinimg.com/webp/1200x/27/26/f9/2726f9058128789b15d421d50093829c.webp'); background-color: #2980b9;">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <h3>🧬 Bioquímica</h3>
+                <p>Metabolismo, enzimas e exames.</p>
+                <span class="tag">38 artigos</span>
+            </a>
+            <a href="microbiologia.html" class="card-tema" data-delay="200">
+                <div class="card-img" style="background-image: url('https://i.pinimg.com/736x/67/fc/22/67fc2237713b30f02fbec3535134ee3c.jpg'); background-color: #1e8449;">
+                    <i class="fas fa-bacteria"></i>
+                </div>
+                <h3>🦠 Microbiologia</h3>
+                <p>Bactérias, fungos, vírus.</p>
+                <span class="tag">45 artigos</span>
+            </a>
+            <a href="imunologia.html" class="card-tema" data-delay="300">
+                <div class="card-img" style="background-image: url('https://i.pinimg.com/736x/dd/c1/f0/ddc1f0e492d0dbfd6c5f4f730ad9bdb9.jpg'); background-color: #6c3483;">
+                    <i class="fas fa-shield-virus"></i>
+                </div>
+                <h3>🛡️ Imunologia</h3>
+                <p>Sistema imune, sorologia, vacinas.</p>
+                <span class="tag">35 artigos</span>
+            </a>
+            <a href="urinalise.html" class="card-tema" data-delay="400">
+                <div class="card-img" style="background-image: url('https://i.pinimg.com/736x/99/b0/89/99b0896a1435f2cea5e78926fff67a27.jpg'); background-color: #1a5276;">
+                    <i class="fas fa-water"></i>
+                </div>
+                <h3>💧 Urinálise</h3>
+                <p>EAS, sedimentoscopia, urocultura.</p>
+                <span class="tag">25 artigos</span>
+            </a>
+        </div>
+
+        <!-- DESTAQUES (MAIS ACESSADOS) -->
+        <h2 class="section-title"><i class="fas fa-fire"></i> Mais acessados</h2>
+        <div class="destaques-list">
+            <a href="bioquimica.html" class="destaque-item"><i class="fas fa-flask"></i><span>Bioquímica Básica</span></a>
+            <a href="hematologia.html" class="destaque-item"><i class="fas fa-tint"></i><span>Hemograma</span></a>
+            <a href="microbiologia.html" class="destaque-item"><i class="fas fa-syringe"></i><span>Coleta de Sangue</span></a>
+            <a href="imunologia.html" class="destaque-item"><i class="fas fa-vial"></i><span>PCR</span></a>
+            <a href="urinalise.html" class="destaque-item"><i class="fas fa-water"></i><span>Urinálise</span></a>
+        </div>
+
+        <!-- IA -->
+        <div class="ia-section">
+            <h2>🤖 Tire dúvidas com IA</h2>
+            <p>Faça perguntas sobre Análises Clínicas e obtenha respostas instantâneas.</p>
+            <button class="btn-ia" onclick="toggleChat()"><i class="fas fa-comment-dots"></i> Perguntar</button>
+        </div>
+
+        <!-- TRILHAS -->
+        <h2 class="section-title"><i class="fas fa-route"></i> Trilha de Aprendizado</h2>
+        <div class="trilha-container">
+            <div class="trilha-step inicio">🚀 Iniciante</div>
+            <div class="trilha-arrow">↓</div>
+            <div class="trilha-step">🧬 Bioquímica</div>
+            <div class="trilha-arrow">↓</div>
+            <div class="trilha-step">🩸 Hematologia</div>
+            <div class="trilha-arrow">↓</div>
+            <div class="trilha-step">🛡️ Imunologia</div>
+            <div class="trilha-arrow">↓</div>
+            <div class="trilha-step">🦠 Microbiologia</div>
+            <div class="trilha-arrow">↓</div>
+            <div class="trilha-step">🔬 Parasitologia</div>
+            <div class="trilha-arrow">↓</div>
+            <div class="trilha-step fim">🎓 Especialista</div>
+        </div>
+
+         <!-- CASO CLÍNICO INTERATIVO -->
+        <h2 class="section-title"><i class="fas fa-stethoscope"></i> Caso Clínico</h2>
+        <div class="caso-card" id="casoClinicoIndex">
+            <h3>🩺 Paciente com febre e leucocitose</h3>
+            <div class="caso-info">
+                <span><strong>40 anos</strong></span>
+                <span>🌡️ Febre alta (39°C)</span>
+                <span>🩸 Leucocitose (18.000/µL)</span>
+            </div>
+            <p><em>Qual a conduta laboratorial mais adequada?</em></p>
+            <div class="quiz-opcoes">
+                <div class="quiz-opcao" onclick="responderCasoIndex('A')">A) Realizar hemocultura</div>
+                <div class="quiz-opcao" onclick="responderCasoIndex('B')">B) Solicitar raio-X de tórax</div>
+                <div class="quiz-opcao" onclick="responderCasoIndex('C')">C) Coletar urocultura</div>
+                <div class="quiz-opcao" onclick="responderCasoIndex('D')">D) Prescrever antibiótico empírico</div>
+            </div>
+            <div class="feedback" id="feedbackCasoIndex"></div>
+        </div>
+    </div>
+
+    
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h4>🧪 LabEnsina</h4>
+                <p>Aprenda Análises Clínicas<br>de forma moderna.</p>
+            </div>
+            <div>
+                <h4>Links</h4>
+                <a href="#">Matérias</a>
+                <a href="#">IA</a>
+                <a href="#">Contato</a>
+                <a href="politica_de_privacidade.html">Política de Privacidade</a>
+            </div>
+            <div>
+                <h4>Redes Sociais</h4>
+                <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 LabEnsina • Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- CHATBOT (flutuante) -->
+    <div class="chat-float">
+        <button class="chat-toggle" onclick="toggleChat()">
+            <i class="fas fa-robot"></i>
+            <span class="badge-notif">1</span>
+        </button>
+    </div>
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h4><i class="fas fa-robot"></i> Assistente LabEnsina</h4>
+            <button class="chat-close" onclick="toggleChat()">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">
+                👋 Olá! Sou o assistente do LabEnsina.<br>
+                Tire suas dúvidas sobre Hematologia, Bioquímica, Microbiologia, Imunologia ou Urinálise.
+                <span class="msg-time">Agora</span>
+            </div>
+        </div>
+        <div class="chat-suggestions">
+            <button onclick="enviarMensagem('O que é hemograma?')">Hemograma</button>
+            <button onclick="enviarMensagem('Qual a função da creatinina?')">Creatinina</button>
+            <button onclick="enviarMensagem('Como interpretar antibiograma?')">Antibiograma</button>
+            <button onclick="enviarMensagem('O que são anticorpos monoclonais?')">Anticorpos</button>
+            <button onclick="enviarMensagem('O que significa proteinúria?')">Proteinúria</button>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Digite sua pergunta..." onkeypress="if(event.key==='Enter') enviarMensagem()" />
+            <button onclick="enviarMensagem()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        function responderCasoIndex(resposta) {
+            const feedback = document.getElementById('feedbackCasoIndex');
+            const opcoes = document.querySelectorAll('#casoClinicoIndex .quiz-opcao');
+            opcoes.forEach(el => {
+                el.style.pointerEvents = 'none';
+                const txt = el.textContent.trim();
+                if (txt.startsWith('A)')) {
+                    el.classList.add(resposta === 'A' ? 'correta' : '');
+                }
+                if (txt.startsWith(resposta + ')') && resposta !== 'A') {
+                    el.classList.add('errada');
+                }
+                if (txt.startsWith('A)')) {
+                    el.classList.add('correta');
+                }
+            });
+            feedback.style.display = 'block';
+            if (resposta === 'A') {
+                feedback.textContent = '✅ Correto! Hemocultura é o padrão-ouro para investigar sepse/bacteremia.';
+                feedback.style.color = '#27ae60';
+            } else {
+                feedback.textContent = '❌ A melhor conduta é a hemocultura, pois o paciente tem febre e leucocitose, sugerindo infecção sistêmica.';
+                feedback.style.color = '#e74c3c';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            atualizarChipsIniciais();
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.card-tema').forEach(card => observer.observe(card));
+
+            const searchInput = document.getElementById('searchInput');
+            const searchSuggestions = document.getElementById('searchSuggestions');
+            const sugestoes = [
+                { termo: 'hemoglobina', tipo: 'Artigo' },
+                { termo: 'hemograma', tipo: 'Artigo' },
+                { termo: 'coleta de sangue', tipo: 'Vídeo' },
+                { termo: 'interpretação de antibiograma', tipo: 'Caso Clínico' },
+                { termo: 'função renal', tipo: 'Questão' },
+                { termo: 'bioquímica básica', tipo: 'Artigo' },
+            ];
+            searchInput.addEventListener('input', function() {
+                const valor = this.value.toLowerCase().trim();
+                if (valor.length < 1) {
+                    searchSuggestions.classList.remove('active');
+                    return;
+                }
+                const filtradas = sugestoes.filter(s => s.termo.includes(valor));
+                if (filtradas.length > 0) {
+                    searchSuggestions.innerHTML = filtradas.map(s => `
+                        <div class="sug-item" data-termo="${s.termo}">
+                            <i class="fas fa-search"></i> ${s.termo}
+                            <span class="sug-type">${s.tipo}</span>
+                        </div>
+                    `).join('');
+                    searchSuggestions.classList.add('active');
+                } else {
+                    searchSuggestions.innerHTML = '<div class="sug-item" style="color:#888;">Nenhuma sugestão encontrada</div>';
+                    searchSuggestions.classList.add('active');
+                }
+            });
+            document.addEventListener('click', function(e) {
+                if (!document.getElementById('searchBox').contains(e.target)) {
+                    searchSuggestions.classList.remove('active');
+                }
+            });
+            searchSuggestions.addEventListener('click', function(e) {
+                const item = e.target.closest('.sug-item');
+                if (item && item.dataset.termo) {
+                    searchInput.value = item.dataset.termo;
+                    searchSuggestions.classList.remove('active');
+                    alert('🔍 Buscando por: ' + item.dataset.termo + ' (' + item.querySelector('.sug-type').textContent + ')');
+                }
+            });
+            document.getElementById('searchBtn').addEventListener('click', function() {
+                const termo = searchInput.value.trim();
+                if (termo) {
+                    alert('🔍 Buscando por: ' + termo);
+                    searchSuggestions.classList.remove('active');
+                }
+            });
+        });
+        // ===== CHATBOT SIMULADO =====
+        function toggleChat() {
+            const win = document.getElementById('chatWindow');
+            win.classList.toggle('aberto');
+            // esconde badge
+            const badge = document.querySelector('.badge-notif');
+            if (badge) badge.style.display = win.classList.contains('aberto') ? 'none' : 'flex';
+        }
+
+        function enviarMensagem(msg) {
+            const input = document.getElementById('chatInput');
+            const mensagem = msg || input.value.trim();
+            if (!mensagem) return;
+
+            const chatMessages = document.getElementById('chatMessages');
+            const hora = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            // mensagem do usuário
+            chatMessages.innerHTML += `
+                <div class="chat-msg user">
+                    ${mensagem}
+                    <span class="msg-time">${hora}</span>
+                </div>`;
+
+            // resposta simulada do bot
+            setTimeout(() => {
+                let resposta = '';
+                const lowerMsg = mensagem.toLowerCase();
+                if (lowerMsg.includes('hemograma')) resposta = 'O hemograma é um exame que avalia as células do sangue: hemácias, leucócitos e plaquetas. É fundamental para diagnóstico de anemias e infecções.';
+                else if (lowerMsg.includes('creatinina')) resposta = 'A creatinina é um marcador da função renal. Níveis elevados podem indicar insuficiência renal.';
+                else if (lowerMsg.includes('antibiograma')) resposta = 'O antibiograma testa a sensibilidade de bactérias a diferentes antibióticos, guiando o tratamento.';
+                else if (lowerMsg.includes('anticorpos')) resposta = 'Anticorpos monoclonais são produzidos por células idênticas e têm alta especificidade. Usados em terapia e diagnóstico.';
+                else if (lowerMsg.includes('proteinúria')) resposta = 'Proteinúria é a presença de proteínas na urina, podendo indicar problemas renais. Deve ser investigada.';
+                else resposta = 'Ótima pergunta! Em breve terei mais informações sobre "' + mensagem + '". Que tal explorar os artigos nas categorias acima?';
+
+                chatMessages.innerHTML += `
+                    <div class="chat-msg bot">
+                        ${resposta}
+                        <span class="msg-time">${hora}</span>
+                    </div>`;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 500);
+
+            if (!msg) input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // ===== PESQUISA INTELIGENTE =====
+        const searchInput = document.getElementById('searchInput');
+        const searchSuggestions = document.getElementById('searchSuggestions');
+        const searchBox = document.getElementById('searchBox');
+
+        const sugestoes = [
+            { termo: 'hemoglobina', tipo: 'Artigo' },
+            { termo: 'hemograma', tipo: 'Artigo' },
+            { termo: 'coleta de sangue', tipo: 'Vídeo' },
+            { termo: 'interpretação de antibiograma', tipo: 'Caso Clínico' },
+            { termo: 'função renal', tipo: 'Questão' },
+            { termo: 'bioquímica básica', tipo: 'Artigo' },
+        ];
+
+        searchInput.addEventListener('input', function() {
+            const valor = this.value.toLowerCase().trim();
+            if (valor.length < 1) {
+                searchSuggestions.classList.remove('active');
+                return;
+            }
+            const filtradas = sugestoes.filter(s => s.termo.includes(valor));
+            if (filtradas.length > 0) {
+                searchSuggestions.innerHTML = filtradas.map(s => `
+                    <div class="sug-item" data-termo="${s.termo}">
+                        <i class="fas fa-search"></i> ${s.termo}
+                        <span class="sug-type">${s.tipo}</span>
+                    </div>
+                `).join('');
+                searchSuggestions.classList.add('active');
+            } else {
+                searchSuggestions.innerHTML = '<div class="sug-item" style="color:#888;">Nenhuma sugestão encontrada</div>';
+                searchSuggestions.classList.add('active');
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!searchBox.contains(e.target)) {
+                searchSuggestions.classList.remove('active');
+            }
+        });
+
+        searchSuggestions.addEventListener('click', function(e) {
+            const item = e.target.closest('.sug-item');
+            if (item && item.dataset.termo) {
+                searchInput.value = item.dataset.termo;
+                searchSuggestions.classList.remove('active');
+                // Simula busca
+                alert('🔍 Buscando por: ' + item.dataset.termo + ' (' + item.querySelector('.sug-type').textContent + ')');
+            }
+        });
+
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const termo = searchInput.value.trim();
+            if (termo) {
+                alert('🔍 Buscando por: ' + termo);
+                searchSuggestions.classList.remove('active');
+            }
+        });
+
+        // ===== ANIMAÇÕES AO ROLAR =====
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.card-tema').forEach((card, index) => {
+            card.style.transitionDelay = (index * 0.1) + 's';
+            observer.observe(card);
+        });
+
+        // também observar outras seções com animação
+        document.querySelectorAll('.stats-section, .ia-section, .caso-card, .depoimento-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = '0.6s ease';
+            observer.observe(el);
+            // quando visível, aplica estilo
+            const originalObserve = observer.observe;
+        });
+
+        // Aplicar animação nas seções
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.stats-section, .ia-section, .caso-card, .depoimento-card, .destaque-item, .trilha-step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = '0.6s ease';
+            sectionObserver.observe(el);
+        });
+    </script>
+
+    <script src="chatbot/utils.js"></script>
+<script src="chatbot/conhecimento.js"></script>
+<script src="chatbot/pesquisa.js"></script>
+<script src="chatbot/sugestoes.js"></script>
+<script src="chatbot/historico.js"></script>
+<script src="chatbot/quiz.js"></script>
+<script src="chatbot/casos.js"></script>
+<script src="chatbot/chatbot.js"></script>
+</body>
+</html>

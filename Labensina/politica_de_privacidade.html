@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LabEnsina • Política de Privacidade</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            background: #f4f8fc;
+            color: #1e2b3c;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        .header {
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .logo h1 span {
+            font-weight: 300;
+            color: #6fc2f0;
+        }
+        .logo small {
+            display: block;
+            font-size: 0.65rem;
+            opacity: 0.7;
+            font-weight: 300;
+            margin-top: -2px;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .search-box {
+            background: #fff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .search-box input {
+            border: none;
+            padding: 0.5rem 0.8rem;
+            font-size: 0.95rem;
+            width: 200px;
+            outline: none;
+            background: transparent;
+            color: #1e2b3c;
+        }
+        .search-box button {
+            background: transparent;
+            border: none;
+            color: #1a3f62;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        .btn-chat {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-chat:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        .btn-chat i {
+            color: #6fc2f0;
+        }
+
+        .nav-bar {
+            background: #fff;
+            padding: 0.6rem 2rem;
+            border-bottom: 1px solid #dce5ef;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            position: sticky;
+            top: 70px;
+            z-index: 99;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+        }
+        .nav-bar a {
+            color: #1e3b5a;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.2rem 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .nav-bar a:hover,
+        .nav-bar a.active {
+            color: #0077be;
+            border-bottom-color: #0077be;
+        }
+        .nav-bar a i {
+            font-size: 0.85rem;
+            color: #3d7ea6;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #e8f0f8, #d4e4f0);
+            padding: 2rem 2rem;
+            margin: 1.2rem 1.5rem;
+            border-radius: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .hero-text h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0a2a44;
+        }
+        .hero-text .breadcrumb {
+            font-size: 0.85rem;
+            color: #5c7f9a;
+            margin: 0.2rem 0 0.5rem;
+        }
+        .hero-text .breadcrumb a {
+            color: #0077be;
+            text-decoration: none;
+        }
+        .hero-text .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .hero-text .badge {
+            background: #1a3f62;
+            color: #fff;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+        .hero-image {
+            font-size: 4rem;
+            color: #1a3f62;
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .conteudo-box {
+            background: #fff;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 6px 18px rgba(0, 20, 40, 0.06);
+            border: 1px solid #e6edf6;
+            margin-bottom: 2rem;
+        }
+        .conteudo-box h3 {
+            color: #0a2a44;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e6edf6;
+            padding-bottom: 0.5rem;
+        }
+        .conteudo-box h4 {
+            color: #1a3f62;
+            margin-top: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .conteudo-box p {
+            color: #1e3b5a;
+            margin-bottom: 0.8rem;
+        }
+        .conteudo-box ul {
+            margin: 0.8rem 0 0.8rem 1.5rem;
+        }
+        .conteudo-box ul li {
+            margin: 0.4rem 0;
+            color: #1e3b5a;
+        }
+        .conteudo-box .highlight-box {
+            background: #d6eaf8;
+            border-left: 5px solid #1a5276;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        .conteudo-box .highlight-box strong {
+            color: #0b2a44;
+        }
+
+        .footer {
+            background: #0f263a;
+            color: #cfdde9;
+            padding: 2rem 1.5rem 1.5rem;
+            margin-top: 2.5rem;
+            border-radius: 40px 40px 0 0;
+        }
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .footer-links a {
+            color: #b2ccdf;
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        /* ===== CHATBOT (flutuante) ===== */
+        .chat-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 1000;
+        }
+        .chat-toggle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(11, 42, 74, 0.4);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .chat-toggle:hover {
+            transform: scale(1.05);
+        }
+        .chat-toggle .badge-notif {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #e74c3c;
+            color: #fff;
+            font-size: 0.6rem;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 28px;
+            width: 380px;
+            max-width: 90vw;
+            max-height: 550px;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #dce5ef;
+            z-index: 1000;
+            animation: slideUp 0.3s ease;
+        }
+        .chat-window.aberto {
+            display: flex;
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .chat-header {
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            padding: 1rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header h4 {
+            font-weight: 500;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .chat-header h4 i {
+            color: #6fc2f0;
+        }
+        .chat-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+        .chat-close:hover {
+            color: #fff;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 1rem 1.2rem;
+            overflow-y: auto;
+            max-height: 350px;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-msg {
+            margin-bottom: 0.8rem;
+            padding: 0.6rem 1rem;
+            border-radius: 16px;
+            max-width: 85%;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            animation: msgIn 0.25s ease;
+        }
+        @keyframes msgIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .chat-msg.bot {
+            background: #e3eefa;
+            color: #1e3b5a;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .chat-msg.user {
+            background: #1a3f62;
+            color: #fff;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .chat-msg .msg-time {
+            font-size: 0.6rem;
+            opacity: 0.6;
+            margin-top: 4px;
+            display: block;
+        }
+        .chat-input-area {
+            display: flex;
+            padding: 0.8rem 1rem;
+            border-top: 1px solid #e6edf6;
+            background: #fff;
+            gap: 8px;
+        }
+        .chat-input-area input {
+            flex: 1;
+            border: 1px solid #dce5ef;
+            border-radius: 30px;
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.2s;
+        }
+        .chat-input-area input:focus {
+            border-color: #0077be;
+        }
+        .chat-input-area button {
+            background: #1a3f62;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            padding: 0.6rem 1.2rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+        .chat-input-area button:hover {
+            background: #0b2a4a;
+        }
+        .chat-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 0.5rem 1rem 0.8rem;
+            background: #f8fafc;
+            border-top: 1px solid #e6edf6;
+        }
+        .chat-suggestions button {
+            background: #e3eefa;
+            border: none;
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.75rem;
+            color: #1a3f62;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .chat-suggestions button:hover {
+            background: #c5d9eb;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.8rem;
+                padding: 1rem;
+            }
+            .logo img {
+                height: 40px;
+                width: 40px;
+            }
+            .header-actions {
+                justify-content: space-between;
+            }
+            .search-box input {
+                width: 140px;
+            }
+            .nav-bar {
+                top: 120px;
+                padding: 0.5rem 1rem;
+                gap: 0.3rem 1rem;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+            .nav-bar a {
+                font-size: 0.8rem;
+                white-space: nowrap;
+            }
+            .hero {
+                margin: 0.8rem 0.5rem;
+                padding: 1.5rem;
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-text h2 {
+                font-size: 1.6rem;
+            }
+            .hero-image {
+                font-size: 3rem;
+                margin-top: 0.5rem;
+            }
+            .container {
+                padding: 0 0.8rem;
+            }
+            .chat-window {
+                width: 92vw;
+                right: 4vw;
+                bottom: 90px;
+                max-height: 70vh;
+            }
+            .chat-float {
+                bottom: 16px;
+                right: 16px;
+            }
+            .chat-toggle {
+                width: 56px;
+                height: 56px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="labensina.png" alt="LabEnsina Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" />
+            <div>
+                <h1>Lab<span>Ensina</span></h1>
+                <small>portal de análises clínicas</small>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="search-box">
+                <input type="text" placeholder="Pesquisar..." id="searchInput" />
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            <button class="btn-chat" onclick="toggleChat()">
+                <i class="fas fa-robot"></i> Assistente
+            </button>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <a href="index.html"><i class="fas fa-home"></i> Início</a>
+        <a href="hematologia.html"><i class="fas fa-microscope"></i> Hematologia</a>
+        <a href="bioquimica.html"><i class="fas fa-vial"></i> Bioquímica</a>
+        <a href="microbiologia.html"><i class="fas fa-bacteria"></i> Microbiologia</a>
+        <a href="imunologia.html"><i class="fas fa-shield-virus"></i> Imunologia</a>
+        <a href="urinalise.html"><i class="fas fa-water"></i> Urinálise</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-text">
+            <span class="badge"><i class="fas fa-lock"></i> Política de Privacidade</span>
+            <div class="breadcrumb">
+                <a href="index.html">Início</a> &gt;
+                <span>Política de Privacidade</span>
+            </div>
+            <h2>Como protegemos seus dados</h2>
+            <p>Saiba como o LabEnsina trata suas informações pessoais.</p>
+        </div>
+        <div class="hero-image"><i class="fas fa-shield-alt"></i></div>
+    </div>
+
+    <div class="container">
+        <div class="conteudo-box">
+            <h3>Política de Privacidade</h3>
+            <p><strong>Última atualização:</strong> Junho 2026</p>
+
+            <p>O LabEnsina valoriza a sua privacidade e está comprometido em proteger os dados pessoais dos usuários. Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos as informações fornecidas por você ao acessar nosso site e utilizar nossos serviços.</p>
+
+            <h4>1. Informações que coletamos</h4>
+            <p>Podemos coletar os seguintes tipos de informações:</p>
+            <ul>
+                <li><strong>Dados de navegação:</strong> Endereço IP, tipo de navegador, páginas visitadas, tempo de permanência, cliques e outras interações com o site.</li>
+                <li><strong>Dados fornecidos voluntariamente:</strong> Nome, e-mail e outras informações quando você preenche formulários (como contato, comentários ou inscrições).</li>
+                <li><strong>Cookies e tecnologias similares:</strong> Utilizamos cookies para melhorar a experiência do usuário, lembrar preferências e analisar o tráfego do site.</li>
+            </ul>
+
+            <h4>2. Como utilizamos suas informações</h4>
+            <ul>
+                <li>Para fornecer e melhorar nossos serviços educacionais.</li>
+                <li>Para personalizar sua experiência e exibir conteúdo relevante.</li>
+                <li>Para enviar comunicações, como atualizações, newsletters e respostas a dúvidas.</li>
+                <li>Para analisar o uso do site e aprimorar nossa plataforma.</li>
+                <li>Para cumprir obrigações legais e regulatórias.</li>
+            </ul>
+
+            <h4>3. Compartilhamento de dados</h4>
+            <p>O LabEnsina <strong>não vende, aluga ou compartilha</strong> seus dados pessoais com terceiros para fins comerciais. Podemos compartilhar informações apenas nas seguintes situações:</p>
+            <ul>
+                <li>Com prestadores de serviços que auxiliam na operação do site (como hospedagem, análise de dados, processamento de pagamentos), sempre sob contratos que garantam a confidencialidade.</li>
+                <li>Quando exigido por lei ou para proteger os direitos, segurança e propriedade do LabEnsina, seus usuários ou o público.</li>
+                <li>Com seu consentimento explícito.</li>
+            </ul>
+
+            <h4>4. Segurança dos dados</h4>
+            <p>Adotamos medidas técnicas e organizacionais adequadas para proteger seus dados contra acesso não autorizado, alteração, divulgação ou destruição. Utilizamos criptografia SSL/TLS para transmissão segura de dados e mantemos controles internos rigorosos.</p>
+
+            <h4>5. Seus direitos</h4>
+            <p>Você tem o direito de:</p>
+            <ul>
+                <li>Acessar, corrigir ou excluir seus dados pessoais a qualquer momento.</li>
+                <li>Revogar seu consentimento para o processamento de dados.</li>
+                <li>Solicitar a portabilidade dos seus dados.</li>
+                <li>Opor-se ao processamento para fins de marketing.</li>
+            </ul>
+            <p>Para exercer esses direitos, entre em contato conosco através do e-mail: <a href="mailto:contato@labensina.com">contato@labensina.com</a>.</p>
+
+            <h4>6. Cookies</h4>
+            <p>Utilizamos cookies para melhorar sua experiência. Você pode gerenciar suas preferências de cookies nas configurações do seu navegador. Cookies essenciais são necessários para o funcionamento do site; outros cookies (analíticos, de personalização) podem ser desativados.</p>
+
+            <h4>7. Links para sites de terceiros</h4>
+            <p>Nosso site pode conter links para outros sites. Esta Política de Privacidade se aplica apenas ao LabEnsina. Recomendamos que você leia as políticas de privacidade de quaisquer sites de terceiros que visitar.</p>
+
+            <h4>8. Alterações nesta política</h4>
+            <p>Podemos atualizar esta Política de Privacidade periodicamente. Publicaremos a versão revisada com a data de atualização. Recomendamos que você reveja esta página regularmente.</p>
+
+            <h4>9. Contato</h4>
+            <p>Se tiver dúvidas sobre esta Política de Privacidade ou sobre como tratamos seus dados, entre em contato:</p>
+            <ul>
+                <li><strong>E-mail:</strong> <a href="mailto:contato@labensina.com">contato@labensina.com</a></li>
+                <li><strong>Endereço:</strong> LabEnsina, São Paulo - SP, Brasil</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>🔒 Compromisso com a transparência:</strong> O LabEnsina acredita que a privacidade é um direito fundamental. Estamos empenhados em garantir que seus dados sejam tratados com respeito, segurança e de acordo com as leis aplicáveis, incluindo a LGPD (Lei Geral de Proteção de Dados).
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3 style="color:#fff;"><i class="fas fa-flask" style="margin-right:6px;"></i>LabEnsina</h3>
+                <p style="font-size:0.85rem;">Plataforma colaborativa para ensino em análises clínicas.</p>
+            </div>
+            <div class="footer-links">
+                <a>Contato</a>
+                <a>Sobre</a>
+                <a>Colaboradores</a>
+                <a href="politica-privacidade.html">Política de Privacidade</a>
+            </div>
+            <small>© 2026 LabEnsina • Todos os direitos reservados.</small>
+        </div>
+    </footer>
+
+    <!-- CHATBOT -->
+    <div class="chat-float">
+        <button class="chat-toggle" onclick="toggleChat()">
+            <i class="fas fa-robot"></i>
+            <span class="badge-notif">1</span>
+        </button>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h4><i class="fas fa-robot"></i> Assistente LabEnsina</h4>
+            <button class="chat-close" onclick="toggleChat()">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">
+                👋 Olá! Sou o assistente do LabEnsina.<br>
+                Tire suas dúvidas sobre análises clínicas.
+                <span class="msg-time">Agora</span>
+            </div>
+        </div>
+        <div class="chat-suggestions">
+            <button onclick="enviarMensagem('O que é hemograma?')">Hemograma</button>
+            <button onclick="enviarMensagem('O que é creatinina?')">Creatinina</button>
+            <button onclick="enviarMensagem('Como interpretar antibiograma?')">Antibiograma</button>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Digite sua pergunta..." onkeypress="if(event.key==='Enter') enviarMensagem()" />
+            <button onclick="enviarMensagem()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // ===== CHATBOT SIMPLES =====
+        function toggleChat() {
+            const win = document.getElementById('chatWindow');
+            win.classList.toggle('aberto');
+            const badge = document.querySelector('.badge-notif');
+            if (badge) badge.style.display = win.classList.contains('aberto') ? 'none' : 'flex';
+        }
+
+        function enviarMensagem(msg) {
+            const input = document.getElementById('chatInput');
+            const mensagem = msg || input.value.trim();
+            if (!mensagem) return;
+
+            const chatMessages = document.getElementById('chatMessages');
+            const hora = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            chatMessages.innerHTML += `
+                <div class="chat-msg user">
+                    ${mensagem}
+                    <span class="msg-time">${hora}</span>
+                </div>`;
+
+            setTimeout(() => {
+                let resposta = '';
+                const lowerMsg = mensagem.toLowerCase();
+                if (lowerMsg.includes('hemograma')) {
+                    resposta = 'O hemograma avalia as células do sangue: hemácias, leucócitos e plaquetas. É fundamental para diagnóstico de anemias e infecções.';
+                } else if (lowerMsg.includes('creatinina')) {
+                    resposta = 'A creatinina é um marcador da função renal. Níveis elevados podem indicar insuficiência renal.';
+                } else if (lowerMsg.includes('antibiograma')) {
+                    resposta = 'O antibiograma testa a sensibilidade de bactérias a diferentes antibióticos, guiando o tratamento.';
+                } else if (lowerMsg.includes('privacidade') || lowerMsg.includes('dados')) {
+                    resposta = 'A política de privacidade do LabEnsina protege seus dados. Não compartilhamos informações com terceiros sem consentimento. Leia mais na página de Política de Privacidade.';
+                } else {
+                    resposta = 'Ótima pergunta! Consulte nossos artigos ou explore as matérias no menu.';
+                }
+
+                chatMessages.innerHTML += `
+                    <div class="chat-msg bot">
+                        ${resposta}
+                        <span class="msg-time">${hora}</span>
+                    </div>`;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 500);
+
+            if (!msg) input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    </script>
+</body>
+</html>

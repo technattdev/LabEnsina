@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LabEnsina • Bioquímica Clínica - Guia Completo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; }
+        body { background: #f0f6fb; color: #1a2a3a; line-height: 1.8; scroll-behavior: smooth; }
+        .header {
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo img { height: 50px; width: 50px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.3); }
+        .logo h1 { font-size: 1.8rem; font-weight: 700; }
+        .logo h1 span { font-weight: 300; color: #6fc2f0; }
+        .logo small { display: block; font-size: 0.6rem; opacity: 0.7; letter-spacing: 1px; }
+        .header-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        .search-box { background: #fff; padding: 0.3rem 0.8rem; border-radius: 40px; display: flex; align-items: center; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); }
+        .search-box input { border: none; padding: 0.5rem 0.8rem; font-size: 0.95rem; width: 200px; outline: none; background: transparent; color: #1a2a3a; }
+        .search-box button { background: transparent; border: none; color: #1a3f62; font-size: 1.1rem; cursor: pointer; }
+        .btn-chat { background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; padding: 0.5rem 1.2rem; border-radius: 40px; cursor: pointer; font-weight: 500; font-size: 0.9rem; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .btn-chat:hover { background: rgba(255, 255, 255, 0.22); }
+        .btn-chat i { color: #6fc2f0; }
+
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 0.6rem 2rem;
+            border-bottom: 1px solid #dce5ef;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.8rem;
+            position: sticky;
+            top: 72px;
+            z-index: 99;
+        }
+        .nav-bar a { color: #1e3b5a; font-weight: 500; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; padding: 0.2rem 0; border-bottom: 2px solid transparent; transition: 0.2s; text-decoration: none; }
+        .nav-bar a:hover, .nav-bar a.active { color: #0077be; border-bottom-color: #0077be; }
+        .nav-bar a i { font-size: 0.85rem; color: #3d7ea6; }
+
+        .hero {
+            background: linear-gradient(135deg, #d6eaf8, #aed6f1);
+            padding: 2.5rem 2rem;
+            margin: 1.2rem 1.5rem;
+            border-radius: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .hero-text h2 { font-size: 2.4rem; font-weight: 700; color: #1a5276; }
+        .hero-text p { font-size: 1.05rem; color: #1a3f5a; max-width: 650px; }
+        .hero-text .badge { background: #1a5276; color: #fff; padding: 0.3rem 1.4rem; border-radius: 30px; font-size: 0.85rem; display: inline-block; }
+        .hero-image { font-size: 5rem; color: #1a5276; opacity: 0.25; }
+
+        /* ===== LAYOUT PRINCIPAL COM SIDEBAR ===== */
+        .main-wrapper { max-width: 1400px; margin: 1.5rem auto; padding: 0 1.5rem; display: flex; gap: 2rem; align-items: flex-start; }
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 140px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0, 20, 40, 0.06);
+            border: 1px solid #e6edf6;
+            max-height: calc(100vh - 160px);
+            overflow-y: auto;
+        }
+        .sidebar h3 { font-size: 1rem; color: #0b2a44; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+        .sidebar h3 i { color: #1a5276; }
+        .sidebar a { display: block; padding: 0.5rem 0.8rem; color: #1e3b5a; text-decoration: none; font-size: 0.85rem; border-radius: 8px; transition: 0.2s; margin-bottom: 2px; }
+        .sidebar a:hover, .sidebar a.active { background: #d6eaf8; color: #1a5276; font-weight: 600; }
+        .content-area { flex: 1; min-width: 0; }
+
+        /* ===== VISÃO GERAL ===== */
+        .visao-geral { background: #fff; border-radius: 24px; padding: 2rem; margin-bottom: 1.5rem; box-shadow: 0 6px 18px rgba(0, 20, 40, 0.05); border: 1px solid #e6edf6; }
+        .visao-geral h2 { font-size: 1.6rem; color: #0b2a44; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 10px; }
+        .visao-geral .subtitulo { color: #5c7f9a; margin-bottom: 1.2rem; font-size: 0.95rem; }
+        .topicos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.6rem; }
+        .topico-item { display: flex; align-items: center; gap: 8px; padding: 0.5rem 0.8rem; background: #f8fafc; border-radius: 10px; font-size: 0.9rem; font-weight: 500; color: #1e3b5a; transition: 0.2s; }
+        .topico-item:hover { background: #d6eaf8; }
+        .topico-item i { color: #1a5276; }
+
+        /* ===== CONTENT CARDS ===== */
+        .content-card { background: #fff; border-radius: 24px; padding: 2rem; margin: 1.5rem 0; box-shadow: 0 6px 18px rgba(0, 20, 40, 0.05); border: 1px solid #e6edf6; }
+        .content-card h3 { color: #0b2a44; font-size: 1.4rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; }
+        .content-card h4 { color: #1a5276; font-size: 1.1rem; margin: 1rem 0 0.5rem; }
+        .content-card p { color: #1e3b5a; margin-bottom: 0.8rem; text-align: justify; }
+        .content-card ul { margin: 0.8rem 0 0.8rem 1.8rem; }
+        .content-card ul li { margin: 0.4rem 0; color: #1e3b5a; }
+        .content-card .highlight-box { background: #eef4fa; border-left: 5px solid #1a5276; padding: 1rem 1.5rem; border-radius: 12px; margin: 1rem 0; }
+        .content-card .highlight-box strong { color: #0b2a44; }
+        .content-card .info-box { background: #d5f5e3; border-left: 5px solid #27ae60; padding: 1rem 1.5rem; border-radius: 12px; margin: 1rem 0; }
+        .content-card .warning-box { background: #fef9e7; border-left: 5px solid #f39c12; padding: 1rem 1.5rem; border-radius: 12px; margin: 1rem 0; }
+        .content-card .danger-box { background: #fadbd8; border-left: 5px solid #e74c3c; padding: 1rem 1.5rem; border-radius: 12px; margin: 1rem 0; }
+
+        /* ===== TABELAS ===== */
+        .table-wrap { overflow-x: auto; margin: 1rem 0; }
+        .table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .table-wrap th { background: #1a3f62; color: #fff; padding: 0.7rem 1rem; text-align: left; }
+        .table-wrap td { padding: 0.6rem 1rem; border-bottom: 1px solid #e6edf6; }
+        .table-wrap tr:nth-child(even) { background: #f8fafc; }
+        .table-wrap tr:hover { background: #d6eaf8; }
+
+        /* ===== MAPA MENTAL ===== */
+        .mapa-mental { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin: 1.5rem 0; padding: 2rem; background: #f8fafc; border-radius: 16px; }
+        .mapa-central { background: #1a5276; color: #fff; padding: 1rem 2rem; border-radius: 16px; font-weight: 700; font-size: 1.2rem; box-shadow: 0 4px 12px rgba(26, 82, 118, 0.3); }
+        .mapa-linha { display: flex; gap: 0.5rem; align-items: center; }
+        .mapa-ramo { display: flex; flex-direction: column; align-items: center; }
+        .mapa-item { background: #2980b9; color: #fff; padding: 0.6rem 1.2rem; border-radius: 10px; font-weight: 500; font-size: 0.9rem; transition: 0.3s; cursor: default; }
+        .mapa-item:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+        .mapa-item.carb { background: #e67e22; }
+        .mapa-item.lip { background: #f39c12; }
+        .mapa-item.prot { background: #27ae60; }
+        .mapa-item.acn { background: #8e44ad; }
+        .mapa-item.enz { background: #e74c3c; }
+        .mapa-item.met { background: #2c3e50; }
+        .mapa-conector { color: #1a5276; font-size: 1.5rem; font-weight: 700; }
+        .mapa-row { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+
+        /* ===== FLUXOGRAMA ===== */
+        .fluxograma { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; margin: 1.5rem 0; padding: 1.5rem; background: #f8fafc; border-radius: 16px; }
+        .fluxo-box { background: #1a5276; color: #fff; padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 600; text-align: center; min-width: 200px; box-shadow: 0 4px 12px rgba(26, 82, 118, 0.3); }
+        .fluxo-box.green { background: #27ae60; }
+        .fluxo-box.orange { background: #e67e22; }
+        .fluxo-box.purple { background: #8e44ad; }
+        .fluxo-box.red { background: #e74c3c; }
+        .fluxo-arrow { font-size: 1.5rem; color: #1a5276; font-weight: 700; }
+        .fluxo-row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+        /* ===== CARDS DE BIOMOLÉCULAS ===== */
+        .biomol-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .biomol-card { background: #f8fafc; border-radius: 16px; padding: 1.5rem; border: 2px solid #e6edf6; transition: 0.3s; text-align: center; cursor: default; }
+        .biomol-card:hover { transform: translateY(-6px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1); }
+        .biomol-card .biomol-icon { font-size: 3rem; margin-bottom: 0.5rem; }
+        .biomol-card h5 { color: #0b2a44; font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .biomol-card p { font-size: 0.85rem; color: #5c7f9a; }
+        .biomol-card.carb { border-color: #e67e22; }
+        .biomol-card.prot { border-color: #27ae60; }
+        .biomol-card.lip { border-color: #f39c12; }
+        .biomol-card.acn { border-color: #8e44ad; }
+
+        /* ===== CARDS DE EXAMES ===== */
+        .exame-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .exame-card { background: #f8fafc; border-radius: 14px; padding: 1.2rem; border: 1px solid #e6edf6; transition: 0.3s; }
+        .exame-card:hover { border-color: #1a5276; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); }
+        .exame-card h5 { color: #1a5276; margin-bottom: 0.3rem; font-size: 1rem; }
+        .exame-card .exame-valor { font-weight: 700; color: #0b2a44; font-size: 1.1rem; }
+        .exame-card .exame-desc { font-size: 0.8rem; color: #5c7f9a; margin-top: 0.3rem; }
+        .exame-card .exame-link { display: inline-block; margin-top: 0.5rem; font-size: 0.8rem; color: #2980b9; text-decoration: none; font-weight: 500; }
+        .exame-card .exame-link:hover { text-decoration: underline; }
+
+        /* ===== CURIOSIDADES ===== */
+        .curiosidade-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: #fff; border-radius: 16px; margin: 0.6rem 0; border: 1px solid #e6edf6; transition: 0.3s; }
+        .curiosidade-item:hover { border-color: #f39c12; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+        .curiosidade-icon { font-size: 2rem; flex-shrink: 0; }
+
+        /* ===== ERROS COMUNS ===== */
+        .erro-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: #fadbd8; border-radius: 16px; margin: 0.6rem 0; border: 1px solid #f5c6c6; transition: 0.3s; }
+        .erro-item:hover { border-color: #e74c3c; }
+        .erro-icon { font-size: 1.5rem; flex-shrink: 0; }
+
+        /* ===== CASO CLÍNICO / EXERCÍCIO ===== */
+        .caso-card { background: #fff; border: 2px solid #e6edf6; border-radius: 20px; padding: 1.5rem; margin: 1rem 0; transition: 0.3s; }
+        .caso-card:hover { border-color: #1a5276; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); }
+        .caso-card .paciente-info { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 0.8rem; }
+        .caso-card .paciente-icon { font-size: 3rem; }
+        .caso-card .quiz-opcoes { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.8rem; }
+        .caso-card .quiz-opcao { padding: 0.7rem 1rem; border: 2px solid #dce5ef; border-radius: 12px; cursor: pointer; font-weight: 500; transition: 0.2s; background: #fafbfc; }
+        .caso-card .quiz-opcao:hover { border-color: #1a5276; background: #d6eaf8; }
+        .caso-card .quiz-opcao.correta { border-color: #27ae60; background: #d5f5e3; color: #1e8449; }
+        .caso-card .quiz-opcao.errada { border-color: #e74c3c; background: #fadbd8; color: #c0392b; }
+        .caso-card .quiz-feedback { margin-top: 0.8rem; font-weight: 600; display: none; }
+
+        /* ===== QUIZ FINAL ===== */
+        .quiz-final .quiz-opcoes { display: flex; flex-direction: column; gap: 0.6rem; margin: 1rem 0; }
+        .quiz-final .quiz-opcao { padding: 0.8rem 1.2rem; border: 2px solid #dce5ef; border-radius: 14px; cursor: pointer; font-weight: 500; transition: 0.2s; background: #fafbfc; font-size: 0.95rem; }
+        .quiz-final .quiz-opcao:hover { border-color: #1a5276; }
+        .quiz-final .quiz-opcao.selecionada { border-color: #1a5276; background: #d6eaf8; }
+        .quiz-final .quiz-opcao.correta { border-color: #27ae60; background: #d5f5e3; }
+        .quiz-final .quiz-opcao.errada { border-color: #e74c3c; background: #fadbd8; }
+        .btn-responder { background: #1a5276; color: #fff; border: none; padding: 0.8rem 2rem; border-radius: 30px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: 0.3s; }
+        .btn-responder:hover { background: #0f3a52; }
+        .btn-responder:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ===== RESUMO ===== */
+        .resumo-list { list-style: none; padding: 0; }
+        .resumo-list li { padding: 0.5rem 0; border-bottom: 1px solid #e6edf6; display: flex; align-items: center; gap: 10px; }
+        .resumo-list li i { color: #27ae60; }
+
+        /* ===== NAVEGAÇÃO ENTRE DISCIPLINAS ===== */
+        .navegacao-disciplinas { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+        .nav-disciplina { display: flex; align-items: center; gap: 10px; padding: 1rem 1.5rem; background: #fff; border-radius: 16px; text-decoration: none; color: #1e3b5a; font-weight: 500; border: 2px solid #e6edf6; transition: 0.3s; flex: 1; min-width: 200px; }
+        .nav-disciplina:hover { border-color: #1a5276; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); }
+        .nav-disciplina.anterior { text-align: left; }
+        .nav-disciplina.proxima { text-align: right; justify-content: flex-end; }
+        .nav-disciplina .nav-label { font-size: 0.75rem; color: #5c7f9a; }
+        .nav-disciplina .nav-titulo { font-size: 1rem; font-weight: 600; color: #0b2a44; }
+
+        /* ===== CIENTISTA CARD ===== */
+        .cientista-card { background: #f8fafc; border-radius: 16px; padding: 1.5rem; margin: 1rem 0; border: 1px solid #e6edf6; }
+        .cientista-card h4 { color: #0b2a44; font-size: 1.2rem; }
+        .cientista-card .area { color: #1a6b8a; font-weight: 500; font-size: 0.9rem; }
+
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        @media (max-width: 768px) {
+            .grid-2col { grid-template-columns: 1fr; }
+            .hero { flex-direction: column; text-align: center; }
+            .hero-text h2 { font-size: 1.8rem; }
+            .nav-bar { top: 110px; overflow-x: auto; flex-wrap: nowrap; }
+            .nav-bar a { font-size: 0.8rem; white-space: nowrap; }
+            .header { flex-direction: column; align-items: stretch; gap: 0.8rem; padding: 1rem; }
+            .search-box input { width: 120px; }
+            .main-wrapper { flex-direction: column; padding: 0 0.8rem; }
+            .sidebar { position: static; width: 100%; max-height: none; margin-bottom: 1rem; }
+            .sidebar a { display: inline-block; margin: 2px; }
+            .topicos-grid { grid-template-columns: repeat(2, 1fr); }
+            .biomol-grid { grid-template-columns: 1fr 1fr; }
+            .exame-grid { grid-template-columns: 1fr; }
+            .mapa-row { flex-direction: column; align-items: center; }
+            .fluxo-row { flex-direction: column; align-items: center; }
+            .navegacao-disciplinas { flex-direction: column; }
+        }
+
+        .footer { background: #0f263a; color: #cfdde9; padding: 2.5rem 1.5rem 1.8rem; margin-top: 3rem; border-radius: 40px 40px 0 0; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 1.8rem; }
+        .footer-links a { color: #b2ccdf; font-size: 0.9rem; cursor: pointer; text-decoration: none; }
+        .footer-links a:hover { color: #fff; }
+
+        /* ===== CHATBOT ===== */
+        .chat-float { position: fixed; bottom: 28px; right: 28px; z-index: 1000; }
+        .chat-toggle { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(145deg, #0b2a4a, #1a3f62); color: #fff; border: none; font-size: 1.8rem; cursor: pointer; box-shadow: 0 6px 24px rgba(11, 42, 74, 0.4); transition: 0.3s; display: flex; align-items: center; justify-content: center; position: relative; }
+        .chat-toggle:hover { transform: scale(1.05); }
+        .chat-toggle .badge-notif { position: absolute; top: -4px; right: -4px; background: #e74c3c; color: #fff; font-size: 0.6rem; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .chat-window { position: fixed; bottom: 100px; right: 28px; width: 380px; max-width: 90vw; max-height: 550px; background: #fff; border-radius: 24px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2); display: none; flex-direction: column; overflow: hidden; border: 1px solid #dce5ef; z-index: 1000; animation: slideUp 0.3s ease; }
+        .chat-window.aberto { display: flex; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .chat-header { background: linear-gradient(145deg, #0b2a4a, #1a3f62); color: #fff; padding: 1rem 1.2rem; display: flex; justify-content: space-between; align-items: center; }
+        .chat-header h4 { font-weight: 500; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+        .chat-header h4 i { color: #6fc2f0; }
+        .chat-close { background: none; border: none; color: rgba(255, 255, 255, 0.7); font-size: 1.4rem; cursor: pointer; }
+        .chat-close:hover { color: #fff; }
+        .chat-messages { flex: 1; padding: 1rem 1.2rem; overflow-y: auto; max-height: 350px; background: #f8fafc; display: flex; flex-direction: column; }
+        .chat-msg { margin-bottom: 0.8rem; padding: 0.6rem 1rem; border-radius: 16px; max-width: 85%; font-size: 0.9rem; line-height: 1.5; animation: msgIn 0.25s ease; }
+        @keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .chat-msg.bot { background: #e3eefa; color: #1e3b5a; align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-msg.user { background: #1a3f62; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-msg .msg-time { font-size: 0.6rem; opacity: 0.6; margin-top: 4px; display: block; }
+        .chat-input-area { display: flex; padding: 0.8rem 1rem; border-top: 1px solid #e6edf6; background: #fff; gap: 8px; }
+        .chat-input-area input { flex: 1; border: 1px solid #dce5ef; border-radius: 30px; padding: 0.6rem 1rem; font-size: 0.9rem; outline: none; }
+        .chat-input-area input:focus { border-color: #0077be; }
+        .chat-input-area button { background: #1a3f62; color: #fff; border: none; border-radius: 30px; padding: 0.6rem 1.2rem; font-weight: 500; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
+        .chat-input-area button:hover { background: #0b2a4a; }
+        .chat-suggestions { display: flex; flex-wrap: wrap; gap: 6px; padding: 0.5rem 1rem 0.8rem; background: #f8fafc; border-top: 1px solid #e6edf6; }
+        .chat-suggestions button { background: #e3eefa; border: none; border-radius: 20px; padding: 0.2rem 0.8rem; font-size: 0.75rem; color: #1a3f62; cursor: pointer; transition: 0.2s; }
+        .chat-suggestions button:hover { background: #c5d9eb; }
+
+        html { scroll-behavior: smooth; scroll-padding-top: 150px; }
+
+        /* ===== VALORES DE REFERÊNCIA ===== */
+        .valores-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .valor-card { background: #f8fafc; border-radius: 14px; padding: 1rem; border: 1px solid #e6edf6; }
+        .valor-card h5 { color: #1a5276; margin-bottom: 0.4rem; }
+        .valor-card .vr-item { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.9rem; }
+        .valor-card .vr-item span:last-child { font-weight: 600; color: #0b2a44; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="labensina.png" alt="LabEnsina" onerror="this.style.display='none'" />
+            <div>
+                <h1>Lab<span>Ensina</span></h1>
+                <small>bioquímica clínica • guia completo</small>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="search-box">
+                <input type="text" placeholder="Pesquisar..." id="searchInput" />
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            <button class="btn-chat" onclick="toggleChat()">
+                <i class="fas fa-robot"></i> Assistente
+            </button>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <a href="index.html"><i class="fas fa-home"></i> Início</a>
+        <a href="hematologia.html"><i class="fas fa-microscope"></i> Hematologia</a>
+        <a href="bioquimica.html" class="active"><i class="fas fa-vial"></i> Bioquímica</a>
+        <a href="microbiologia.html"><i class="fas fa-bacteria"></i> Microbiologia</a>
+        <a href="imunologia.html"><i class="fas fa-shield-virus"></i> Imunologia</a>
+        <a href="urinalise.html"><i class="fas fa-heartbeat"></i> Urinálise</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-text">
+            <span class="badge"><i class="fas fa-flask"></i> Bioquímica Clínica</span>
+            <h2>Guia Completo de Bioquímica Clínica</h2>
+            <p>Fundamentos, biomarcadores, métodos diagnósticos e correlações clínico-laboratoriais das doenças metabólicas, renais, hepáticas, cardíacas e endócrinas.</p>
+        </div>
+        <div class="hero-image"><i class="fas fa-flask"></i></div>
+    </div>
+
+    <!-- ===== LAYOUT PRINCIPAL COM SIDEBAR ===== -->
+    <div class="main-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <h3><i class="fas fa-list"></i> Nesta página</h3>
+            <a href="#visao-geral">📋 Visão Geral</a>
+            <a href="#mapa-mental">🗺️ Mapa Mental</a>
+            <a href="#introducao">📖 Introdução</a>
+            <a href="#historia">📜 História</a>
+            <a href="#cientistas">👨‍🔬 Cientistas</a>
+            <a href="#fluxograma">🔀 Fluxograma do Metabolismo</a>
+            <a href="#biomoleculas">🧬 Biomoléculas</a>
+            <a href="#enzimas">⚡ Enzimas</a>
+            <a href="#exames">🔍 Exames e Biomarcadores</a>
+            <a href="#relacao-clinica">🏥 Relação com Exames</a>
+            <a href="#valores-ref">📊 Valores de Referência</a>
+            <a href="#doencas">🩺 Doenças e Correlações</a>
+            <a href="#curiosidades">💡 Você Sabia?</a>
+            <a href="#erros-comuns">❌ Erros Comuns</a>
+            <a href="#exercicios">📝 Exercícios</a>
+            <a href="#casos-clinicos">🩺 Casos Clínicos</a>
+            <a href="#quiz-final">❓ Quiz Final</a>
+            <a href="#resumo">✅ Resumo</a>
+            <a href="#referencias">📚 Referências</a>
+        </aside>
+
+        <div class="content-area">
+
+            <!-- 1. VISÃO GERAL -->
+            <div class="visao-geral" id="visao-geral">
+                <h2><i class="fas fa-dna" style="color:#1a5276;"></i> 🧬 BIOQUÍMICA</h2>
+                <p class="subtitulo">Aprenda como as reações químicas do organismo explicam o funcionamento das células e os exames laboratoriais.</p>
+                <p style="margin-bottom:1rem; font-weight:500;">📖 <strong>Nesta matéria você verá:</strong></p>
+                <div class="topicos-grid">
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Biomoléculas</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Enzimas</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Carboidratos</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Lipídios</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Proteínas</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Metabolismo</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Glicólise</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Ciclo de Krebs</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Cadeia Respiratória</div>
+                </div>
+            </div>
+
+            <!-- 2. MAPA MENTAL DA BIOQUÍMICA -->
+            <div class="content-card" id="mapa-mental">
+                <h3><i class="fas fa-project-diagram" style="color:#1a5276;"></i> Mapa Mental da Bioquímica</h3>
+                <p>Visualize os principais ramos da Bioquímica de forma integrada:</p>
+                <div class="mapa-mental">
+                    <div class="mapa-central">🧬 BIOQUÍMICA</div>
+                    <div class="mapa-conector">│</div>
+                    <div style="text-align:center; font-size:1.2rem; color:#1a5276; font-weight:700;">────────┼────────</div>
+                    <div class="mapa-row">
+                        <div class="mapa-item carb">🍞 Carboidratos</div>
+                        <div class="mapa-item lip">🧈 Lipídios</div>
+                        <div class="mapa-item prot">🥩 Proteínas</div>
+                        <div class="mapa-item acn">🧬 Ácidos Nucleicos</div>
+                        <div class="mapa-item enz">⚡ Enzimas</div>
+                        <div class="mapa-item met">🔥 Metabolismo</div>
+                    </div>
+                </div>
+                <p style="text-align:center; font-size:0.9rem; color:#5c7f9a; margin-top:0.5rem;">Este mapa ajuda quem está começando a entender a organização da disciplina.</p>
+            </div>
+
+            <!-- INTRODUÇÃO -->
+            <div class="content-card" id="introducao">
+                <h3><i class="fas fa-book-open" style="color:#1a5276;"></i> Introdução à Bioquímica Clínica</h3>
+                <p>A <strong>Bioquímica Clínica</strong>, também denominada Química Clínica ou Patologia Clínica, é a área da medicina laboratorial que estuda as alterações bioquímicas do organismo humano em situações de saúde e doença. Por meio da análise de fluidos biológicos — principalmente sangue (soro ou plasma), urina e, em menor escala, líquido cefalorraquidiano, efusões e outros — é possível diagnosticar, monitorar e prognosticar inúmeras condições patológicas.</p>
+                <p>A bioquímica clínica moderna evoluiu de simples testes de urina na antiguidade para um campo complexo que integra conhecimentos de química, biologia molecular, fisiopatologia, farmacologia e tecnologia de ponta.</p>
+                <div class="info-box">
+                    <strong>🟢 Importante:</strong> Estima-se que mais de <strong>70% das decisões médicas</strong> sejam baseadas em resultados de exames laboratoriais, sendo a bioquímica clínica responsável pela maior parte dessas análises.
+                </div>
+            </div>
+
+            <!-- 3. FLUXOGRAMA DO METABOLISMO -->
+            <div class="content-card" id="fluxograma">
+                <h3><i class="fas fa-chart-line" style="color:#1a5276;"></i> Fluxograma do Metabolismo Energético</h3>
+                <p>Um dos maiores desafios em Bioquímica é visualizar as etapas. Este diagrama resume a produção de energia:</p>
+                <div class="fluxograma">
+                    <div class="fluxo-box">🍞 Glicose</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box orange">⚡ Glicólise (citoplasma)</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box">🧪 Piruvato</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box purple">🔄 Acetil-CoA</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box green">🔁 Ciclo de Krebs (mitocôndria)</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box red">🔗 Cadeia Respiratória</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box" style="background:#f39c12; font-size:1.2rem;">⚡ ATP (~30-32 moléculas)</div>
+                </div>
+                <p style="text-align:center; font-size:0.9rem; color:#5c7f9a; margin-top:0.5rem;">Cada molécula de glicose pode gerar cerca de 30–32 moléculas de ATP em condições aeróbicas.</p>
+            </div>
+
+            <!-- HISTÓRIA -->
+            <div class="content-card" id="historia">
+                <h3><i class="fas fa-history" style="color:#1a5276;"></i> História da Bioquímica Clínica</h3>
+                <p>A bioquímica clínica tem suas raízes na antiguidade, com a prática da uroscopia — análise visual da urina — utilizada por médicos gregos e romanos para diagnosticar doenças. Hipócrates (460-377 a.C.) já correlacionava alterações na urina com condições clínicas.</p>
+                <ul>
+                    <li><strong>1840</strong> — Justus von Liebig desenvolve métodos para análise quantitativa de ureia e creatinina.</li>
+                    <li><strong>1850</strong> — Thomas Addison descreve a insuficiência adrenal e a anemia perniciosa.</li>
+                    <li><strong>1900</strong> — A introdução da colorimetria permite quantificar substâncias como glicose e ureia.</li>
+                    <li><strong>1920</strong> — Desenvolvimento dos primeiros espectrofotômetros.</li>
+                    <li><strong>1950</strong> — Automação laboratorial com o AutoAnalyzer de Leonard Skeggs.</li>
+                    <li><strong>1980</strong> — Imunoensaios (ELISA, RIA) revolucionam a dosagem de hormônios e proteínas.</li>
+                    <li><strong>2000</strong> — Espectrometria de massa em tandem e biologia molecular ampliam a capacidade diagnóstica.</li>
+                </ul>
+            </div>
+
+            <!-- CIENTISTAS -->
+            <div class="content-card" id="cientistas">
+                <h3><i class="fas fa-user-graduate" style="color:#1a5276;"></i> Cientistas Pioneiros da Bioquímica Clínica</h3>
+                <div class="cientista-card">
+                    <h4>Justus von Liebig (1803-1873)</h4>
+                    <span class="area">Químico alemão • Pai da química orgânica</span>
+                    <p>Desenvolveu métodos para análise de ureia, creatinina e ácido úrico. Estabeleceu que a ureia é o principal produto do metabolismo nitrogenado.</p>
+                </div>
+                <div class="cientista-card">
+                    <h4>Thomas Addison (1793-1860)</h4>
+                    <span class="area">Médico inglês • Endocrinologia e hematologia</span>
+                    <p>Descreveu a doença de Addison e a anemia perniciosa, sendo um dos primeiros a correlacionar achados laboratoriais com manifestações clínicas.</p>
+                </div>
+                <div class="cientista-card">
+                    <h4>Leonard Skeggs (1918-2002)</h4>
+                    <span class="area">Bioquímico americano • Automação laboratorial</span>
+                    <p>Inventou o AutoAnalyzer em 1957, o primeiro equipamento automatizado para análises bioquímicas.</p>
+                </div>
+                <div class="cientista-card">
+                    <h4>Rosalyn Yalow (1921-2011)</h4>
+                    <span class="area">Física médica americana • Prêmio Nobel 1977</span>
+                    <p>Desenvolveu o radioimunoensaio (RIA), técnica que revolucionou a endocrinologia e a bioquímica clínica.</p>
+                </div>
+            </div>
+
+            <!-- 4. CARDS DAS BIOMOLÉCULAS -->
+            <div class="content-card" id="biomoleculas">
+                <h3><i class="fas fa-cubes" style="color:#1a5276;"></i> Biomoléculas</h3>
+                <p>As principais biomoléculas que compõem os seres vivos e são analisadas nos exames laboratoriais:</p>
+                <div class="biomol-grid">
+                    <div class="biomol-card carb">
+                        <div class="biomol-icon">🍞</div>
+                        <h5>Carboidratos</h5>
+                        <p>Fonte rápida de energia. Ex: glicose, frutose, amido, glicogênio.</p>
+                    </div>
+                    <div class="biomol-card prot">
+                        <div class="biomol-icon">🥩</div>
+                        <h5>Proteínas</h5>
+                        <p>Estrutura, enzimas, transporte e defesa. Ex: albumina, hemoglobina, enzimas.</p>
+                    </div>
+                    <div class="biomol-card lip">
+                        <div class="biomol-icon">🧈</div>
+                        <h5>Lipídios</h5>
+                        <p>Reserva energética e membranas. Ex: colesterol, triglicerídeos, fosfolipídios.</p>
+                    </div>
+                    <div class="biomol-card acn">
+                        <div class="biomol-icon">🧬</div>
+                        <h5>DNA/RNA</h5>
+                        <p>Informação genética. Ex: DNA genômico, RNA mensageiro, microRNAs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. TABELA DAS ENZIMAS -->
+            <div class="content-card" id="enzimas">
+                <h3><i class="fas fa-bolt" style="color:#1a5276;"></i> Classificação das Enzimas</h3>
+                <p>As enzimas são proteínas que catalisam reações bioquímicas. A classificação internacional (IUBMB) divide as enzimas em 6 classes:</p>
+                <div class="table-wrap">
+                    <table>
+                        <tr><th>Classe</th><th>Função</th><th>Exemplo Clínico</th></tr>
+                        <tr><td>1. Oxidoredutases</td><td>Oxidação/redução</td><td>Desidrogenase láctica (LDH)</td></tr>
+                        <tr><td>2. Transferases</td><td>Transferência de grupos</td><td>ALT (TGP), AST (TGO) — transaminases</td></tr>
+                        <tr><td>3. Hidrolases</td><td>Hidrólise</td><td>Amilase, lipase, fosfatase alcalina</td></tr>
+                        <tr><td>4. Liases</td><td>Adição/remoção de grupos</td><td>Fumarase (Ciclo de Krebs)</td></tr>
+                        <tr><td>5. Isomerases</td><td>Isomerização</td><td>Fosfoglicose isomerase (glicólise)</td></tr>
+                        <tr><td>6. Ligases</td><td>União de moléculas</td><td>DNA ligase</td></tr>
+                    </table>
+                </div>
+                <div class="highlight-box">
+                    <strong>🧪 Aplicação clínica:</strong> A dosagem de enzimas como ALT, AST, amilase, lipase, CK e LDH é fundamental para o diagnóstico de doenças hepáticas, pancreatite, infarto do miocárdio e outras condições.
+                </div>
+            </div>
+
+            <!-- PRINCIPAIS EXAMES -->
+            <div class="content-card" id="exames">
+                <h3><i class="fas fa-vial" style="color:#1a5276;"></i> Principais Exames e Biomarcadores</h3>
+                <h4>1. Perfil Metabólico Básico</h4>
+                <ul>
+                    <li><strong>Glicose:</strong> 70-100 mg/dL (jejum). Diabetes: ≥126 mg/dL.</li>
+                    <li><strong>Ureia:</strong> 15-40 mg/dL. Elevada na insuficiência renal.</li>
+                    <li><strong>Creatinina:</strong> 0,7-1,3 mg/dL. Marcador de função renal.</li>
+                    <li><strong>Eletrólitos:</strong> Na⁺, K⁺, Cl⁻, HCO₃⁻.</li>
+                </ul>
+                <h4>2. Perfil Hepático</h4>
+                <ul>
+                    <li><strong>ALT (TGP):</strong> 7-56 U/L. Lesão hepatocelular.</li>
+                    <li><strong>AST (TGO):</strong> 5-40 U/L. Lesão hepática, cardíaca, muscular.</li>
+                    <li><strong>GGT:</strong> 8-61 U/L. Doença hepatobiliar, álcool.</li>
+                    <li><strong>Fosfatase Alcalina:</strong> 44-147 U/L. Doenças biliares e ósseas.</li>
+                    <li><strong>Bilirrubina Total:</strong> 0,3-1,2 mg/dL.</li>
+                    <li><strong>Albumina:</strong> 3,5-5,0 g/dL.</li>
+                </ul>
+                <h4>3. Perfil Lipídico</h4>
+                <ul>
+                    <li><strong>Colesterol Total:</strong> < 190 mg/dL.</li>
+                    <li><strong>LDL:</strong> < 130 mg/dL.</li>
+                    <li><strong>HDL:</strong> > 40 (H) / > 50 (M) mg/dL.</li>
+                    <li><strong>Triglicerídeos:</strong> < 150 mg/dL.</li>
+                </ul>
+                <h4>4. Marcadores Cardíacos</h4>
+                <ul>
+                    <li><strong>Troponina I/T:</strong> < 0,04 ng/mL.</li>
+                    <li><strong>CK-MB:</strong> 0-25 U/L.</li>
+                    <li><strong>BNP:</strong> < 100 pg/mL.</li>
+                </ul>
+            </div>
+
+            <!-- 6. RELAÇÃO COM EXAMES LABORATORIAIS -->
+            <div class="content-card" id="relacao-clinica">
+                <h3><i class="fas fa-stethoscope" style="color:#1a5276;"></i> Relação com Exames Laboratoriais</h3>
+                <p>Conecte a teoria com a prática clínica. Após cada tema, veja a aplicação diagnóstica:</p>
+                <div class="exame-grid">
+                    <div class="exame-card">
+                        <h5>🍞 Glicose</h5>
+                        <p class="exame-valor">Glicemia em jejum</p>
+                        <p class="exame-desc">Utilizado para diagnóstico de <strong>diabetes mellitus</strong>. Normal: 70-99 mg/dL.</p>
+                        <a href="#doencas" class="exame-link">Ver mais sobre diabetes →</a>
+                    </div>
+                    <div class="exame-card">
+                        <h5>🧪 ALT e AST</h5>
+                        <p class="exame-valor">Transaminases</p>
+                        <p class="exame-desc"><strong>Avaliação hepática.</strong> Elevação indica lesão dos hepatócitos.</p>
+                        <a href="#doencas" class="exame-link">Ver doenças hepáticas →</a>
+                    </div>
+                    <div class="exame-card">
+                        <h5>🩸 Creatinina</h5>
+                        <p class="exame-valor">Função renal</p>
+                        <p class="exame-desc"><strong>Avaliação da função renal.</strong> TFG estimada a partir da creatinina sérica.</p>
+                        <a href="#doencas" class="exame-link">Ver doença renal →</a>
+                    </div>
+                    <div class="exame-card">
+                        <h5>❤️ Troponina</h5>
+                        <p class="exame-valor">Marcador cardíaco</p>
+                        <p class="exame-desc"><strong>Infarto do miocárdio.</strong> Específica para lesão do músculo cardíaco.</p>
+                        <a href="#doencas" class="exame-link">Ver síndrome coronariana →</a>
+                    </div>
+                    <div class="exame-card">
+                        <h5>🧈 Colesterol</h5>
+                        <p class="exame-valor">Perfil lipídico</p>
+                        <p class="exame-desc"><strong>Risco cardiovascular.</strong> LDL elevado é fator de risco para aterosclerose.</p>
+                    </div>
+                    <div class="exame-card">
+                        <h5>🦴 Cálcio</h5>
+                        <p class="exame-valor">Metabolismo ósseo</p>
+                        <p class="exame-desc"><strong>Doenças ósseas e renais.</strong> Regulado pelo PTH e vitamina D.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. VALORES DE REFERÊNCIA -->
+            <div class="content-card" id="valores-ref">
+                <h3><i class="fas fa-table" style="color:#1a5276;"></i> Valores de Referência</h3>
+                <p>Consulte rapidamente os principais parâmetros bioquímicos:</p>
+                <div class="valores-grid">
+                    <div class="valor-card">
+                        <h5>🍞 Glicemia em jejum</h5>
+                        <div class="vr-item"><span>Normal</span><span>70–99 mg/dL</span></div>
+                        <div class="vr-item"><span>Pré-diabetes</span><span>100–125 mg/dL</span></div>
+                        <div class="vr-item"><span>Diabetes</span><span>≥126 mg/dL</span></div>
+                    </div>
+                    <div class="valor-card">
+                        <h5>🧈 Colesterol total</h5>
+                        <div class="vr-item"><span>Desejável</span><span>&lt;190 mg/dL</span></div>
+                        <div class="vr-item"><span>Limitrofe</span><span>190–239 mg/dL</span></div>
+                        <div class="vr-item"><span>Elevado</span><span>≥240 mg/dL</span></div>
+                    </div>
+                    <div class="valor-card">
+                        <h5>🧪 Triglicerídeos</h5>
+                        <div class="vr-item"><span>Desejável</span><span>&lt;150 mg/dL</span></div>
+                        <div class="vr-item"><span>Limitrofe</span><span>150–199 mg/dL</span></div>
+                        <div class="vr-item"><span>Elevado</span><span>≥200 mg/dL</span></div>
+                    </div>
+                    <div class="valor-card">
+                        <h5>🩸 Creatinina</h5>
+                        <div class="vr-item"><span>Homem</span><span>0,7–1,3 mg/dL</span></div>
+                        <div class="vr-item"><span>Mulher</span><span>0,6–1,1 mg/dL</span></div>
+                    </div>
+                    <div class="valor-card">
+                        <h5>🧴 Ureia</h5>
+                        <div class="vr-item"><span>Adulto</span><span>15–40 mg/dL</span></div>
+                    </div>
+                    <div class="valor-card">
+                        <h5>❤️ Troponina I</h5>
+                        <div class="vr-item"><span>Normal</span><span>&lt;0,04 ng/mL</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DOENÇAS E CORRELAÇÕES -->
+            <div class="content-card" id="doencas">
+                <h3><i class="fas fa-heartbeat" style="color:#1a5276;"></i> Doenças e Correlações Clínico-Laboratoriais</h3>
+                <h4>1. Diabetes Mellitus</h4>
+                <p>Distúrbio metabólico caracterizado por hiperglicemia crônica.</p>
+                <p><strong>Critérios diagnósticos (ADA):</strong></p>
+                <ul>
+                    <li>Glicemia em jejum ≥ 126 mg/dL;</li>
+                    <li>Glicemia 2h após sobrecarga ≥ 200 mg/dL;</li>
+                    <li>HbA1c ≥ 6,5%;</li>
+                    <li>Sintomas + glicemia aleatória ≥ 200 mg/dL.</li>
+                </ul>
+                <h4>2. Doença Renal Crônica (DRC)</h4>
+                <p>Redução progressiva da função renal. Estadiamento baseado na TFG (estágios 1 a 5).</p>
+                <h4>3. Doenças Hepáticas</h4>
+                <p><strong>Hepatite:</strong> ALT e AST elevados. <strong>Cirrose:</strong> Albumina baixa, TP prolongado.</p>
+                <h4>4. Síndrome Coronariana Aguda</h4>
+                <p>Troponina elevada indica lesão miocárdica. CK-MB e BNP complementam a avaliação.</p>
+            </div>
+
+            <!-- 7. CURIOSIDADES -->
+            <div class="content-card" id="curiosidades">
+                <h3><i class="fas fa-lightbulb" style="color:#f39c12;"></i> 💡 Você Sabia?</h3>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🧠</div>
+                    <div><strong>O cérebro utiliza aproximadamente 20% da energia produzida pelo organismo,</strong> mesmo representando apenas 2% do peso corporal. A glicose é seu principal combustível.</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">⚡</div>
+                    <div><strong>Cada molécula de glicose pode gerar cerca de 30–32 moléculas de ATP</strong> em condições aeróbicas. Na ausência de oxigênio (fermentação), gera apenas 2 ATP.</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🩸</div>
+                    <div><strong>A hemoglobina glicada (HbA1c) reflete a média da glicemia dos últimos 3 meses,</strong> pois as hemácias vivem aproximadamente 120 dias.</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🧬</div>
+                    <div><strong>O corpo humano contém cerca de 100.000 tipos diferentes de proteínas,</strong> cada uma com uma função específica codificada pelos genes.</div>
+                </div>
+            </div>
+
+            <!-- 8. ERROS COMUNS -->
+            <div class="content-card" id="erros-comuns">
+                <h3><i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> ❌ Erros Comuns e Mitos</h3>
+                <div class="erro-item">
+                    <div class="erro-icon">❌</div>
+                    <div><strong>ATP não é armazenado em grandes quantidades.</strong> O corpo armazena energia na forma de glicogênio e lipídios, não como ATP livre. O ATP é produzido continuamente conforme a demanda.</div>
+                </div>
+                <div class="erro-item">
+                    <div class="erro-icon">❌</div>
+                    <div><strong>Nem toda gordura é prejudicial.</strong> Os lipídios são essenciais para a formação de membranas celulares, produção de hormônios e absorção de vitaminas lipossolúveis (A, D, E, K).</div>
+                </div>
+                <div class="erro-item">
+                    <div class="erro-icon">❌</div>
+                    <div><strong>Nem toda proteína funciona como enzima.</strong> Proteínas também atuam como transporte (hemoglobina), estrutura (colágeno), defesa (anticorpos) e regulação (hormônios).</div>
+                </div>
+                <div class="erro-item">
+                    <div class="erro-icon">❌</div>
+                    <div><strong>Jejum para exames não significa 12 horas sem água.</strong> A ingestão de água é permitida e recomendada. Apenas alimentos e bebidas calóricas devem ser evitados.</div>
+                </div>
+            </div>
+
+            <!-- 9. EXERCÍCIOS -->
+            <div class="content-card" id="exercicios">
+                <h3><i class="fas fa-pencil-alt" style="color:#1a5276;"></i> 📝 Exercícios</h3>
+                <p>Teste seus conhecimentos com questões sobre bioquímica:</p>
+
+                <!-- EXERCÍCIO 1 -->
+                <div class="caso-card" id="exercicio1">
+                    <p><strong>❓ Qual via metabólica produz ATP diretamente a partir da glicose no citoplasma?</strong></p>
+                    <div class="quiz-opcoes">
+                        <div class="quiz-opcao" onclick="responderExercicio('exercicio1', this, 'B')">A) Ciclo de Krebs</div>
+                        <div class="quiz-opcao" onclick="responderExercicio('exercicio1', this, 'B')">B) Glicólise</div>
+                        <div class="quiz-opcao" onclick="responderExercicio('exercicio1', this, 'B')">C) Beta-oxidação</div>
+                        <div class="quiz-opcao" onclick="responderExercicio('exercicio1', this, 'B')">D) Gliconeogênese</div>
+                    </div>
+                    <div class="quiz-feedback" id="exercicio1-feedback"></div>
+                </div>
+
+                <!-- EXERCÍCIO 2 -->
+                <div class="caso-card" id="exercicio2">
+                    <p><strong>❓ Qual enzima é considerada o marcador mais específico de lesão hepática?</strong></p>
+                    <div class="quiz-opcoes">
+                        <div class="quiz-opcao" onclick="responderExercicio('exercicio2', this, 'A')">A) ALT (TGP)</div>
+                        <div class="quiz-opcao" onclick="responderExercicio('exercicio2', this, 'A')">B) AST (TGO)</div>
+                        <div class="quiz-opcao" onclick="responderExercicio('exercicio2', this, 'A')">C) CK-MB</div>
+                        <div class="quiz-opcao" onclick="responderExercicio('exercicio2', this, 'A')">D) Amilase</div>
+                    </div>
+                    <div class="quiz-feedback" id="exercicio2-feedback"></div>
+                </div>
+            </div>
+
+            <!-- 10. CASOS CLÍNICOS -->
+            <div class="content-card" id="casos-clinicos">
+                <h3><i class="fas fa-stethoscope" style="color:#1a5276;"></i> 🩺 Casos Clínicos</h3>
+
+                <!-- CASO 1 -->
+                <div class="caso-card" id="caso1">
+                    <div class="paciente-info">
+                        <div class="paciente-icon">🧑</div>
+                        <div>
+                            <strong>Paciente:</strong> Adulto, 45 anos<br>
+                            <strong>Exames:</strong> Glicemia: 280 mg/dL<br>
+                            <strong>Sintomas:</strong> Poliúria, polidipsia
+                        </div>
+                    </div>
+                    <p><strong>❓ Qual via metabólica está alterada?</strong></p>
+                    <div class="quiz-opcoes">
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'C')">A) Metabolismo de lipídios</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'C')">B) Metabolismo de proteínas</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'C')">C) Metabolismo de carboidratos</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'C')">D) Metabolismo de ácidos nucleicos</div>
+                    </div>
+                    <div class="quiz-feedback" id="caso1-feedback"></div>
+                </div>
+
+                <!-- CASO 2 -->
+                <div class="caso-card" id="caso2">
+                    <div class="paciente-info">
+                        <div class="paciente-icon">👨</div>
+                        <div>
+                            <strong>Paciente:</strong> Adulto, 50 anos<br>
+                            <strong>Exames:</strong> ALT elevada, AST elevada<br>
+                            <strong>Sintomas:</strong> Icterícia, fadiga
+                        </div>
+                    </div>
+                    <p><strong>❓ Qual órgão provavelmente está comprometido?</strong></p>
+                    <div class="quiz-opcoes">
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'B')">A) Rim</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'B')">B) Fígado</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'B')">C) Pâncreas</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'B')">D) Coração</div>
+                    </div>
+                    <div class="quiz-feedback" id="caso2-feedback"></div>
+                </div>
+            </div>
+
+            <!-- QUIZ FINAL -->
+            <div class="content-card quiz-final" id="quiz-final">
+                <h3><i class="fas fa-question-circle" style="color:#1a5276;"></i> ❓ Quiz Final</h3>
+                <p><strong>Quantas moléculas de ATP são produzidas a partir de uma molécula de glicose em condições aeróbicas?</strong></p>
+                <div class="quiz-opcoes" id="quizFinalOpcoes">
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="A">○ 2 ATP</div>
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="B">○ 4 ATP</div>
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="C">○ 30-32 ATP</div>
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="D">○ 100 ATP</div>
+                </div>
+                <button class="btn-responder" id="btnResponderQuiz" onclick="responderQuiz()">Responder</button>
+                <p id="quizFinalFeedback" style="margin-top:1rem; font-weight:600;"></p>
+            </div>
+
+            <!-- 12. RESUMO FINAL -->
+            <div class="content-card" id="resumo">
+                <h3><i class="fas fa-clipboard-check" style="color:#27ae60;"></i> ✅ Resumo</h3>
+                <ul class="resumo-list">
+                    <li><i class="fas fa-check-circle"></i> A <strong>Bioquímica</strong> estuda as reações químicas da vida.</li>
+                    <li><i class="fas fa-check-circle"></i> As <strong>enzimas</strong> aceleram reações e são marcadores de doenças.</li>
+                    <li><i class="fas fa-check-circle"></i> A <strong>glicólise</strong> inicia a produção de energia no citoplasma.</li>
+                    <li><i class="fas fa-check-circle"></i> O <strong>Ciclo de Krebs</strong> amplia a geração de ATP na mitocôndria.</li>
+                    <li><i class="fas fa-check-circle"></i> A <strong>cadeia respiratória</strong> produz a maior parte da energia celular (~28 ATP).</li>
+                    <li><i class="fas fa-check-circle"></i> Os <strong>exames bioquímicos</strong> auxiliam no diagnóstico de diversas doenças.</li>
+                </ul>
+            </div>
+
+            <!-- REFERÊNCIAS -->
+            <div class="content-card" id="referencias">
+                <h3><i class="fas fa-book" style="color:#1a5276;"></i> Referências Bibliográficas</h3>
+                <ul>
+                    <li><strong>Burtis, C.A. & Ashwood, E.R.</strong> Tietz Fundamentos da Química Clínica. 7ª ed. Elsevier, 2016.</li>
+                    <li><strong>Kaplan, L.A. & Pesce, A.J.</strong> Clinical Chemistry: Theory, Analysis, Correlation. 5th ed. Mosby, 2010.</li>
+                    <li><strong>McPherson, R.A. & Pincus, M.R.</strong> Henry's Clinical Diagnosis and Management by Laboratory Methods. 24th ed. Elsevier, 2021.</li>
+                    <li><strong>Young, D.S.</strong> Effects of Drugs on Clinical Laboratory Tests. 5th ed. AACC Press, 2000.</li>
+                    <li><strong>Sociedade Brasileira de Patologia Clínica (SBPC).</strong> Diretrizes para a prática de análises clínicas.</li>
+                </ul>
+                <p style="margin-top:1rem; font-size:0.9rem; color:#5c7f9a;">Última atualização: Junho 2026</p>
+            </div>
+
+            <!-- 12. PRÓXIMOS ESTUDOS -->
+            <div class="navegacao-disciplinas">
+                <a href="hematologia.html" class="nav-disciplina anterior">
+                    <i class="fas fa-arrow-left" style="color:#1a5276;"></i>
+                    <div>
+                        <div class="nav-label">← Disciplina Anterior</div>
+                        <div class="nav-titulo">Hematologia</div>
+                    </div>
+                </a>
+                <a href="microbiologia.html" class="nav-disciplina proxima">
+                    <div>
+                        <div class="nav-label">Próxima Disciplina →</div>
+                        <div class="nav-titulo">Microbiologia</div>
+                    </div>
+                    <i class="fas fa-arrow-right" style="color:#1a5276;"></i>
+                </a>
+            </div>
+
+        </div><!-- .content-area -->
+    </div><!-- .main-wrapper -->
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3 style="color:#fff;"><i class="fas fa-flask" style="margin-right:6px;"></i>LabEnsina</h3>
+                <p style="font-size:0.85rem;">Plataforma colaborativa para ensino em análises clínicas.</p>
+            </div>
+            <div class="footer-links">
+                <a>Contato</a>
+                <a>Sobre</a>
+                <a>Colaboradores</a>
+            </div>
+            <small>© 2026 LabEnsina • Conteúdo científico atualizado</small>
+        </div>
+    </footer>
+
+    <!-- CHATBOT -->
+    <div class="chat-float">
+        <button class="chat-toggle" onclick="toggleChat()">
+            <i class="fas fa-robot"></i>
+            <span class="badge-notif">1</span>
+        </button>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h4><i class="fas fa-robot"></i> Assistente Bioquímica</h4>
+            <button class="chat-close" onclick="toggleChat()">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">
+                👋 Olá! Tire suas dúvidas sobre bioquímica clínica: exames, biomarcadores, interpretação e muito mais.
+                <span class="msg-time">Agora</span>
+            </div>
+        </div>
+        <div class="chat-suggestions">
+            <button onclick="enviarMensagem('Qual o valor normal da glicose?')">Glicose</button>
+            <button onclick="enviarMensagem('O que é HbA1c?')">HbA1c</button>
+            <button onclick="enviarMensagem('Como interpretar ALT e AST?')">Enzimas hepáticas</button>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Digite sua pergunta..." onkeypress="if(event.key==='Enter') enviarMensagem()" />
+            <button onclick="enviarMensagem()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // ===== CHATBOT =====
+        function toggleChat() {
+            document.getElementById('chatWindow').classList.toggle('aberto');
+        }
+        function enviarMensagem(msg) {
+            const input = document.getElementById('chatInput');
+            const texto = msg || input.value.trim();
+            if (!texto) return;
+            input.value = '';
+            const container = document.getElementById('chatMessages');
+            const userDiv = document.createElement('div');
+            userDiv.className = 'chat-msg user';
+            userDiv.innerHTML = texto + '<span class="msg-time">Agora</span>';
+            container.appendChild(userDiv);
+
+            let resposta = 'Desculpe, não entendi. Pergunte sobre: glicose, HbA1c, enzimas hepáticas, lipidograma, função renal, troponina, TSH, etc.';
+            const lower = texto.toLowerCase();
+            if (lower.includes('glicose') || lower.includes('açúcar')) {
+                resposta = 'A glicose em jejum normal é de 70-100 mg/dL. Valores ≥126 mg/dL indicam diabetes. A HbA1c reflete a média glicêmica dos últimos 3 meses.';
+            } else if (lower.includes('hba1c') || lower.includes('hemoglobina glicada')) {
+                resposta = 'A HbA1c reflete a média da glicemia nos últimos 3 meses. Normal: <5,7%; Pré-diabetes: 5,7-6,4%; Diabetes: ≥6,5%.';
+            } else if (lower.includes('alt') || lower.includes('ast') || lower.includes('tgp') || lower.includes('tgo')) {
+                resposta = 'ALT (TGP): 7-56 U/L, específico de lesão hepatocelular. AST (TGO): 5-40 U/L, elevado em lesões hepáticas, cardíacas e musculares.';
+            } else if (lower.includes('colesterol') || lower.includes('ldl') || lower.includes('hdl')) {
+                resposta = 'Lipidograma ideal: Colesterol total <190; LDL <130; HDL >40 (H) / >50 (M); Triglicerídeos <150 mg/dL.';
+            } else if (lower.includes('creatinina') || lower.includes('função renal') || lower.includes('rins')) {
+                resposta = 'Creatinina: 0,7-1,3 mg/dL. Clearance estima a TFG (normal 90-120 mL/min). Microalbuminúria (30-300 mg/24h) detecta nefropatia precoce.';
+            } else if (lower.includes('troponina') || lower.includes('infarto')) {
+                resposta = 'Troponina I/T <0,04 ng/mL. Elevação indica lesão miocárdica (infarto). CK-MB: 0-25 U/L. BNP <100 pg/mL (insuficiência cardíaca).';
+            } else if (lower.includes('tsh') || lower.includes('tireoide')) {
+                resposta = 'TSH: 0,4-4,0 µUI/mL. TSH baixo + T4 alto = hipertireoidismo. TSH alto + T4 baixo = hipotireoidismo.';
+            } else {
+                resposta = 'Posso ajudar com: glicose, HbA1c, enzimas hepáticas, lipidograma, função renal, troponina, TSH. Qual sua dúvida?';
+            }
+
+            setTimeout(() => {
+                const botDiv = document.createElement('div');
+                botDiv.className = 'chat-msg bot';
+                botDiv.innerHTML = '🤖 ' + resposta + '<span class="msg-time">Agora</span>';
+                container.appendChild(botDiv);
+                container.scrollTop = container.scrollHeight;
+            }, 400);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // ===== CASOS CLÍNICOS =====
+        function responderCaso(casoId, elemento, respostaCorreta) {
+            const caso = document.getElementById(casoId);
+            const opcoes = caso.querySelectorAll('.quiz-opcao');
+            const feedback = document.getElementById(casoId + '-feedback');
+            if (caso.dataset.respondido === 'true') return;
+            caso.dataset.respondido = 'true';
+            const respostaUsuario = elemento.textContent.charAt(0);
+            opcoes.forEach(op => {
+                op.style.pointerEvents = 'none';
+                const letra = op.textContent.charAt(0);
+                if (letra === respostaCorreta) op.classList.add('correta');
+                else if (op === elemento && letra !== respostaCorreta) op.classList.add('errada');
+            });
+            if (respostaUsuario === respostaCorreta) {
+                feedback.textContent = '✅ Correto! Muito bem!';
+                feedback.style.color = '#27ae60';
+            } else {
+                feedback.textContent = '❌ Incorreto. A resposta correta é a opção ' + respostaCorreta + '.';
+                feedback.style.color = '#e74c3c';
+            }
+            feedback.style.display = 'block';
+        }
+
+        // ===== EXERCÍCIOS =====
+        function responderExercicio(exId, elemento, respostaCorreta) {
+            responderCaso(exId, elemento, respostaCorreta);
+        }
+
+        // ===== QUIZ FINAL =====
+        let quizSelecionado = null;
+        function selecionarQuiz(elemento) {
+            const opcoes = document.querySelectorAll('#quizFinalOpcoes .quiz-opcao');
+            opcoes.forEach(op => op.classList.remove('selecionada'));
+            elemento.classList.add('selecionada');
+            quizSelecionado = elemento.dataset.resposta;
+        }
+        function responderQuiz() {
+            if (!quizSelecionado) { alert('Selecione uma resposta antes de clicar em Responder.'); return; }
+            const feedback = document.getElementById('quizFinalFeedback');
+            const opcoes = document.querySelectorAll('#quizFinalOpcoes .quiz-opcao');
+            const btnResponder = document.getElementById('btnResponderQuiz');
+            opcoes.forEach(op => {
+                op.style.pointerEvents = 'none';
+                if (op.dataset.resposta === 'C') op.classList.add('correta');
+                else if (op.classList.contains('selecionada') && op.dataset.resposta !== 'C') op.classList.add('errada');
+            });
+            if (quizSelecionado === 'C') {
+                feedback.textContent = '✅ Correto! Uma molécula de glicose gera cerca de 30-32 ATP em condições aeróbicas.';
+                feedback.style.color = '#27ae60';
+            } else {
+                feedback.textContent = '❌ Incorreto. A glicose gera cerca de 30-32 ATP em condições aeróbicas (2 na glicólise, 2 no Krebs e ~28 na cadeia respiratória).';
+                feedback.style.color = '#e74c3c';
+            }
+            btnResponder.disabled = true;
+            btnResponder.textContent = 'Respondido ✓';
+        }
+
+        // ===== ÍNDICE LATERAL =====
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const sections = document.querySelectorAll('div[id]');
+        function highlightSidebarLink() {
+            let currentId = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 200;
+                if (window.scrollY >= sectionTop) currentId = section.getAttribute('id');
+            });
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentId) link.classList.add('active');
+            });
+        }
+        window.addEventListener('scroll', highlightSidebarLink);
+        highlightSidebarLink();
+
+        // ===== PESQUISA =====
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const termo = document.getElementById('searchInput').value.trim();
+            if (termo) alert('🔍 Buscando por: ' + termo + ' em Bioquímica Clínica...');
+        });
+    </script>
+   <script src="utils.js"></script>
+    <script src="conhecimento.js"></script>
+    <script src="pesquisa.js"></script>
+    <script src="sugestoes.js"></script>
+    <script src="historico.js"></script>
+    <script src="quiz.js"></script>
+    <script src="casos.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>

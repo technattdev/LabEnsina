@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LabEnsina • Hematologia - Guia Completo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; }
+        body { background: #f0f6fb; color: #1a2a3a; line-height: 1.8; scroll-behavior: smooth; }
+        .header {
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo img { height: 50px; width: 50px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.3); }
+        .logo h1 { font-size: 1.8rem; font-weight: 700; }
+        .logo h1 span { font-weight: 300; color: #6fc2f0; }
+        .logo small { display: block; font-size: 0.6rem; opacity: 0.7; letter-spacing: 1px; }
+        .header-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        .search-box {
+            background: #fff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+        .search-box input { border: none; padding: 0.5rem 0.8rem; font-size: 0.95rem; width: 200px; outline: none; background: transparent; color: #1a2a3a; }
+        .search-box button { background: transparent; border: none; color: #1a3f62; font-size: 1.1rem; cursor: pointer; }
+        .btn-chat {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-chat:hover { background: rgba(255, 255, 255, 0.22); }
+        .btn-chat i { color: #6fc2f0; }
+
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 0.6rem 2rem;
+            border-bottom: 1px solid #dce5ef;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.8rem;
+            position: sticky;
+            top: 72px;
+            z-index: 99;
+        }
+        .nav-bar a {
+            color: #1e3b5a;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.2rem 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+        .nav-bar a:hover,
+        .nav-bar a.active { color: #0077be; border-bottom-color: #0077be; }
+        .nav-bar a i { font-size: 0.85rem; color: #3d7ea6; }
+
+        .hero {
+            background: linear-gradient(135deg, #fde2e2, #f5c6c6);
+            padding: 2.5rem 2rem;
+            margin: 1.2rem 1.5rem;
+            border-radius: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .hero-text h2 { font-size: 2.4rem; font-weight: 700; color: #a93226; }
+        .hero-text p { font-size: 1.05rem; color: #5a3a3a; max-width: 650px; }
+        .hero-text .badge { background: #a93226; color: #fff; padding: 0.3rem 1.4rem; border-radius: 30px; font-size: 0.85rem; display: inline-block; }
+        .hero-image { font-size: 5rem; color: #a93226; opacity: 0.25; }
+
+        /* ===== LAYOUT PRINCIPAL COM SIDEBAR ===== */
+        .main-wrapper {
+            max-width: 1400px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 140px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0, 20, 40, 0.06);
+            border: 1px solid #e6edf6;
+            max-height: calc(100vh - 160px);
+            overflow-y: auto;
+        }
+        .sidebar h3 {
+            font-size: 1rem;
+            color: #0b2a44;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sidebar h3 i { color: #a93226; }
+        .sidebar a {
+            display: block;
+            padding: 0.5rem 0.8rem;
+            color: #1e3b5a;
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            transition: 0.2s;
+            margin-bottom: 2px;
+        }
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #fde2e2;
+            color: #a93226;
+            font-weight: 600;
+        }
+        .content-area { flex: 1; min-width: 0; }
+
+        /* ===== VISÃO GERAL ===== */
+        .visao-geral {
+            background: #fff;
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 6px 18px rgba(0, 20, 40, 0.05);
+            border: 1px solid #e6edf6;
+        }
+        .visao-geral h2 {
+            font-size: 1.6rem;
+            color: #0b2a44;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .visao-geral .subtitulo {
+            color: #5c7f9a;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+        .topicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.6rem;
+        }
+        .topico-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.5rem 0.8rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e3b5a;
+            transition: 0.2s;
+        }
+        .topico-item:hover { background: #fde2e2; }
+        .topico-item i { color: #a93226; }
+
+        /* ===== CONTENT CARDS ===== */
+        .content-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 6px 18px rgba(0, 20, 40, 0.05);
+            border: 1px solid #e6edf6;
+        }
+        .content-card h3 { color: #0b2a44; font-size: 1.4rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; }
+        .content-card h4 { color: #a93226; font-size: 1.1rem; margin: 1rem 0 0.5rem; }
+        .content-card p { color: #1e3b5a; margin-bottom: 0.8rem; text-align: justify; }
+        .content-card ul { margin: 0.8rem 0 0.8rem 1.8rem; }
+        .content-card ul li { margin: 0.4rem 0; color: #1e3b5a; }
+        .content-card .highlight-box {
+            background: #fde2e2;
+            border-left: 5px solid #a93226;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        .content-card .highlight-box strong { color: #0b2a44; }
+        .content-card .info-box {
+            background: #e8f4f8;
+            border-left: 5px solid #2980b9;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        .content-card .warning-box {
+            background: #fef9e7;
+            border-left: 5px solid #f39c12;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        /* ===== TABELAS ===== */
+        .table-wrap { overflow-x: auto; margin: 1rem 0; }
+        .table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .table-wrap th { background: #a93226; color: #fff; padding: 0.7rem 1rem; text-align: left; }
+        .table-wrap td { padding: 0.6rem 1rem; border-bottom: 1px solid #e6edf6; }
+        .table-wrap tr:nth-child(even) { background: #f8fafc; }
+        .table-wrap tr:hover { background: #fde2e2; }
+
+        /* ===== GALERIA DE CÉLULAS ===== */
+        .celulas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .celula-card {
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 1rem;
+            border: 2px solid #e6edf6;
+            transition: 0.3s;
+            cursor: default;
+        }
+        .celula-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-color: #a93226;
+        }
+        .celula-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            position: relative;
+        }
+        .celula-card h5 { font-size: 0.85rem; color: #0b2a44; }
+        .celula-card small { font-size: 0.7rem; color: #5c7f9a; }
+
+        /* ===== FLUXOGRAMA ===== */
+        .fluxograma {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 16px;
+        }
+        .fluxo-box {
+            background: #a93226;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-align: center;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(169, 50, 38, 0.3);
+        }
+        .fluxo-box.sub {
+            background: #c0392b;
+            font-size: 0.9rem;
+            padding: 0.6rem 1.2rem;
+        }
+        .fluxo-box.terciario {
+            background: #e74c3c;
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            min-width: 140px;
+        }
+        .fluxo-arrow {
+            font-size: 1.5rem;
+            color: #a93226;
+            font-weight: 700;
+        }
+        .fluxo-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* ===== CASO CLÍNICO ===== */
+        .caso-card {
+            background: #fff;
+            border: 2px solid #e6edf6;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            transition: 0.3s;
+        }
+        .caso-card:hover { border-color: #a93226; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); }
+        .caso-card .paciente-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+        .caso-card .paciente-icon {
+            font-size: 3rem;
+            color: #a93226;
+        }
+        .caso-card .quiz-opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+        .caso-card .quiz-opcao {
+            padding: 0.7rem 1rem;
+            border: 2px solid #dce5ef;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+            background: #fafbfc;
+        }
+        .caso-card .quiz-opcao:hover { border-color: #a93226; background: #fde2e2; }
+        .caso-card .quiz-opcao.correta { border-color: #27ae60; background: #d5f5e3; color: #1e8449; }
+        .caso-card .quiz-opcao.errada { border-color: #e74c3c; background: #fadbd8; color: #c0392b; }
+        .caso-card .quiz-feedback { margin-top: 0.8rem; font-weight: 600; display: none; }
+
+        /* ===== CURIOSIDADES ===== */
+        .curiosidade-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 16px;
+            margin: 0.6rem 0;
+            border: 1px solid #e6edf6;
+            transition: 0.3s;
+        }
+        .curiosidade-item:hover { border-color: #f39c12; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+        .curiosidade-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        /* ===== QUIZ FINAL ===== */
+        .quiz-final .quiz-opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin: 1rem 0;
+        }
+        .quiz-final .quiz-opcao {
+            padding: 0.8rem 1.2rem;
+            border: 2px solid #dce5ef;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+            background: #fafbfc;
+            font-size: 0.95rem;
+        }
+        .quiz-final .quiz-opcao:hover { border-color: #a93226; }
+        .quiz-final .quiz-opcao.selecionada { border-color: #a93226; background: #fde2e2; }
+        .quiz-final .quiz-opcao.correta { border-color: #27ae60; background: #d5f5e3; }
+        .quiz-final .quiz-opcao.errada { border-color: #e74c3c; background: #fadbd8; }
+        .btn-responder {
+            background: #a93226;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .btn-responder:hover { background: #7b241c; }
+        .btn-responder:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ===== RESUMO ===== */
+        .resumo-list {
+            list-style: none;
+            padding: 0;
+        }
+        .resumo-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e6edf6;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .resumo-list li i { color: #27ae60; }
+
+        /* ===== NAVEGAÇÃO ENTRE DISCIPLINAS ===== */
+        .navegacao-disciplinas {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .nav-disciplina {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 1.5rem;
+            background: #fff;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #1e3b5a;
+            font-weight: 500;
+            border: 2px solid #e6edf6;
+            transition: 0.3s;
+            flex: 1;
+            min-width: 200px;
+        }
+        .nav-disciplina:hover { border-color: #a93226; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); }
+        .nav-disciplina.anterior { text-align: left; }
+        .nav-disciplina.proxima { text-align: right; justify-content: flex-end; }
+        .nav-disciplina .nav-label { font-size: 0.75rem; color: #5c7f9a; }
+        .nav-disciplina .nav-titulo { font-size: 1rem; font-weight: 600; color: #0b2a44; }
+
+        /* ===== CIENTISTA CARD ===== */
+        .cientista-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid #e6edf6;
+        }
+        .cientista-card h4 { color: #0b2a44; font-size: 1.2rem; }
+        .cientista-card .area { color: #a93226; font-weight: 500; font-size: 0.9rem; }
+
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        @media (max-width: 768px) {
+            .grid-2col { grid-template-columns: 1fr; }
+            .hero { flex-direction: column; text-align: center; }
+            .hero-text h2 { font-size: 1.8rem; }
+            .nav-bar { top: 110px; overflow-x: auto; flex-wrap: nowrap; }
+            .nav-bar a { font-size: 0.8rem; white-space: nowrap; }
+            .header { flex-direction: column; align-items: stretch; gap: 0.8rem; padding: 1rem; }
+            .search-box input { width: 120px; }
+            .main-wrapper { flex-direction: column; padding: 0 0.8rem; }
+            .sidebar {
+                position: static;
+                width: 100%;
+                max-height: none;
+                margin-bottom: 1rem;
+            }
+            .sidebar a { display: inline-block; margin: 2px; }
+            .topicos-grid { grid-template-columns: repeat(2, 1fr); }
+            .celulas-grid { grid-template-columns: repeat(3, 1fr); }
+            .fluxo-row { flex-direction: column; align-items: center; }
+            .navegacao-disciplinas { flex-direction: column; }
+        }
+
+        .footer {
+            background: #0f263a;
+            color: #cfdde9;
+            padding: 2.5rem 1.5rem 1.8rem;
+            margin-top: 3rem;
+            border-radius: 40px 40px 0 0;
+        }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 1.8rem; }
+        .footer-links a { color: #b2ccdf; font-size: 0.9rem; cursor: pointer; text-decoration: none; }
+        .footer-links a:hover { color: #fff; }
+
+        /* ===== CHATBOT ===== */
+        .chat-float { position: fixed; bottom: 28px; right: 28px; z-index: 1000; }
+        .chat-toggle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(11, 42, 74, 0.4);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .chat-toggle:hover { transform: scale(1.05); }
+        .chat-toggle .badge-notif {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #e74c3c;
+            color: #fff;
+            font-size: 0.6rem;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        .chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 28px;
+            width: 380px;
+            max-width: 90vw;
+            max-height: 550px;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #dce5ef;
+            z-index: 1000;
+            animation: slideUp 0.3s ease;
+        }
+        .chat-window.aberto { display: flex; }
+        @keyframes slideUp {
+            from { opacity: 0;
+            transform: translateY(20px) scale(0.95); }
+            to { opacity: 1;
+            transform: translateY(0) scale(1); }
+        }
+        .chat-header {
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            padding: 1rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header h4 { font-weight: 500; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+        .chat-header h4 i { color: #6fc2f0; }
+        .chat-close { background: none; border: none; color: rgba(255, 255, 255, 0.7); font-size: 1.4rem; cursor: pointer; }
+        .chat-close:hover { color: #fff; }
+        .chat-messages { flex: 1; padding: 1rem 1.2rem; overflow-y: auto; max-height: 350px; background: #f8fafc; display: flex; flex-direction: column; }
+        .chat-msg { margin-bottom: 0.8rem; padding: 0.6rem 1rem; border-radius: 16px; max-width: 85%; font-size: 0.9rem; line-height: 1.5; animation: msgIn 0.25s ease; }
+        @keyframes msgIn {
+            from { opacity: 0;
+            transform: translateY(8px); }
+            to { opacity: 1;
+            transform: translateY(0); }
+        }
+        .chat-msg.bot { background: #fde2e2; color: #1e3b5a; align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-msg.user { background: #1a3f62; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-msg .msg-time { font-size: 0.6rem; opacity: 0.6; margin-top: 4px; display: block; }
+        .chat-input-area { display: flex; padding: 0.8rem 1rem; border-top: 1px solid #e6edf6; background: #fff; gap: 8px; }
+        .chat-input-area input { flex: 1; border: 1px solid #dce5ef; border-radius: 30px; padding: 0.6rem 1rem; font-size: 0.9rem; outline: none; }
+        .chat-input-area input:focus { border-color: #0077be; }
+        .chat-input-area button { background: #1a3f62; color: #fff; border: none; border-radius: 30px; padding: 0.6rem 1.2rem; font-weight: 500; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
+        .chat-input-area button:hover { background: #0b2a4a; }
+        .chat-suggestions { display: flex; flex-wrap: wrap; gap: 6px; padding: 0.5rem 1rem 0.8rem; background: #f8fafc; border-top: 1px solid #e6edf6; }
+        .chat-suggestions button { background: #fde2e2; border: none; border-radius: 20px; padding: 0.2rem 0.8rem; font-size: 0.75rem; color: #a93226; cursor: pointer; transition: 0.2s; }
+        .chat-suggestions button:hover { background: #f5c6c6; }
+
+        /* ===== SCROLL SUAVE PARA ÍNDICE ===== */
+        html { scroll-behavior: smooth; scroll-padding-top: 150px; }
+
+        /* ===== SEÇÃO DE VALORES DE REFERÊNCIA ===== */
+        .valores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .valor-card {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 1rem;
+            border: 1px solid #e6edf6;
+        }
+        .valor-card h5 { color: #a93226; margin-bottom: 0.4rem; }
+        .valor-card .vr-item { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.9rem; }
+        .valor-card .vr-item span:last-child { font-weight: 600; color: #0b2a44; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="labensina.png" alt="LabEnsina" onerror="this.style.display='none'" />
+            <div>
+                <h1>Lab<span>Ensina</span></h1>
+                <small>hematologia • guia completo</small>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="search-box">
+                <input type="text" placeholder="Pesquisar..." id="searchInput" />
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            <button class="btn-chat" onclick="toggleChat()">
+                <i class="fas fa-robot"></i> Assistente
+            </button>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <a href="index.html"><i class="fas fa-home"></i> Início</a>
+        <a href="hematologia.html" class="active"><i class="fas fa-microscope"></i> Hematologia</a>
+        <a href="bioquimica.html"><i class="fas fa-vial"></i> Bioquímica</a>
+        <a href="microbiologia.html"><i class="fas fa-bacteria"></i> Microbiologia</a>
+        <a href="imunologia.html"><i class="fas fa-shield-virus"></i> Imunologia</a>
+        <a href="urinalise.html"><i class="fas fa-heartbeat"></i> Urinálise</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-text">
+            <span class="badge"><i class="fas fa-tint"></i> Hematologia</span>
+            <h2>Guia Completo de Hematologia</h2>
+            <p>Estudo aprofundado do sangue, órgãos hematopoiéticos, distúrbios hemorrágicos, anemias, leucemias, linfomas, hemostasia e medicina transfusional.</p>
+        </div>
+        <div class="hero-image"><i class="fas fa-microscope"></i></div>
+    </div>
+
+    <!-- ===== LAYOUT PRINCIPAL COM SIDEBAR ===== -->
+    <div class="main-wrapper">
+        <!-- SIDEBAR / ÍNDICE LATERAL -->
+        <aside class="sidebar" id="sidebar">
+            <h3><i class="fas fa-list"></i> Nesta página</h3>
+            <a href="#visao-geral">📋 Visão Geral</a>
+            <a href="#introducao">📖 Introdução</a>
+            <a href="#historia">📜 História</a>
+            <a href="#cientistas">👨‍🔬 Cientistas</a>
+            <a href="#fisiologia">❤️ Fisiologia do Sangue</a>
+            <a href="#celulas">🔬 Galeria de Células</a>
+            <a href="#exames">🧪 Exames Hematológicos</a>
+            <a href="#valores-ref">📊 Valores de Referência</a>
+            <a href="#anemias">🩸 Anemias</a>
+            <a href="#leucemias">⚡ Leucemias e Linfomas</a>
+            <a href="#hemostasia">🤝 Hemostasia</a>
+            <a href="#hemoglobinopatias">🧬 Hemoglobinopatias</a>
+            <a href="#transfusional">💉 Medicina Transfusional</a>
+            <a href="#avancos">🚀 Avanços Tecnológicos</a>
+            <a href="#curiosidades">💡 Curiosidades</a>
+            <a href="#casos-clinicos">🩺 Casos Clínicos</a>
+            <a href="#quiz-final">❓ Quiz Final</a>
+            <a href="#resumo">✅ Resumo</a>
+            <a href="#referencias">📚 Referências</a>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <div class="content-area">
+
+            <!-- 1. VISÃO GERAL -->
+            <div class="visao-geral" id="visao-geral">
+                <h2><i class="fas fa-eye" style="color:#a93226;"></i> HEMATOLOGIA</h2>
+                <p class="subtitulo">🔴 Estudo do sangue e dos órgãos hematopoiéticos</p>
+                <p style="margin-bottom:1rem; font-weight:500;">📖 <strong>O que você aprenderá:</strong></p>
+                <div class="topicos-grid">
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Hemácias</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Leucócitos</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Plaquetas</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Hemoglobina</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Hemograma</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Anemias</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Coagulação</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Leucemias</div>
+                </div>
+            </div>
+
+            <!-- INTRODUÇÃO -->
+            <div class="content-card" id="introducao">
+                <h3><i class="fas fa-book-open" style="color:#a93226;"></i> Introdução à Hematologia</h3>
+                <p>A <strong>Hematologia</strong> é a especialidade médica e laboratorial que estuda o sangue, seus componentes e os órgãos responsáveis pela sua produção (medula óssea, baço, linfonodos). O sangue é um tecido conjuntivo líquido que circula pelo sistema cardiovascular, transportando oxigênio, nutrientes, hormônios, fatores de coagulação, células de defesa e removendo produtos do metabolismo.</p>
+                <p>A hematologia clínica abrange o diagnóstico, tratamento e prevenção de doenças do sangue, incluindo anemias, leucemias, linfomas, distúrbios da coagulação, hemoglobinopatias e tromboses. A hematologia laboratorial utiliza técnicas como o hemograma completo, mielograma, citometria de fluxo, coagulograma e biologia molecular para caracterizar doenças hematológicas.</p>
+                <div class="highlight-box">
+                    <strong>🔴 Importante:</strong> O hemograma é o exame mais solicitado na prática médica, fornecendo informações sobre a série vermelha (anemias), série branca (infecções, leucemias) e plaquetas (coagulação).
+                </div>
+                <div class="info-box">
+                    <strong>💡 Informação:</strong> O sangue representa cerca de <strong>7% do peso corporal</strong> total. Uma pessoa de 70 kg tem aproximadamente 5 litros de sangue circulando pelo corpo.
+                </div>
+            </div>
+
+            <!-- FLUXOGRAMA DA HEMATOPOIESE -->
+            <div class="content-card" id="fluxograma">
+                <h3><i class="fas fa-project-diagram" style="color:#a93226;"></i> Fluxograma da Hematopoiese</h3>
+                <div class="fluxograma">
+                    <div class="fluxo-box">🦴 Medula Óssea</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box sub">🔬 Células-Tronco Hematopoiéticas</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-row">
+                        <div class="fluxo-box terciario">🔴 Hemácias</div>
+                        <div class="fluxo-box terciario">⚪ Leucócitos</div>
+                        <div class="fluxo-box terciario">🟡 Plaquetas</div>
+                    </div>
+                </div>
+                <p style="text-align:center; font-size:0.9rem; color:#5c7f9a; margin-top:0.5rem;">A medula óssea produz milhões de células sanguíneas por segundo!</p>
+            </div>
+
+            <!-- HISTÓRIA -->
+            <div class="content-card" id="historia">
+                <h3><i class="fas fa-history" style="color:#a93226;"></i> História da Hematologia</h3>
+                <p>A história da hematologia remonta à antiguidade, quando o sangue era visto como um dos quatro humores (sangue, fleuma, bile amarela e bile negra) na teoria humoral de Hipócrates e Galeno.</p>
+                <ul>
+                    <li><strong>1628</strong> — William Harvey descreve a circulação sanguínea.</li>
+                    <li><strong>1658</strong> — Jan Swammerdam observa hemácias ao microscópio.</li>
+                    <li><strong>1673</strong> — Leeuwenhoek descreve glóbulos vermelhos e brancos.</li>
+                    <li><strong>1845</strong> — Rudolf Virchow descreve a leucemia.</li>
+                    <li><strong>1868</strong> — Ernst Neumann identifica a medula óssea como órgão hematopoiético.</li>
+                    <li><strong>1900</strong> — Karl Landsteiner descobre os grupos sanguíneos ABO.</li>
+                    <li><strong>1937</strong> — Armand Quick desenvolve o tempo de protrombina (TP).</li>
+                    <li><strong>1940</strong> — Landsteiner e Wiener descobrem o fator Rh.</li>
+                    <li><strong>1950</strong> — Cooley descreve a talassemia major (anemia de Cooley).</li>
+                    <li><strong>1970</strong> — Classificação FAB (Franco-Americana-Britânica) das leucemias.</li>
+                    <li><strong>2000</strong> — Citometria de fluxo e biologia molecular transformam o diagnóstico hematológico.</li>
+                </ul>
+            </div>
+
+            <!-- CIENTISTAS -->
+            <div class="content-card" id="cientistas">
+                <h3><i class="fas fa-user-graduate" style="color:#a93226;"></i> Cientistas Pioneiros da Hematologia</h3>
+
+                <div class="cientista-card">
+                    <h4>Karl Landsteiner (1868-1943)</h4>
+                    <span class="area">Imunologista austríaco • Prêmio Nobel 1930</span>
+                    <p>Descobriu os grupos sanguíneos ABO em 1900 e, junto com Wiener, o fator Rh em 1940. Suas descobertas tornaram as transfusões sanguíneas seguras e salvaram milhões de vidas. Foi o fundador da imunologia transfusional.</p>
+                </div>
+
+                <div class="cientista-card">
+                    <h4>Rudolf Virchow (1821-1902)</h4>
+                    <span class="area">Patologista alemão • Pai da patologia moderna</span>
+                    <p>Descreveu a leucemia e estabeleceu as bases da patologia celular. Identificou a relação entre doenças e alterações nas células sanguíneas.</p>
+                </div>
+
+                <div class="cientista-card">
+                    <h4>Thomas Addison (1793-1860)</h4>
+                    <span class="area">Médico inglês</span>
+                    <p>Descreveu a anemia perniciosa (anemia de Addison-Biermer), correlacionando alterações clínicas com achados laboratoriais, estabelecendo as bases da hematologia clínica.</p>
+                </div>
+
+                <div class="cientista-card">
+                    <h4>James B. Herrick (1861-1954)</h4>
+                    <span class="area">Médico americano</span>
+                    <p>Descreveu a anemia falciforme em 1910, sendo o primeiro a identificar a doença e descrever as células em foice.</p>
+                </div>
+
+                <div class="cientista-card">
+                    <h4>Alexandre B. B. (1908-1998)</h4>
+                    <span class="area">Hematologista francês</span>
+                    <p>Pioneiro na classificação das leucemias agudas e no desenvolvimento de protocolos de quimioterapia para leucemias e linfomas.</p>
+                </div>
+            </div>
+
+            <!-- FISIOLOGIA E COMPONENTES -->
+            <div class="content-card" id="fisiologia">
+                <h3><i class="fas fa-heart" style="color:#a93226;"></i> Fisiologia do Sangue e Componentes</h3>
+                <p>O sangue é composto por uma parte celular e uma parte líquida (plasma).</p>
+
+                <h4>1. Plasma (55% do volume sanguíneo)</h4>
+                <ul>
+                    <li><strong>Água:</strong> 90-92% — solvente universal.</li>
+                    <li><strong>Proteínas:</strong> Albumina (3,5-5,0 g/dL), globulinas (2,0-3,5 g/dL), fibrinogênio (200-400 mg/dL).</li>
+                    <li><strong>Eletrólitos:</strong> Na⁺ (136-145 mEq/L), K⁺ (3,5-5,0 mEq/L), Cl⁻ (98-106 mEq/L), HCO₃⁻ (22-28 mEq/L).</li>
+                    <li><strong>Nutrientes e metabólitos:</strong> Glicose, ureia, creatinina, lipídios, vitaminas, hormônios.</li>
+                </ul>
+
+                <h4>2. Células Sanguíneas (45% do volume)</h4>
+                <ul>
+                    <li><strong>Hemácias (eritrócitos):</strong> 4,5-5,5 milhões/µL (homens) e 4,0-5,0 milhões/µL (mulheres). Transportam oxigênio (hemoglobina).</li>
+                    <li><strong>Leucócitos (glóbulos brancos):</strong> 4.000-11.000/µL. Defesa imunológica.
+                        <ul>
+                            <li><strong>Neutrófilos:</strong> 40-70% — fagocitose, infecções bacterianas.</li>
+                            <li><strong>Linfócitos:</strong> 20-40% — imunidade humoral e celular.</li>
+                            <li><strong>Monócitos:</strong> 2-8% — macrófagos, defesa contra microrganismos.</li>
+                            <li><strong>Eosinófilos:</strong> 1-4% — alergias, infecções parasitárias.</li>
+                            <li><strong>Basófilos:</strong> 0,5-1% — reações alérgicas, liberação de histamina.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Plaquetas (trombócitos):</strong> 150.000-400.000/µL. Coagulação e hemostasia.</li>
+                </ul>
+
+                <!-- TABELA COMPARATIVA -->
+                <h4>3. Tabela Comparativa das Células Sanguíneas</h4>
+                <div class="table-wrap">
+                    <table>
+                        <tr><th>Célula</th><th>Função</th><th>Valor Normal</th><th>Vida Média</th></tr>
+                        <tr><td>🔴 Hemácia</td><td>Transporte de O₂ e CO₂</td><td>4,5–5,9 milhões/µL</td><td>~120 dias</td></tr>
+                        <tr><td>⚪ Leucócito</td><td>Defesa imunológica</td><td>4.000–11.000/µL</td><td>Horas a anos</td></tr>
+                        <tr><td>🟡 Plaqueta</td><td>Coagulação sanguínea</td><td>150.000–450.000/µL</td><td>7–10 dias</td></tr>
+                    </table>
+                </div>
+
+                <h4>4. Hematopoiese</h4>
+                <p>A hematopoiese é o processo de formação e maturação das células sanguíneas. Ocorre na medula óssea (nos adultos), baço e fígado (no feto).</p>
+                <ul>
+                    <li><strong>Células-tronco hematopoiéticas (HSC):</strong> Pluripotentes, dão origem a todas as linhagens.</li>
+                    <li><strong>Linhagem mieloide:</strong> Hemácias, plaquetas, neutrófilos, eosinófilos, basófilos, monócitos.</li>
+                    <li><strong>Linhagem linfoide:</strong> Linfócitos B, T e células NK.</li>
+                    <li><strong>Fatores de crescimento:</strong> EPO (eritropoietina), G-CSF, GM-CSF, trombopoietina (TPO), IL-3.</li>
+                </ul>
+                <div class="highlight-box">
+                    <strong>🔴 Importante:</strong> A eritropoietina (EPO), produzida pelos rins, estimula a produção de hemácias na medula óssea. A deficiência de EPO é a principal causa de anemia na doença renal crônica.
+                </div>
+                <div class="warning-box">
+                    <strong>⚠️ Atenção:</strong> Leucocitose não significa necessariamente infecção bacteriana. Pode ocorrer em inflamações, estresse, exercício intenso, uso de corticoides e até em condições fisiológicas como a gravidez.
+                </div>
+            </div>
+
+            <!-- 3. GALERIA DE CÉLULAS -->
+            <div class="content-card" id="celulas">
+                <h3><i class="fas fa-images" style="color:#a93226;"></i> Galeria de Células Sanguíneas</h3>
+                <p>Visualize as principais células encontradas no sangue periférico:</p>
+                <div class="celulas-grid">
+                    <div class="celula-card">
+                        <div class="celula-img" style="background: radial-gradient(circle, #e74c3c 30%, #fadbd8 60%, #fff 70%);">🔴</div>
+                        <h5>Hemácia</h5>
+                        <small>Transporte de O₂</small>
+                    </div>
+                    <div class="celula-card">
+                        <div class="celula-img" style="background: radial-gradient(circle, #c0392b 20%, #f5c6c6 50%, #fff 60%);">🩸</div>
+                        <h5>Hemácia Falciforme</h5>
+                        <small>Anemia falciforme</small>
+                    </div>
+                    <div class="celula-card">
+                        <div class="celula-img" style="background: radial-gradient(circle, #8e44ad 25%, #d7bde2 55%, #fff 65%);">🟣</div>
+                        <h5>Neutrófilo</h5>
+                        <small>Fagocitose</small>
+                    </div>
+                    <div class="celula-card">
+                        <div class="celula-img" style="background: radial-gradient(circle, #e67e22 25%, #fdebd0 55%, #fff 65%);">🟠</div>
+                        <h5>Eosinófilo</h5>
+                        <small>Alergias/Parasitas</small>
+                    </div>
+                    <div class="celula-card">
+                        <div class="celula-img" style="background: radial-gradient(circle, #2c3e50 20%, #aab7c4 50%, #fff 60%);">⚫</div>
+                        <h5>Basófilo</h5>
+                        <small>Histamina</small>
+                    </div>
+                    <div class="celula-card">
+                        <div class="celula-img" style="background: radial-gradient(circle, #7f8c8d 25%, #d5dbdb 55%, #fff 65%);">🔘</div>
+                        <h5>Monócito</h5>
+                        <small>Macrófago</small>
+                    </div>
+                    <div class="celula-card">
+                        <div class="celula-img" style="background: radial-gradient(circle, #2980b9 20%, #aed6f1 50%, #fff 60%);">🔵</div>
+                        <h5>Linfócito</h5>
+                        <small>Imunidade</small>
+                    </div>
+                    <div class="celula-card">
+                        <div class="celula-img" style="background: radial-gradient(circle, #f1c40f 20%, #fef9e7 50%, #fff 60%);">🟡</div>
+                        <h5>Plaqueta</h5>
+                        <small>Coagulação</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRINCIPAIS EXAMES -->
+            <div class="content-card" id="exames">
+                <h3><i class="fas fa-vial" style="color:#a93226;"></i> Principais Exames Hematológicos</h3>
+
+                <h4>1. Hemograma Completo</h4>
+                <p>O hemograma é o exame mais importante da hematologia, fornecendo informações sobre as três séries sanguíneas.</p>
+
+                <div class="table-wrap">
+                    <table>
+                        <tr><th>Parâmetro</th><th>Valor de Referência</th><th>Significado Clínico</th></tr>
+                        <tr><td>Hemácias</td><td>H: 4,5-5,5 M/µL<br>M: 4,0-5,0 M/µL</td><td>Baixa = anemia; alta = policitemia</td></tr>
+                        <tr><td>Hemoglobina (Hb)</td><td>H: 13,5-17,5 g/dL<br>M: 12,0-16,0 g/dL</td><td>Baixa = anemia; alta = policitemia</td></tr>
+                        <tr><td>Hematócrito (Ht)</td><td>H: 40-52%<br>M: 36-48%</td><td>Reflete volume de hemácias</td></tr>
+                        <tr><td>VCM</td><td>80-100 fL</td><td>Microcítica (&lt;80), macrocítica (&gt;100)</td></tr>
+                        <tr><td>HCM</td><td>27-33 pg</td><td>Hipocrômica (&lt;27), hipercrômica (&gt;33)</td></tr>
+                        <tr><td>Leucócitos</td><td>4.000-11.000/µL</td><td>Alto = infecção/leucemia; baixo = neutropenia</td></tr>
+                        <tr><td>Plaquetas</td><td>150.000-400.000/µL</td><td>Baixo = trombocitopenia; alto = trombocitemia</td></tr>
+                    </table>
+                </div>
+
+                <h4>2. Coagulograma</h4>
+                <ul>
+                    <li><strong>Tempo de Protrombina (TP):</strong> 11-15 segundos. Avalia via extrínseca (fatores VII, X, V, II, I).</li>
+                    <li><strong>INR (Relação Normalizada Internacional):</strong> 0,8-1,2. Monitoramento de anticoagulantes (varfarina).</li>
+                    <li><strong>Tempo de Tromboplastina Parcial Ativada (TTPA):</strong> 25-35 segundos. Avalia via intrínseca (fatores XII, XI, IX, VIII, X, V, II, I).</li>
+                    <li><strong>Tempo de Trombina (TT):</strong> 14-21 segundos. Avalia conversão de fibrinogênio em fibrina.</li>
+                    <li><strong>Fibrinogênio:</strong> 200-400 mg/dL. Elevado na inflamação; baixo na CIVD.</li>
+                </ul>
+
+                <h4>3. Mielograma (Aspirado de Medula Óssea)</h4>
+                <p>Exame invasivo que analisa a medula óssea, indicado para diagnóstico de leucemias, aplasia, mieloma múltiplo e doenças infiltrativas.</p>
+
+                <h4>4. Citometria de Fluxo</h4>
+                <p>Analisa características físicas (tamanho, granulosidade) e antigênicas das células, permitindo diagnóstico de leucemias, linfomas e imunodeficiências.</p>
+
+                <h4>5. Eletroforese de Hemoglobina</h4>
+                <p>Detecta hemoglobinopatias como anemia falciforme (HbS), talassemias (HbA2, HbF) e outras variantes.</p>
+
+                <h4>6. Biologia Molecular (PCR, FISH)</h4>
+                <p>Identifica mutações genéticas em leucemias (BCR-ABL na LMC), linfomas e síndromes mielodisplásicas.</p>
+            </div>
+
+            <!-- 8. VALORES DE REFERÊNCIA -->
+            <div class="content-card" id="valores-ref">
+                <h3><i class="fas fa-table" style="color:#a93226;"></i> Valores de Referência Resumidos</h3>
+                <p>Consulte rapidamente os principais parâmetros hematológicos:</p>
+                <div class="valores-grid">
+                    <div class="valor-card">
+                        <h5>🔴 Hemoglobina</h5>
+                        <div class="vr-item"><span>Homem</span><span>13,5–17,5 g/dL</span></div>
+                        <div class="vr-item"><span>Mulher</span><span>12,0–15,5 g/dL</span></div>
+                    </div>
+                    <div class="valor-card">
+                        <h5>⚪ Leucócitos</h5>
+                        <div class="vr-item"><span>Adulto</span><span>4.000–11.000/µL</span></div>
+                    </div>
+                    <div class="valor-card">
+                        <h5>🟡 Plaquetas</h5>
+                        <div class="vr-item"><span>Adulto</span><span>150.000–450.000/µL</span></div>
+                    </div>
+                    <div class="valor-card">
+                        <h5>📏 VCM</h5>
+                        <div class="vr-item"><span>Normal</span><span>80–100 fL</span></div>
+                    </div>
+                    <div class="valor-card">
+                        <h5>🩸 Hematócrito</h5>
+                        <div class="vr-item"><span>Homem</span><span>40–52%</span></div>
+                        <div class="vr-item"><span>Mulher</span><span>36–48%</span></div>
+                    </div>
+                    <div class="valor-card">
+                        <h5>🧪 Ferritina</h5>
+                        <div class="vr-item"><span>Homem</span><span>30–400 ng/mL</span></div>
+                        <div class="vr-item"><span>Mulher</span><span>13–150 ng/mL</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ANEMIAS -->
+            <div class="content-card" id="anemias">
+                <h3><i class="fas fa-heartbeat" style="color:#a93226;"></i> Anemias: Classificação e Diagnóstico</h3>
+                <p>A <strong>anemia</strong> é definida como a redução da concentração de hemoglobina abaixo dos valores normais para idade e sexo. A classificação morfológica baseia-se no VCM:</p>
+
+                <h4>1. Anemias Microcíticas (VCM &lt; 80 fL)</h4>
+                <ul>
+                    <li><strong>Anemia Ferropriva:</strong> Causada por deficiência de ferro. Ferritina baixa, ferro sérico baixo, capacidade total de ligação elevada (CTLF).</li>
+                    <li><strong>Talassemias:</strong> Anemia hemolítica hereditária. HbA2 elevada (β-talassemia), HbF elevada.</li>
+                    <li><strong>Anemia de Doença Crônica:</strong> Ferritina normal/alta, ferro baixo, CTLF baixa.</li>
+                </ul>
+
+                <h4>2. Anemias Normocíticas (VCM 80-100 fL)</h4>
+                <ul>
+                    <li><strong>Anemia Hemolítica:</strong> Destruição precoce de hemácias. LDH elevado, haptoglobina baixa, bilirrubina indireta elevada.</li>
+                    <li><strong>Anemia Aplástica:</strong> Insuficiência da medula óssea. Pancitopenia, medula óssea hipocelular.</li>
+                    <li><strong>Anemia de Doença Renal Crônica:</strong> EPO baixa, ureia e creatinina elevadas.</li>
+                </ul>
+
+                <h4>3. Anemias Macrocíticas (VCM &gt; 100 fL)</h4>
+                <ul>
+                    <li><strong>Anemia Megaloblástica:</strong> Deficiência de vitamina B12 ou ácido fólico. Hipersegmentação dos neutrófilos, macrócitos.</li>
+                    <li><strong>Síndrome Mielodisplásica:</strong> Displasia da medula óssea, citopenias.</li>
+                    <li><strong>Uso de medicamentos:</strong> Hidroxiureia, zidovudina, quimioterápicos.</li>
+                </ul>
+
+                <div class="table-wrap">
+                    <table>
+                        <tr><th>Tipo de Anemia</th><th>VCM</th><th>Ferritina</th><th>Ferro Sérico</th><th>CTLF</th></tr>
+                        <tr><td>Ferropriva</td><td>↓</td><td>↓</td><td>↓</td><td>↑</td></tr>
+                        <tr><td>Doença Crônica</td><td>↓ / N</td><td>↑ / N</td><td>↓</td><td>↓</td></tr>
+                        <tr><td>Talassemia</td><td>↓</td><td>↑</td><td>↑</td><td>N</td></tr>
+                        <tr><td>Megaloblástica</td><td>↑</td><td>↑</td><td>↑</td><td>N</td></tr>
+                        <tr><td>Hemolítica</td><td>N</td><td>↑</td><td>↑</td><td>N</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- LEUCEMIAS E LINFOMAS -->
+            <div class="content-card" id="leucemias">
+                <h3><i class="fas fa-bolt" style="color:#a93226;"></i> Leucemias e Linfomas</h3>
+
+                <h4>1. Leucemias Agudas</h4>
+                <ul>
+                    <li><strong>Leucemia Mieloide Aguda (LMA):</strong> Proliferação de blastos mieloides (≥20% na medula). Subtipos M0-M7 (FAB).</li>
+                    <li><strong>Leucemia Linfoide Aguda (LLA):</strong> Proliferação de linfoblastos (células T ou B). Mais comum em crianças.</li>
+                    <li><strong>Diagnóstico:</strong> Hemograma (leucocitose com blastos), mielograma, citometria de fluxo, citogenética.</li>
+                    <li><strong>Tratamento:</strong> Quimioterapia intensiva, transplante de medula óssea, imunoterapia.</li>
+                </ul>
+
+                <h4>2. Leucemias Crônicas</h4>
+                <ul>
+                    <li><strong>Leucemia Mieloide Crônica (LMC):</strong> Proliferação de células mieloides maduras. Citogenética: t(9;22) — cromossomo Philadelphia (BCR-ABL).</li>
+                    <li><strong>Leucemia Linfoide Crônica (LLC):</strong> Proliferação de linfócitos B maduros. Principal leucemia em adultos (idade &gt; 60 anos).</li>
+                    <li><strong>Tratamento:</strong> Inibidores de tirosina quinase (LMC), quimioterapia e imunoterapia (LLC).</li>
+                </ul>
+
+                <h4>3. Linfomas</h4>
+                <ul>
+                    <li><strong>Linfoma de Hodgkin:</strong> Presença de células de Reed-Sternberg. Bimodal: jovens e idosos.</li>
+                    <li><strong>Linfomas não-Hodgkin (LNH):</strong> Grupo heterogêneo de neoplasias linfoides. Ex: linfoma difuso de grandes células B, linfoma folicular, linfoma de Burkitt.</li>
+                    <li><strong>Diagnóstico:</strong> Biópsia de linfonodo, imunofenotipagem, citometria de fluxo, FISH.</li>
+                </ul>
+            </div>
+
+            <!-- HEMOSTASIA E COAGULOPATIAS -->
+            <div class="content-card" id="hemostasia">
+                <h3><i class="fas fa-hand-holding-heart" style="color:#a93226;"></i> Hemostasia e Coagulopatias</h3>
+                <p>A hemostasia mantém o sangue fluido nos vasos e promove a formação de coágulos quando ocorre lesão vascular.</p>
+
+                <h4>1. Fases da Hemostasia</h4>
+                <ul>
+                    <li><strong>Vasoconstrição:</strong> Redução do fluxo sanguíneo na lesão.</li>
+                    <li><strong>Hemostasia Primária (Plaquetária):</strong> Adesão, ativação e agregação plaquetária. Formação do tampão plaquetário.</li>
+                    <li><strong>Hemostasia Secundária (Coagulação):</strong> Cascata de coagulação (vias intrínseca e extrínseca) forma a fibrina.</li>
+                    <li><strong>Fibrinólise:</strong> Dissolução do coágulo pela plasmina.</li>
+                </ul>
+
+                <h4>2. Distúrbios Hemorrágicos</h4>
+                <ul>
+                    <li><strong>Hemofilia A:</strong> Deficiência do fator VIII (cromossomo X). Sangramentos articulares e musculares.</li>
+                    <li><strong>Hemofilia B:</strong> Deficiência do fator IX.</li>
+                    <li><strong>Doença de von Willebrand:</strong> Deficiência do fator vWF. Sangramentos mucocutâneos.</li>
+                    <li><strong>Coagulação Intravascular Disseminada (CIVD):</strong> Consumo excessivo de fatores de coagulação, trombose e hemorragia.</li>
+                </ul>
+
+                <h4>3. Distúrbios Trombóticos</h4>
+                <ul>
+                    <li><strong>Trombofilias hereditárias:</strong> Fator V Leiden, mutação da protrombina (G20210A), deficiência de antitrombina, proteína C ou S.</li>
+                    <li><strong>Trombofilias adquiridas:</strong> Síndrome do anticorpo antifosfolipídeo, câncer, imobilização, anticoncepcionais orais.</li>
+                </ul>
+            </div>
+
+            <!-- HEMOGLOBINOPATIAS -->
+            <div class="content-card" id="hemoglobinopatias">
+                <h3><i class="fas fa-dna" style="color:#a93226;"></i> Hemoglobinopatias</h3>
+
+                <h4>1. Anemia Falciforme (HbSS)</h4>
+                <p>Doença hereditária autossômica recessiva causada pela mutação no gene da beta-globina (GAG → GTG), substituindo ácido glutâmico por valina na posição 6 da cadeia β. A hemoglobina S (HbS) polimeriza em condições de baixa oxigenação, deformando as hemácias em forma de foice.</p>
+                <p><strong>Manifestações:</strong> Crises vaso-oclusivas (dor óssea, SCA, AVC), anemia hemolítica crônica, autosplenectomia (recorrente infecções).</p>
+                <p><strong>Diagnóstico:</strong> Eletroforese de hemoglobina (HbS &gt; 80%), teste de falcização (solução de metabissulfito).</p>
+
+                <h4>2. Talassemias</h4>
+                <p>Redução ou ausência da síntese de cadeias de globina.</p>
+                <ul>
+                    <li><strong>β-talassemia:</strong> Mutação no gene HBB (cromossomo 11). β-talassemia minor (HbA2 elevada + HbF), β-talassemia major (anemia grave, dependente de transfusão).</li>
+                    <li><strong>α-talassemia:</strong> Deleção de genes HBA1/HBA2 (cromossomo 16). Síndrome de HbH e hidropisia fetal.</li>
+                </ul>
+            </div>
+
+            <!-- MEDICINA TRANSFUSIONAL -->
+            <div class="content-card" id="transfusional">
+                <h3><i class="fas fa-syringe" style="color:#a93226;"></i> Medicina Transfusional</h3>
+                <p>A medicina transfusional é fundamental para o tratamento de anemias graves, hemorragias e doenças hematológicas.</p>
+
+                <h4>1. Grupos Sanguíneos</h4>
+                <ul>
+                    <li><strong>Sistema ABO:</strong> Antígenos A, B e O (sem antígeno).</li>
+                    <li><strong>Sistema Rh:</strong> Rh positivo (presença do antígeno D) ou Rh negativo.</li>
+                    <li><strong>Outros sistemas:</strong> Kell, Duffy, Kidd, MNS, Lewis.</li>
+                </ul>
+
+                <h4>2. Testes Pré-Transfusionais</h4>
+                <ul>
+                    <li><strong>Tipagem ABO/Rh:</strong> Determina o tipo sanguíneo.</li>
+                    <li><strong>Pesquisa de Anticorpos Irregulares (PAI):</strong> Detecta anticorpos contra outros antígenos.</li>
+                    <li><strong>Prova Cruzada:</strong> Compatibilidade entre doador e receptor.</li>
+                </ul>
+
+                <h4>3. Hemocomponentes e Indicações</h4>
+                <ul>
+                    <li><strong>Concentrado de Hemácias:</strong> Anemia sintomática, Hb &lt; 7-8 g/dL.</li>
+                    <li><strong>Concentrado de Plaquetas:</strong> Trombocitopenia &lt; 10.000/µL ou sangramento ativo.</li>
+                    <li><strong>Plasma Fresco Congelado:</strong> Deficiência de fatores de coagulação, CIVD, hemorragia maciça.</li>
+                    <li><strong>Crioprecipitado:</strong> Fibrinogênio baixo, hemofilia A (fator VIII).</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>🔴 Importante:</strong> Reações transfusionais podem ser imediatas (hemolítica, alérgica, anafilática, TACO, TRALI) e tardias (aloimunização, hemólise tardia, transmissão de doenças).
+                </div>
+            </div>
+
+            <!-- AVANÇOS -->
+            <div class="content-card" id="avancos">
+                <h3><i class="fas fa-robot" style="color:#a93226;"></i> Avanços Tecnológicos em Hematologia</h3>
+
+                <h4>1. Citometria de Fluxo Multiparamétrica</h4>
+                <p>Permite a análise de múltiplos antígenos simultaneamente, essencial para diagnóstico e monitoramento de leucemias e linfomas.</p>
+
+                <h4>2. Sequenciamento de Nova Geração (NGS)</h4>
+                <p>Identifica mutações genéticas em doenças hematológicas, guiando terapias-alvo e medicina personalizada.</p>
+
+                <h4>3. Terapia Gênica e CAR-T Cells</h4>
+                <p>Tratamento inovador para leucemias e linfomas refratários, utilizando células T geneticamente modificadas para reconhecer e destruir células tumorais.</p>
+
+                <h4>4. Hemograma Virtual e IA</h4>
+                <p>Algoritmos de inteligência artificial auxiliam na interpretação automatizada de lâminas e na detecção precoce de alterações hematológicas.</p>
+
+                <h4>5. Biópsia Líquida</h4>
+                <p>Detecção de DNA tumoral circulante (ctDNA) no sangue para monitoramento de doenças hematológicas e detecção precoce de recidivas.</p>
+            </div>
+
+            <!-- 9. CURIOSIDADES -->
+            <div class="content-card" id="curiosidades">
+                <h3><i class="fas fa-lightbulb" style="color:#f39c12;"></i> Você Sabia?</h3>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🩸</div>
+                    <div><strong>O sangue representa cerca de 7% do peso corporal.</strong> Uma pessoa de 70 kg tem aproximadamente 5 litros de sangue.</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🦴</div>
+                    <div><strong>A medula óssea produz milhões de células sanguíneas por segundo.</strong> Em um único dia, ela produz cerca de 200 bilhões de hemácias!</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🔴</div>
+                    <div><strong>As hemácias vivem aproximadamente 120 dias.</strong> Após esse período, são removidas pelo baço e fígado, e seus componentes são reciclados.</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🦟</div>
+                    <div><strong>A anemia falciforme confere resistência à malária.</strong> Por isso, a mutação é mais comum em regiões endêmicas de malária, como a África subsaariana.</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">💉</div>
+                    <div><strong>O tipo sanguíneo O negativo é o doador universal</strong> para hemácias, enquanto o AB positivo é o receptor universal.</div>
+                </div>
+            </div>
+
+            <!-- 7. CASOS CLÍNICOS -->
+            <div class="content-card" id="casos-clinicos">
+                <h3><i class="fas fa-stethoscope" style="color:#a93226;"></i> Casos Clínicos</h3>
+                <p>Teste seus conhecimentos com casos clínicos interativos:</p>
+
+                <!-- CASO 1 -->
+                <div class="caso-card" id="caso1">
+                    <div class="paciente-info">
+                        <div class="paciente-icon">👩</div>
+                        <div>
+                            <strong>Paciente:</strong> Mulher, 24 anos<br>
+                            <strong>Sintomas:</strong> Cansaço, palidez, unhas quebradiças<br>
+                            <strong>Exames:</strong> Hemoglobina baixa
+                        </div>
+                    </div>
+                    <p><strong>❓ Qual a hipótese diagnóstica mais provável?</strong></p>
+                    <div class="quiz-opcoes">
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'B')">A) Policitemia</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'B')">B) Anemia ferropriva</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'B')">C) Leucemia</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'B')">D) Trombocitose</div>
+                    </div>
+                    <div class="quiz-feedback" id="caso1-feedback"></div>
+                </div>
+
+                <!-- CASO 2 -->
+                <div class="caso-card" id="caso2">
+                    <div class="paciente-info">
+                        <div class="paciente-icon">👨</div>
+                        <div>
+                            <strong>Paciente:</strong> Homem, 55 anos<br>
+                            <strong>Sintomas:</strong> Fadiga, perda de peso, esplenomegalia<br>
+                            <strong>Exames:</strong> Leucocitose com blastos, cromossomo Philadelphia positivo
+                        </div>
+                    </div>
+                    <p><strong>❓ Qual o diagnóstico mais provável?</strong></p>
+                    <div class="quiz-opcoes">
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'C')">A) Leucemia Linfoide Aguda</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'C')">B) Leucemia Mieloide Aguda</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'C')">C) Leucemia Mieloide Crônica</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'C')">D) Leucemia Linfoide Crônica</div>
+                    </div>
+                    <div class="quiz-feedback" id="caso2-feedback"></div>
+                </div>
+            </div>
+
+            <!-- 10. QUIZ FINAL -->
+            <div class="content-card quiz-final" id="quiz-final">
+                <h3><i class="fas fa-question-circle" style="color:#a93226;"></i> Quiz Final</h3>
+                <p><strong>Quanto tempo vive uma hemácia?</strong></p>
+                <div class="quiz-opcoes" id="quizFinalOpcoes">
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="A">○ 30 dias</div>
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="B">○ 60 dias</div>
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="C">○ 120 dias</div>
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="D">○ 365 dias</div>
+                </div>
+                <button class="btn-responder" id="btnResponderQuiz" onclick="responderQuiz()">Responder</button>
+                <p id="quizFinalFeedback" style="margin-top:1rem; font-weight:600;"></p>
+            </div>
+
+            <!-- 11. RESUMO -->
+            <div class="content-card" id="resumo">
+                <h3><i class="fas fa-clipboard-check" style="color:#27ae60;"></i> Resumo da Matéria</h3>
+                <ul class="resumo-list">
+                    <li><i class="fas fa-check-circle"></i> O sangue possui plasma (55%) e elementos figurados (45%).</li>
+                    <li><i class="fas fa-check-circle"></i> As <strong>hemácias</strong> transportam oxigênio através da hemoglobina.</li>
+                    <li><i class="fas fa-check-circle"></i> Os <strong>leucócitos</strong> atuam na defesa imunológica do organismo.</li>
+                    <li><i class="fas fa-check-circle"></i> As <strong>plaquetas</strong> participam da coagulação sanguínea.</li>
+                    <li><i class="fas fa-check-circle"></i> O <strong>hemograma</strong> é o principal exame hematológico.</li>
+                    <li><i class="fas fa-check-circle"></i> Anemias são classificadas pelo VCM: microcíticas, normocíticas e macrocíticas.</li>
+                    <li><i class="fas fa-check-circle"></i> A hematopoiese ocorre na medula óssea e é regulada por fatores de crescimento.</li>
+                    <li><i class="fas fa-check-circle"></i> A hemostasia envolve vasoconstrição, tampão plaquetário, coagulação e fibrinólise.</li>
+                    <li><i class="fas fa-check-circle"></i> Hemoglobinopatias como anemia falciforme e talassemias têm base genética.</li>
+                    <li><i class="fas fa-check-circle"></i> A medicina transfusional é essencial para anemias graves e distúrbios hemorrágicos.</li>
+                </ul>
+            </div>
+
+            <!-- REFERÊNCIAS -->
+            <div class="content-card" id="referencias">
+                <h3><i class="fas fa-book" style="color:#a93226;"></i> Referências Bibliográficas</h3>
+                <ul>
+                    <li><strong>Hoffman, R. et al.</strong> Hematology: Basic Principles and Practice. 7th ed. Elsevier, 2017.</li>
+                    <li><strong>Bain, B.J. et al.</strong> Dacie and Lewis Practical Haematology. 12th ed. Elsevier, 2016.</li>
+                    <li><strong>McPherson, R.A. & Pincus, M.R.</strong> Henry's Clinical Diagnosis and Management by Laboratory Methods. 24th ed. Elsevier, 2021.</li>
+                    <li><strong>WHO Classification of Tumours of Haematopoietic and Lymphoid Tissues.</strong> Revised 4th ed. IARC, 2017.</li>
+                    <li><strong>American Society of Hematology (ASH) Guidelines.</strong> 2020-2024.</li>
+                </ul>
+                <p style="margin-top:1rem; font-size:0.9rem; color:#5c7f9a;">Última atualização: Junho 2026</p>
+            </div>
+
+            <!-- 12. NAVEGAÇÃO ENTRE DISCIPLINAS -->
+            <div class="navegacao-disciplinas">
+                <a href="bioquimica.html" class="nav-disciplina anterior">
+                    <i class="fas fa-arrow-left" style="color:#a93226;"></i>
+                    <div>
+                        <div class="nav-label">← Disciplina Anterior</div>
+                        <div class="nav-titulo">Bioquímica Clínica</div>
+                    </div>
+                </a>
+                <a href="imunologia.html" class="nav-disciplina proxima">
+                    <div>
+                        <div class="nav-label">Próxima Disciplina →</div>
+                        <div class="nav-titulo">Imunologia</div>
+                    </div>
+                    <i class="fas fa-arrow-right" style="color:#a93226;"></i>
+                </a>
+            </div>
+
+        </div><!-- .content-area -->
+    </div><!-- .main-wrapper -->
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3 style="color:#fff;"><i class="fas fa-flask" style="margin-right:6px;"></i>LabEnsina</h3>
+                <p style="font-size:0.85rem;">Plataforma colaborativa para ensino em análises clínicas.</p>
+            </div>
+            <div class="footer-links">
+                <a>Contato</a>
+                <a>Sobre</a>
+                <a>Colaboradores</a>
+            </div>
+            <small>© 2026 LabEnsina • Conteúdo científico atualizado</small>
+        </div>
+    </footer>
+
+    <!-- CHATBOT -->
+    <div class="chat-float">
+        <button class="chat-toggle" onclick="toggleChat()">
+            <i class="fas fa-robot"></i>
+            <span class="badge-notif">1</span>
+        </button>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h4><i class="fas fa-robot"></i> Assistente Hematologia</h4>
+            <button class="chat-close" onclick="toggleChat()">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">
+                👋 Olá! Tire suas dúvidas sobre hematologia: hemograma, anemias, leucemias, coagulação e mais.
+                <span class="msg-time">Agora</span>
+            </div>
+        </div>
+        <div class="chat-suggestions">
+            <button onclick="enviarMensagem('O que é hemograma?')">Hemograma</button>
+            <button onclick="enviarMensagem('Tipos de anemia')">Anemias</button>
+            <button onclick="enviarMensagem('O que é leucemia?')">Leucemia</button>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Digite sua pergunta..." onkeypress="if(event.key==='Enter') enviarMensagem()" />
+            <button onclick="enviarMensagem()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // ===== CHATBOT =====
+        function toggleChat() {
+            document.getElementById('chatWindow').classList.toggle('aberto');
+        }
+        function enviarMensagem(msg) {
+            const input = document.getElementById('chatInput');
+            const texto = msg || input.value.trim();
+            if (!texto) return;
+            input.value = '';
+            const container = document.getElementById('chatMessages');
+
+            const userDiv = document.createElement('div');
+            userDiv.className = 'chat-msg user';
+            userDiv.innerHTML = texto + '<span class="msg-time">Agora</span>';
+            container.appendChild(userDiv);
+
+            let resposta = 'Desculpe, não entendi. Pergunte sobre: hemograma, anemias, leucemias, coagulação, hemofilia, anemia falciforme, etc.';
+            const lower = texto.toLowerCase();
+
+            if (lower.includes('hemograma') || lower.includes('hemacias') || lower.includes('leucocitos')) {
+                resposta = 'O hemograma avalia a série vermelha (hemácias, Hb, Ht, VCM, HCM), série branca (leucócitos, neutrófilos, linfócitos) e plaquetas. Normal: Hb H:13,5-17,5; M:12-16 g/dL. Leucócitos: 4.000-11.000/µL. Plaquetas: 150.000-400.000/µL.';
+            } else if (lower.includes('anemia') || lower.includes('anemias')) {
+                resposta = 'Anemias: Ferropriva (VCM ↓, ferritina ↓), Megaloblástica (VCM ↑, B12/folato ↓), Hemolítica (LDH ↑, haptoglobina ↓), Aplástica (pancitopenia, medula hipocelular), Doença Crônica (ferritina normal/alta).';
+            } else if (lower.includes('leucemia') || lower.includes('blastos')) {
+                resposta = 'Leucemias: LMA (blastos mieloides ≥20%), LLA (linfoblastos), LMC (cromossomo Philadelphia BCR-ABL), LLC (linfócitos B maduros). Diagnóstico: hemograma, mielograma, citometria de fluxo, FISH.';
+            } else if (lower.includes('coagulacao') || lower.includes('coágulo') || lower.includes('hemostasia')) {
+                resposta = 'Hemostasia: vasoconstrição, adesão/agregação plaquetária (primária) e cascata de coagulação (secundária). Exames: TP (via extrínseca), TTPA (via intrínseca), fibrinogênio.';
+            } else if (lower.includes('hemofilia')) {
+                resposta = 'Hemofilia A: deficiência FVIII. Hemofilia B: deficiência FIX. Herança ligada ao X. Sangramentos articulares, musculares. Tratamento: reposição do fator deficiente.';
+            } else if (lower.includes('falciforme') || lower.includes('hbss')) {
+                resposta = 'Anemia falciforme (HbSS): mutação no gene da beta-globina (GAG→GTG). Crises vaso-oclusivas, anemia hemolítica. Diagnóstico: eletroforese de Hb (HbS >80%). Tratamento: hidroxiureia, transfusões, transplante.';
+            } else {
+                resposta = 'Posso ajudar com: hemograma, anemias, leucemias, coagulação, hemofilia, anemia falciforme, talassemias, medicina transfusional. Qual sua dúvida?';
+            }
+
+            setTimeout(() => {
+                const botDiv = document.createElement('div');
+                botDiv.className = 'chat-msg bot';
+                botDiv.innerHTML = '🤖 ' + resposta + '<span class="msg-time">Agora</span>';
+                container.appendChild(botDiv);
+                container.scrollTop = container.scrollHeight;
+            }, 400);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // ===== CASOS CLÍNICOS =====
+        function responderCaso(casoId, elemento, respostaCorreta) {
+            const caso = document.getElementById(casoId);
+            const opcoes = caso.querySelectorAll('.quiz-opcao');
+            const feedback = document.getElementById(casoId + '-feedback');
+
+            // Verificar se já foi respondido
+            if (caso.dataset.respondido === 'true') return;
+
+            caso.dataset.respondido = 'true';
+            const respostaUsuario = elemento.textContent.charAt(0);
+
+            opcoes.forEach(op => {
+                op.style.pointerEvents = 'none';
+                const letra = op.textContent.charAt(0);
+                if (letra === respostaCorreta) {
+                    op.classList.add('correta');
+                } else if (op === elemento && letra !== respostaCorreta) {
+                    op.classList.add('errada');
+                }
+            });
+
+            if (respostaUsuario === respostaCorreta) {
+                feedback.textContent = '✅ Correto! Muito bem!';
+                feedback.style.color = '#27ae60';
+            } else {
+                feedback.textContent = '❌ Incorreto. A resposta correta é a opção ' + respostaCorreta + '.';
+                feedback.style.color = '#e74c3c';
+            }
+            feedback.style.display = 'block';
+        }
+
+        // ===== QUIZ FINAL =====
+        let quizSelecionado = null;
+
+        function selecionarQuiz(elemento) {
+            const opcoes = document.querySelectorAll('#quizFinalOpcoes .quiz-opcao');
+            opcoes.forEach(op => op.classList.remove('selecionada'));
+            elemento.classList.add('selecionada');
+            quizSelecionado = elemento.dataset.resposta;
+        }
+
+        function responderQuiz() {
+            if (!quizSelecionado) {
+                alert('Selecione uma resposta antes de clicar em Responder.');
+                return;
+            }
+
+            const feedback = document.getElementById('quizFinalFeedback');
+            const opcoes = document.querySelectorAll('#quizFinalOpcoes .quiz-opcao');
+            const btnResponder = document.getElementById('btnResponderQuiz');
+
+            opcoes.forEach(op => {
+                op.style.pointerEvents = 'none';
+                if (op.dataset.resposta === 'C') {
+                    op.classList.add('correta');
+                } else if (op.classList.contains('selecionada') && op.dataset.resposta !== 'C') {
+                    op.classList.add('errada');
+                }
+            });
+
+            if (quizSelecionado === 'C') {
+                feedback.textContent = '✅ Correto! As hemácias vivem aproximadamente 120 dias.';
+                feedback.style.color = '#27ae60';
+            } else {
+                feedback.textContent = '❌ Incorreto. As hemácias vivem aproximadamente 120 dias.';
+                feedback.style.color = '#e74c3c';
+            }
+
+            btnResponder.disabled = true;
+            btnResponder.textContent = 'Respondido ✓';
+        }
+
+        // ===== ÍNDICE LATERAL - DESTAQUE ATIVO AO ROLAR =====
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const sections = document.querySelectorAll('div[id]');
+
+        function highlightSidebarLink() {
+            let currentId = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 200;
+                if (window.scrollY >= sectionTop) {
+                    currentId = section.getAttribute('id');
+                }
+            });
+
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightSidebarLink);
+        highlightSidebarLink();
+
+        // ===== PESQUISA =====
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const termo = document.getElementById('searchInput').value.trim();
+            if (termo) {
+                alert('🔍 Buscando por: ' + termo + ' em Hematologia...');
+            }
+        });
+    </script>
+    <script src="utils.js"></script>
+    <script src="conhecimento.js"></script>
+    <script src="pesquisa.js"></script>
+    <script src="sugestoes.js"></script>
+    <script src="historico.js"></script>
+    <script src="quiz.js"></script>
+    <script src="casos.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>

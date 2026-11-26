@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LabEnsina • Urinálise - Guia Completo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; }
+        body { background: #f0f6fb; color: #1a2a3a; line-height: 1.8; scroll-behavior: smooth; }
+        .header {
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo img { height: 50px; width: 50px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.3); }
+        .logo h1 { font-size: 1.8rem; font-weight: 700; }
+        .logo h1 span { font-weight: 300; color: #6fc2f0; }
+        .logo small { display: block; font-size: 0.6rem; opacity: 0.7; letter-spacing: 1px; }
+        .header-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        .search-box { background: #fff; padding: 0.3rem 0.8rem; border-radius: 40px; display: flex; align-items: center; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); }
+        .search-box input { border: none; padding: 0.5rem 0.8rem; font-size: 0.95rem; width: 200px; outline: none; background: transparent; color: #1a2a3a; }
+        .search-box button { background: transparent; border: none; color: #1a3f62; font-size: 1.1rem; cursor: pointer; }
+        .btn-chat { background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; padding: 0.5rem 1.2rem; border-radius: 40px; cursor: pointer; font-weight: 500; font-size: 0.9rem; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .btn-chat:hover { background: rgba(255, 255, 255, 0.22); }
+        .btn-chat i { color: #6fc2f0; }
+
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 0.6rem 2rem;
+            border-bottom: 1px solid #dce5ef;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.8rem;
+            position: sticky;
+            top: 72px;
+            z-index: 99;
+        }
+        .nav-bar a { color: #1e3b5a; font-weight: 500; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; padding: 0.2rem 0; border-bottom: 2px solid transparent; transition: 0.2s; text-decoration: none; }
+        .nav-bar a:hover, .nav-bar a.active { color: #0077be; border-bottom-color: #0077be; }
+        .nav-bar a i { font-size: 0.85rem; color: #3d7ea6; }
+
+        .hero {
+            background: linear-gradient(135deg, #d6eaf8, #a9cce3);
+            padding: 2.5rem 2rem;
+            margin: 1.2rem 1.5rem;
+            border-radius: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .hero-text h2 { font-size: 2.4rem; font-weight: 700; color: #1a5276; }
+        .hero-text p { font-size: 1.05rem; color: #1a3f5a; max-width: 650px; }
+        .hero-text .badge { background: #1a5276; color: #fff; padding: 0.3rem 1.4rem; border-radius: 30px; font-size: 0.85rem; display: inline-block; }
+        .hero-image { font-size: 5rem; color: #1a5276; opacity: 0.25; }
+
+        /* ===== LAYOUT PRINCIPAL COM SIDEBAR ===== */
+        .main-wrapper { max-width: 1400px; margin: 1.5rem auto; padding: 0 1.5rem; display: flex; gap: 2rem; align-items: flex-start; }
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 140px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0, 20, 40, 0.06);
+            border: 1px solid #e6edf6;
+            max-height: calc(100vh - 160px);
+            overflow-y: auto;
+        }
+        .sidebar h3 { font-size: 1rem; color: #0b2a44; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+        .sidebar h3 i { color: #1a5276; }
+        .sidebar a { display: block; padding: 0.5rem 0.8rem; color: #1e3b5a; text-decoration: none; font-size: 0.85rem; border-radius: 8px; transition: 0.2s; margin-bottom: 2px; }
+        .sidebar a:hover, .sidebar a.active { background: #d6eaf8; color: #1a5276; font-weight: 600; }
+        .content-area { flex: 1; min-width: 0; }
+
+        /* ===== VISÃO GERAL ===== */
+        .visao-geral { background: #fff; border-radius: 24px; padding: 2rem; margin-bottom: 1.5rem; box-shadow: 0 6px 18px rgba(0, 20, 40, 0.05); border: 1px solid #e6edf6; }
+        .visao-geral h2 { font-size: 1.6rem; color: #0b2a44; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 10px; }
+        .visao-geral .subtitulo { color: #5c7f9a; margin-bottom: 1.2rem; font-size: 0.95rem; }
+        .topicos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.6rem; }
+        .topico-item { display: flex; align-items: center; gap: 8px; padding: 0.5rem 0.8rem; background: #f8fafc; border-radius: 10px; font-size: 0.9rem; font-weight: 500; color: #1e3b5a; transition: 0.2s; }
+        .topico-item:hover { background: #d6eaf8; }
+        .topico-item i { color: #1a5276; }
+
+        /* ===== CONTENT CARDS ===== */
+        .content-card { background: #fff; border-radius: 24px; padding: 2rem; margin: 1.5rem 0; box-shadow: 0 6px 18px rgba(0, 20, 40, 0.05); border: 1px solid #e6edf6; }
+        .content-card h3 { color: #0b2a44; font-size: 1.4rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; }
+        .content-card h4 { color: #1a5276; font-size: 1.1rem; margin: 1rem 0 0.5rem; }
+        .content-card p { color: #1e3b5a; margin-bottom: 0.8rem; text-align: justify; }
+        .content-card ul { margin: 0.8rem 0 0.8rem 1.8rem; }
+        .content-card ul li { margin: 0.4rem 0; color: #1e3b5a; }
+        .content-card .highlight-box { background: #d6eaf8; border-left: 5px solid #1a5276; padding: 1rem 1.5rem; border-radius: 12px; margin: 1rem 0; }
+        .content-card .highlight-box strong { color: #0b2a44; }
+        .content-card .info-box { background: #d5f5e3; border-left: 5px solid #27ae60; padding: 1rem 1.5rem; border-radius: 12px; margin: 1rem 0; }
+        .content-card .warning-box { background: #fef9e7; border-left: 5px solid #f39c12; padding: 1rem 1.5rem; border-radius: 12px; margin: 1rem 0; }
+        .content-card .danger-box { background: #fadbd8; border-left: 5px solid #e74c3c; padding: 1rem 1.5rem; border-radius: 12px; margin: 1rem 0; }
+
+        /* ===== TABELAS ===== */
+        .table-wrap { overflow-x: auto; margin: 1rem 0; }
+        .table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .table-wrap th { background: #1a5276; color: #fff; padding: 0.7rem 1rem; text-align: left; }
+        .table-wrap td { padding: 0.6rem 1rem; border-bottom: 1px solid #e6edf6; }
+        .table-wrap tr:nth-child(even) { background: #f8fafc; }
+        .table-wrap tr:hover { background: #d6eaf8; }
+
+        /* ===== FLUXOGRAMA ===== */
+        .fluxograma { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; margin: 1.5rem 0; padding: 1.5rem; background: #f8fafc; border-radius: 16px; }
+        .fluxo-box { background: #1a5276; color: #fff; padding: 0.7rem 1.3rem; border-radius: 10px; font-weight: 600; text-align: center; min-width: 180px; box-shadow: 0 3px 10px rgba(26, 82, 118, 0.25); font-size: 0.9rem; }
+        .fluxo-box.blue { background: #2980b9; }
+        .fluxo-box.green { background: #27ae60; }
+        .fluxo-box.orange { background: #e67e22; }
+        .fluxo-box.purple { background: #8e44ad; }
+        .fluxo-arrow { font-size: 1.3rem; color: #1a5276; font-weight: 700; }
+
+        /* ===== ETAPAS (CARDS COLORIDOS) ===== */
+        .etapas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin: 1rem 0; }
+        .etapa-card { border-radius: 20px; padding: 1.5rem; border: 2px solid #e6edf6; transition: 0.3s; }
+        .etapa-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); }
+        .etapa-card h4 { font-size: 1.1rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px; }
+        .etapa-card ul { margin: 0.5rem 0 0 1.2rem; font-size: 0.9rem; }
+        .etapa-card ul li { margin: 0.3rem 0; }
+        .etapa-card.fisico { background: #f0f8ff; border-color: #2980b9; }
+        .etapa-card.fisico h4 { color: #2980b9; }
+        .etapa-card.quimico { background: #f0fff0; border-color: #27ae60; }
+        .etapa-card.quimico h4 { color: #27ae60; }
+        .etapa-card.sedimento { background: #fffdf0; border-color: #f39c12; }
+        .etapa-card.sedimento h4 { color: #f39c12; }
+
+        /* ===== GALERIA DO SEDIMENTO ===== */
+        .galeria-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.8rem; margin: 1rem 0; }
+        .galeria-card { text-align: center; background: #f8fafc; border-radius: 14px; padding: 0.8rem 0.5rem; border: 2px solid #e6edf6; transition: 0.3s; cursor: default; }
+        .galeria-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); border-color: #1a5276; }
+        .galeria-img { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 0.4rem; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+        .galeria-card h5 { font-size: 0.75rem; color: #0b2a44; }
+        .galeria-card small { font-size: 0.6rem; color: #5c7f9a; display: block; }
+
+        /* ===== CURIOSIDADES ===== */
+        .curiosidade-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: #fff; border-radius: 16px; margin: 0.6rem 0; border: 1px solid #e6edf6; transition: 0.3s; }
+        .curiosidade-item:hover { border-color: #f39c12; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+        .curiosidade-icon { font-size: 2rem; flex-shrink: 0; }
+
+        /* ===== ERROS COMUNS ===== */
+        .erro-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: #fadbd8; border-radius: 16px; margin: 0.6rem 0; border: 1px solid #f5c6c6; transition: 0.3s; }
+        .erro-item:hover { border-color: #e74c3c; }
+        .erro-icon { font-size: 1.5rem; flex-shrink: 0; }
+
+        /* ===== CASO CLÍNICO ===== */
+        .caso-card { background: #fff; border: 2px solid #e6edf6; border-radius: 20px; padding: 1.5rem; margin: 1rem 0; transition: 0.3s; }
+        .caso-card:hover { border-color: #1a5276; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); }
+        .caso-card .paciente-info { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 0.8rem; }
+        .caso-card .paciente-icon { font-size: 3rem; }
+        .caso-card .quiz-opcoes { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.8rem; }
+        .caso-card .quiz-opcao { padding: 0.7rem 1rem; border: 2px solid #dce5ef; border-radius: 12px; cursor: pointer; font-weight: 500; transition: 0.2s; background: #fafbfc; }
+        .caso-card .quiz-opcao:hover { border-color: #1a5276; background: #d6eaf8; }
+        .caso-card .quiz-opcao.correta { border-color: #27ae60; background: #d5f5e3; color: #1e8449; }
+        .caso-card .quiz-opcao.errada { border-color: #e74c3c; background: #fadbd8; color: #c0392b; }
+        .caso-card .quiz-feedback { margin-top: 0.8rem; font-weight: 600; display: none; }
+
+        /* ===== QUIZ FINAL ===== */
+        .quiz-final .quiz-opcoes { display: flex; flex-direction: column; gap: 0.6rem; margin: 1rem 0; }
+        .quiz-final .quiz-opcao { padding: 0.8rem 1.2rem; border: 2px solid #dce5ef; border-radius: 14px; cursor: pointer; font-weight: 500; transition: 0.2s; background: #fafbfc; font-size: 0.95rem; }
+        .quiz-final .quiz-opcao:hover { border-color: #1a5276; }
+        .quiz-final .quiz-opcao.selecionada { border-color: #1a5276; background: #d6eaf8; }
+        .quiz-final .quiz-opcao.correta { border-color: #27ae60; background: #d5f5e3; }
+        .quiz-final .quiz-opcao.errada { border-color: #e74c3c; background: #fadbd8; }
+        .btn-responder { background: #1a5276; color: #fff; border: none; padding: 0.8rem 2rem; border-radius: 30px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: 0.3s; }
+        .btn-responder:hover { background: #0f3a52; }
+        .btn-responder:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ===== RESUMO ===== */
+        .resumo-list { list-style: none; padding: 0; }
+        .resumo-list li { padding: 0.5rem 0; border-bottom: 1px solid #e6edf6; display: flex; align-items: center; gap: 10px; }
+        .resumo-list li i { color: #27ae60; }
+
+        /* ===== NAVEGAÇÃO ENTRE DISCIPLINAS ===== */
+        .navegacao-disciplinas { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+        .nav-disciplina { display: flex; align-items: center; gap: 10px; padding: 1rem 1.5rem; background: #fff; border-radius: 16px; text-decoration: none; color: #1e3b5a; font-weight: 500; border: 2px solid #e6edf6; transition: 0.3s; flex: 1; min-width: 200px; }
+        .nav-disciplina:hover { border-color: #1a5276; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); }
+        .nav-disciplina.anterior { text-align: left; }
+        .nav-disciplina.proxima { text-align: right; justify-content: flex-end; }
+        .nav-disciplina .nav-label { font-size: 0.75rem; color: #5c7f9a; }
+        .nav-disciplina .nav-titulo { font-size: 1rem; font-weight: 600; color: #0b2a44; }
+
+        /* ===== CARDS DE INTEGRAÇÃO ===== */
+        .integracao-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin: 1rem 0; }
+        .integracao-card { display: flex; align-items: center; gap: 10px; padding: 0.8rem 1rem; background: #f8fafc; border-radius: 12px; border: 1px solid #e6edf6; text-decoration: none; color: #1e3b5a; font-weight: 500; font-size: 0.9rem; transition: 0.2s; }
+        .integracao-card:hover { border-color: #1a5276; background: #d6eaf8; }
+        .integracao-card i { color: #1a5276; font-size: 1.2rem; }
+
+        /* ===== VALORES DE REFERÊNCIA ===== */
+        .valores-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin: 1rem 0; }
+        .valor-card { background: #f8fafc; border-radius: 12px; padding: 0.8rem 1rem; border: 1px solid #e6edf6; }
+        .valor-card h5 { color: #1a5276; margin-bottom: 0.3rem; font-size: 0.9rem; }
+        .valor-card .vr-valor { font-weight: 700; color: #0b2a44; font-size: 1rem; }
+
+        .cientista-card { background: #f8fafc; border-radius: 16px; padding: 1.5rem; margin: 1rem 0; border: 1px solid #e6edf6; }
+        .cientista-card h4 { color: #0b2a44; font-size: 1.2rem; }
+        .cientista-card .area { color: #1a5276; font-weight: 500; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; }
+            .hero-text h2 { font-size: 1.8rem; }
+            .nav-bar { top: 110px; overflow-x: auto; flex-wrap: nowrap; }
+            .nav-bar a { font-size: 0.8rem; white-space: nowrap; }
+            .header { flex-direction: column; align-items: stretch; gap: 0.8rem; padding: 1rem; }
+            .search-box input { width: 120px; }
+            .main-wrapper { flex-direction: column; padding: 0 0.8rem; }
+            .sidebar { position: static; width: 100%; max-height: none; margin-bottom: 1rem; }
+            .sidebar a { display: inline-block; margin: 2px; }
+            .topicos-grid { grid-template-columns: repeat(2, 1fr); }
+            .galeria-grid { grid-template-columns: repeat(3, 1fr); }
+            .etapas-grid { grid-template-columns: 1fr; }
+            .navegacao-disciplinas { flex-direction: column; }
+        }
+
+        .footer { background: #0f263a; color: #cfdde9; padding: 2.5rem 1.5rem 1.8rem; margin-top: 3rem; border-radius: 40px 40px 0 0; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 1.8rem; }
+        .footer-links a { color: #b2ccdf; font-size: 0.9rem; cursor: pointer; text-decoration: none; }
+        .footer-links a:hover { color: #fff; }
+
+        /* ===== CHATBOT ===== */
+        .chat-float { position: fixed; bottom: 28px; right: 28px; z-index: 1000; }
+        .chat-toggle { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(145deg, #0b2a4a, #1a3f62); color: #fff; border: none; font-size: 1.8rem; cursor: pointer; box-shadow: 0 6px 24px rgba(11, 42, 74, 0.4); transition: 0.3s; display: flex; align-items: center; justify-content: center; position: relative; }
+        .chat-toggle:hover { transform: scale(1.05); }
+        .chat-toggle .badge-notif { position: absolute; top: -4px; right: -4px; background: #e74c3c; color: #fff; font-size: 0.6rem; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .chat-window { position: fixed; bottom: 100px; right: 28px; width: 380px; max-width: 90vw; max-height: 550px; background: #fff; border-radius: 24px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2); display: none; flex-direction: column; overflow: hidden; border: 1px solid #dce5ef; z-index: 1000; animation: slideUp 0.3s ease; }
+        .chat-window.aberto { display: flex; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .chat-header { background: linear-gradient(145deg, #0b2a4a, #1a3f62); color: #fff; padding: 1rem 1.2rem; display: flex; justify-content: space-between; align-items: center; }
+        .chat-header h4 { font-weight: 500; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+        .chat-header h4 i { color: #6fc2f0; }
+        .chat-close { background: none; border: none; color: rgba(255, 255, 255, 0.7); font-size: 1.4rem; cursor: pointer; }
+        .chat-close:hover { color: #fff; }
+        .chat-messages { flex: 1; padding: 1rem 1.2rem; overflow-y: auto; max-height: 350px; background: #f8fafc; display: flex; flex-direction: column; }
+        .chat-msg { margin-bottom: 0.8rem; padding: 0.6rem 1rem; border-radius: 16px; max-width: 85%; font-size: 0.9rem; line-height: 1.5; animation: msgIn 0.25s ease; }
+        @keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .chat-msg.bot { background: #d6eaf8; color: #1e3b5a; align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-msg.user { background: #1a3f62; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-msg .msg-time { font-size: 0.6rem; opacity: 0.6; margin-top: 4px; display: block; }
+        .chat-input-area { display: flex; padding: 0.8rem 1rem; border-top: 1px solid #e6edf6; background: #fff; gap: 8px; }
+        .chat-input-area input { flex: 1; border: 1px solid #dce5ef; border-radius: 30px; padding: 0.6rem 1rem; font-size: 0.9rem; outline: none; }
+        .chat-input-area input:focus { border-color: #0077be; }
+        .chat-input-area button { background: #1a3f62; color: #fff; border: none; border-radius: 30px; padding: 0.6rem 1.2rem; font-weight: 500; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
+        .chat-input-area button:hover { background: #0b2a4a; }
+        .chat-suggestions { display: flex; flex-wrap: wrap; gap: 6px; padding: 0.5rem 1rem 0.8rem; background: #f8fafc; border-top: 1px solid #e6edf6; }
+        .chat-suggestions button { background: #d6eaf8; border: none; border-radius: 20px; padding: 0.2rem 0.8rem; font-size: 0.75rem; color: #1a5276; cursor: pointer; transition: 0.2s; }
+        .chat-suggestions button:hover { background: #a9cce3; }
+
+        html { scroll-behavior: smooth; scroll-padding-top: 150px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="labensina.png" alt="LabEnsina" onerror="this.style.display='none'" />
+            <div>
+                <h1>Lab<span>Ensina</span></h1>
+                <small>urinálise • guia completo</small>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="search-box">
+                <input type="text" placeholder="Pesquisar..." id="searchInput" />
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            <button class="btn-chat" onclick="toggleChat()">
+                <i class="fas fa-robot"></i> Assistente
+            </button>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <a href="index.html"><i class="fas fa-home"></i> Início</a>
+        <a href="hematologia.html"><i class="fas fa-microscope"></i> Hematologia</a>
+        <a href="bioquimica.html"><i class="fas fa-vial"></i> Bioquímica</a>
+        <a href="microbiologia.html"><i class="fas fa-bacteria"></i> Microbiologia</a>
+        <a href="imunologia.html"><i class="fas fa-shield-virus"></i> Imunologia</a>
+        <a href="urinalise.html" class="active"><i class="fas fa-water"></i> Urinálise</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-text">
+            <span class="badge"><i class="fas fa-water"></i> Urinálise</span>
+            <h2>Guia Completo de Urinálise</h2>
+            <p>Análise da urina: exame físico, químico e microscópico. Interpretação clínica para diagnóstico de doenças renais, metabólicas, infecciosas e sistêmicas.</p>
+        </div>
+        <div class="hero-image"><i class="fas fa-water"></i></div>
+    </div>
+
+    <!-- ===== LAYOUT PRINCIPAL COM SIDEBAR ===== -->
+    <div class="main-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <h3><i class="fas fa-list"></i> Nesta página</h3>
+            <a href="#visao-geral">📋 Visão Geral</a>
+            <a href="#fluxograma-exame">🔍 Fluxograma do Exame</a>
+            <a href="#introducao">📖 Introdução</a>
+            <a href="#historia">📜 História</a>
+            <a href="#formacao-urina">🔄 Formação da Urina</a>
+            <a href="#etapas">📋 Etapas da Urinálise</a>
+            <a href="#tabela-parametros">📊 Tabela de Parâmetros</a>
+            <a href="#exame-fisico">🔵 Exame Físico</a>
+            <a href="#exame-quimico">🟢 Exame Químico</a>
+            <a href="#sedimentoscopia">🟡 Sedimentoscopia</a>
+            <a href="#galeria">🔬 Galeria do Sedimento</a>
+            <a href="#valores-ref">📋 Valores de Referência</a>
+            <a href="#doencas">🏥 Doenças Renais</a>
+            <a href="#curiosidades">💡 Você Sabia?</a>
+            <a href="#erros-comuns">❌ Erros Comuns</a>
+            <a href="#casos-clinicos">🩺 Casos Clínicos</a>
+            <a href="#integracao">🔗 Integração com Disciplinas</a>
+            <a href="#quiz-final">❓ Quiz Final</a>
+            <a href="#resumo">✅ Resumo</a>
+            <a href="#referencias">📚 Referências</a>
+        </aside>
+
+        <div class="content-area">
+
+            <!-- 1. BANNER INFORMATIVO / VISÃO GERAL -->
+            <div class="visao-geral" id="visao-geral">
+                <h2><i class="fas fa-flask" style="color:#1a5276;"></i> 🧪 URINÁLISE</h2>
+                <p class="subtitulo">Aprenda como interpretar o exame de urina, identificar alterações e compreender seu valor no diagnóstico clínico.</p>
+                <p style="margin-bottom:1rem; font-weight:500;">📖 <strong>Nesta matéria você aprenderá:</strong></p>
+                <div class="topicos-grid">
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Formação da urina</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Exame físico</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Exame químico</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Sedimentoscopia</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Cristais</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Células</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Cilindros</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Infecções urinárias</div>
+                </div>
+            </div>
+
+            <!-- 2. FLUXOGRAMA DO EXAME DE URINA -->
+            <div class="content-card" id="fluxograma-exame">
+                <h3><i class="fas fa-project-diagram" style="color:#1a5276;"></i> Fluxograma do Exame de Urina</h3>
+                <p>Veja o processo completo realizado no laboratório de análises clínicas:</p>
+                <div class="fluxograma">
+                    <div class="fluxo-box">🧪 Coleta da amostra</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box blue">🏷️ Identificação</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box">🔵 Exame físico (cor, aspecto, odor, densidade)</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box green">🟢 Exame químico (fita reagente)</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box orange">⚙️ Centrifugação (1.500 rpm / 5 min)</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box purple">🔬 Sedimentoscopia (microscopia)</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box green">📋 Interpretação e Laudo</div>
+                </div>
+                <p style="text-align:center; font-size:0.9rem; color:#5c7f9a; margin-top:0.5rem;">Este fluxograma aproxima a teoria da prática do laboratório de análises clínicas.</p>
+            </div>
+
+            <!-- INTRODUÇÃO -->
+            <div class="content-card" id="introducao">
+                <h3><i class="fas fa-book-open" style="color:#1a5276;"></i> Introdução à Urinálise</h3>
+                <p>A <strong>Urinálise</strong> (ou análise de urina) é um dos exames laboratoriais mais antigos e ainda hoje um dos mais solicitados na prática clínica. Consiste na avaliação da urina por meio de três componentes: <strong>exame físico, exame químico e exame microscópico (sedimentoscopia)</strong>.</p>
+                <p>A urina é um filtrado do sangue que reflete o funcionamento dos rins, bem como alterações metabólicas e sistêmicas. A urinálise pode detectar precocemente doenças renais, diabetes, infecções urinárias, distúrbios hepáticos, doenças metabólicas e até mesmo neoplasias.</p>
+                <div class="info-box">
+                    <strong>🟢 Importante:</strong> A urinálise é o exame de triagem para doenças renais (proteinúria, hematúria), infecções do trato urinário (piúria, nitritos) e diabetes (glicosúria, cetonúria). É de baixo custo, não invasivo e fornece informações valiosas.
+                </div>
+            </div>
+
+            <!-- 6. FLUXOGRAMA DA FORMAÇÃO DA URINA -->
+            <div class="content-card" id="formacao-urina">
+                <h3><i class="fas fa-kidney" style="color:#1a5276;"></i> Fluxograma da Formação da Urina</h3>
+                <p>Entenda o processo fisiológico que explica por que determinadas substâncias aparecem no exame:</p>
+                <div class="fluxograma">
+                    <div class="fluxo-box" style="background:#c0392b;">🩸 Sangue</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box blue">🔵 Glomérulo</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box green">💧 Filtração (180 L/dia)</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box orange">🔄 Túbulos renais</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box">♻️ Reabsorção (99% da água)</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box purple">➡️ Secreção tubular</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box" style="background:#27ae60;">🧪 Urina (1-2 L/dia)</div>
+                </div>
+                <div class="highlight-box">
+                    <strong>🔵 Limiar renal da glicose:</strong> 180 mg/dL. Acima deste valor, a glicose aparece na urina (glicosúria), pois a capacidade de reabsorção tubular é excedida.
+                </div>
+            </div>
+
+            <!-- HISTÓRIA -->
+            <div class="content-card" id="historia">
+                <h3><i class="fas fa-history" style="color:#1a5276;"></i> História da Urinálise</h3>
+                <p>A análise da urina tem raízes milenares. Na antiguidade, a uroscopia (observação visual da urina) era praticada por médicos gregos, egípcios e hindus.</p>
+                <ul>
+                    <li><strong>400 a.C.</strong> — Hipócrates descreve a relação entre a cor da urina e certas doenças.</li>
+                    <li><strong>100 d.C.</strong> — Galeno utiliza a análise da urina como ferramenta diagnóstica.</li>
+                    <li><strong>1660</strong> — Thomas Willis descreve a urina adocicada (diabetes mellitus).</li>
+                    <li><strong>1776</strong> — Matthew Dobson confirma que a urina adocicada contém açúcar.</li>
+                    <li><strong>1827</strong> — Richard Bright descreve a relação entre proteinúria e doença renal.</li>
+                    <li><strong>1950</strong> — Introdução das fitas reagentes (tiras de papel impregnadas).</li>
+                    <li><strong>1980</strong> — Automação da urinálise (leitura por reflectância).</li>
+                    <li><strong>2000</strong> — Microscopia digital e análise automatizada do sedimento.</li>
+                    <li><strong>2020</strong> — Dispositivos Point-of-Care e integração com inteligência artificial.</li>
+                </ul>
+            </div>
+
+            <!-- CIENTISTAS -->
+            <div class="content-card" id="cientistas">
+                <h3><i class="fas fa-user-graduate" style="color:#1a5276;"></i> Cientistas Pioneiros da Urinálise</h3>
+                <div class="cientista-card">
+                    <h4>Hipócrates (460-377 a.C.)</h4>
+                    <span class="area">Médico grego • Pai da Medicina</span>
+                    <p>Considerado o primeiro a utilizar a uroscopia como ferramenta diagnóstica. Correlacionou a cor, odor e quantidade da urina com doenças.</p>
+                </div>
+                <div class="cientista-card">
+                    <h4>Thomas Willis (1621-1675)</h4>
+                    <span class="area">Médico inglês</span>
+                    <p>Descreveu a "urina melada" (urina adocicada) em pacientes com diabetes mellitus, estabelecendo a relação entre glicosúria e diabetes.</p>
+                </div>
+                <div class="cientista-card">
+                    <h4>Richard Bright (1789-1858)</h4>
+                    <span class="area">Médico inglês • Pai da Nefrologia</span>
+                    <p>Descreveu a associação entre proteinúria, edema e doença renal (Doença de Bright). Foi o primeiro a estabelecer a urinálise como ferramenta essencial para diagnóstico de doenças renais.</p>
+                </div>
+            </div>
+
+            <!-- 3. DIVIDIR O CONTEÚDO EM ETAPAS -->
+            <div class="content-card" id="etapas">
+                <h3><i class="fas fa-layer-group" style="color:#1a5276;"></i> Etapas da Urinálise</h3>
+                <p>A urinálise é dividida em três etapas principais. Cada uma fornece informações específicas:</p>
+                <div class="etapas-grid">
+                    <div class="etapa-card fisico">
+                        <h4>🔵 Exame Físico</h4>
+                        <ul>
+                            <li><strong>Cor</strong> — amarelo claro a escuro</li>
+                            <li><strong>Aspecto</strong> — clara ou turva</li>
+                            <li><strong>Odor</strong> — característico</li>
+                            <li><strong>Volume</strong> — 1-2 L/dia</li>
+                            <li><strong>Densidade</strong> — 1.005-1.030</li>
+                        </ul>
+                    </div>
+                    <div class="etapa-card quimico">
+                        <h4>🟢 Exame Químico</h4>
+                        <ul>
+                            <li><strong>pH</strong> — 4,6-8,0</li>
+                            <li><strong>Proteínas</strong> — negativa</li>
+                            <li><strong>Glicose</strong> — negativa</li>
+                            <li><strong>Cetonas</strong> — negativa</li>
+                            <li><strong>Bilirrubina</strong> — negativa</li>
+                            <li><strong>Nitrito</strong> — negativo</li>
+                            <li><strong>Leucócitos</strong> — negativo</li>
+                        </ul>
+                    </div>
+                    <div class="etapa-card sedimento">
+                        <h4>🟡 Sedimento Urinário</h4>
+                        <ul>
+                            <li><strong>Hemácias</strong> — 0-3/campo</li>
+                            <li><strong>Leucócitos</strong> — 0-5/campo</li>
+                            <li><strong>Células epiteliais</strong></li>
+                            <li><strong>Cilindros</strong> — hialinos raros</li>
+                            <li><strong>Cristais</strong> — variáveis</li>
+                            <li><strong>Bactérias</strong> — ausentes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. TABELA DOS PARÂMETROS -->
+            <div class="content-card" id="tabela-parametros">
+                <h3><i class="fas fa-table" style="color:#1a5276;"></i> Tabela dos Parâmetros</h3>
+                <p>Esta tabela é extremamente útil para revisão e consulta rápida:</p>
+                <div class="table-wrap">
+                    <table>
+                        <tr><th>Parâmetro</th><th>Normal</th><th>Alteração pode indicar</th></tr>
+                        <tr><td>Cor</td><td>Amarelo claro</td><td>Desidratação, medicamentos, hematúria</td></tr>
+                        <tr><td>pH</td><td>5,0–8,0</td><td>Distúrbios metabólicos, ITU, dieta</td></tr>
+                        <tr><td>Densidade</td><td>1.005–1.030</td><td>Diabetes, insuficiência renal, desidratação</td></tr>
+                        <tr><td>Glicose</td><td>Negativa</td><td>Diabetes mellitus, glicosúria renal</td></tr>
+                        <tr><td>Proteínas</td><td>Negativa / &lt;30 mg/dL</td><td>Doença renal, pré-eclâmpsia, mieloma</td></tr>
+                        <tr><td>Nitrito</td><td>Negativo</td><td>Infecção urinária bacteriana</td></tr>
+                        <tr><td>Leucócitos</td><td>Negativo / Poucos</td><td>Inflamação, infecção urinária</td></tr>
+                        <tr><td>Sangue</td><td>Ausente</td><td>Glomerulonefrite, cálculos, neoplasia</td></tr>
+                        <tr><td>Bilirrubina</td><td>Negativa</td><td>Icterícia, hepatite, obstrução biliar</td></tr>
+                        <tr><td>Cetonas</td><td>Negativa</td><td>Cetoacidose diabética, jejum, alcoolismo</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- EXAME FÍSICO -->
+            <div class="content-card" id="exame-fisico">
+                <h3><i class="fas fa-eye" style="color:#2980b9;"></i> Exame Físico da Urina</h3>
+                <p>O exame físico avalia as características macroscópicas da amostra.</p>
+                <h4>1. Cor</h4>
+                <ul>
+                    <li><strong>Amarelo claro (normal):</strong> Urocromo, urobilina.</li>
+                    <li><strong>Amarelo escuro:</strong> Desidratação, concentração da urina.</li>
+                    <li><strong>Vermelho/rosado:</strong> Hematúria (sangue), hemoglobinúria, alimentos (beterraba), medicamentos (rifampicina).</li>
+                    <li><strong>Marrom:</strong> Bilirrubina, hemoglobina, mioglobina.</li>
+                    <li><strong>Branca (leitoso):</strong> Piúria, quilúria, lipidúria.</li>
+                </ul>
+                <h4>2. Aspecto (Clareza)</h4>
+                <ul>
+                    <li><strong>Clara (normal):</strong> Ausência de partículas.</li>
+                    <li><strong>Turva:</strong> Leucócitos (piúria), hemácias, cristais, bactérias, muco.</li>
+                </ul>
+                <h4>3. Densidade</h4>
+                <p>Normal: 1,005-1,030. Medida por refratometria ou fita reagente.</p>
+                <ul>
+                    <li><strong>↓ Densidade (&lt;1,010):</strong> Diabetes insipidus, insuficiência renal.</li>
+                    <li><strong>↑ Densidade (&gt;1,030):</strong> Desidratação, diabetes mellitus (glicosúria).</li>
+                </ul>
+            </div>
+
+            <!-- EXAME QUÍMICO -->
+            <div class="content-card" id="exame-quimico">
+                <h3><i class="fas fa-flask" style="color:#27ae60;"></i> Exame Químico da Urina (Fita Reagente)</h3>
+                <p>O exame químico utiliza tiras reagentes que mudam de cor em contato com a urina.</p>
+                <h4>1. pH</h4>
+                <p>Normal: 4,6-8,0 (média 6,0). Ácido: diabetes, proteínas. Alcalino: ITU, dieta vegetariana.</p>
+                <h4>2. Proteínas (Proteinúria)</h4>
+                <p>Normal: &lt; 30 mg/dL. A fita detecta principalmente albumina.</p>
+                <ul>
+                    <li><strong>Glomerular:</strong> Síndrome nefrótica, glomerulonefrite, diabetes.</li>
+                    <li><strong>Tubular:</strong> Nefrite intersticial, pielonefrite.</li>
+                    <li><strong>De sobrecarga:</strong> Mieloma múltiplo (proteína de Bence Jones).</li>
+                </ul>
+                <h4>3. Glicose (Glicosúria)</h4>
+                <p>Normal: Ausente. Limiar renal: 180 mg/dL. Diabetes mellitus, glicosúria renal.</p>
+                <div class="warning-box">
+                    <strong>⚠️ Atenção:</strong> Glicose na urina normalmente indica que a glicemia ultrapassou o limiar renal de 180 mg/dL. Porém, não confirma diabetes sozinha — é necessário dosar a glicemia.
+                </div>
+                <h4>4. Nitritos e Leucócitos</h4>
+                <p><strong>Nitrito positivo</strong> sugere infecção por bactérias redutoras de nitrato (E. coli, Klebsiella, Proteus).</p>
+                <div class="warning-box">
+                    <strong>⚠️ Atenção:</strong> Nitrito positivo sugere infecção por bactérias redutoras de nitrato. Falso-negativo pode ocorrer com Enterococcus (não reduz nitrato) ou urina muito diluída.
+                </div>
+                <h4>5. Outros parâmetros</h4>
+                <ul>
+                    <li><strong>Cetonas:</strong> Cetoacidose diabética, jejum, alcoolismo.</li>
+                    <li><strong>Sangue:</strong> Hematúria, hemoglobinúria, mioglobinúria.</li>
+                    <li><strong>Bilirrubina:</strong> Icterícia, hepatite, obstrução biliar.</li>
+                    <li><strong>Urobilinogênio:</strong> 0,2-1,0 mg/dL. Elevado na hepatite, hemólise.</li>
+                </ul>
+            </div>
+
+            <!-- SEDIMENTOSCOPIA -->
+            <div class="content-card" id="sedimentoscopia">
+                <h3><i class="fas fa-microscope" style="color:#f39c12;"></i> Sedimentoscopia (Exame Microscópico)</h3>
+                <p>A sedimentoscopia é a análise microscópica do sedimento urinário após centrifugação (1.500 rpm por 5 minutos).</p>
+                <h4>1. Células</h4>
+                <ul>
+                    <li><strong>Hemácias:</strong> 0-3/campo. Hematúria &gt;3/campo. Formas dismórficas = origem glomerular.</li>
+                    <li><strong>Leucócitos:</strong> 0-5/campo. Piúria &gt;5/campo = infecção, nefrite.</li>
+                    <li><strong>Células epiteliais:</strong> Escamosas (normal), transicionais (bexiga), renais (lesão tubular).</li>
+                </ul>
+                <h4>2. Cilindros</h4>
+                <ul>
+                    <li><strong>Hialinos:</strong> Proteína Tamm-Horsfall. Normais em pequena quantidade.</li>
+                    <li><strong>Hemáticos:</strong> Sugerem glomerulonefrite (lesão glomerular).</li>
+                    <li><strong>Leucocitários:</strong> Pielonefrite, nefrite intersticial.</li>
+                    <li><strong>Granulosos e céreos:</strong> Lesão tubular, insuficiência renal crônica.</li>
+                    <li><strong>Gordurosos:</strong> Síndrome nefrótica.</li>
+                </ul>
+                <h4>3. Cristais</h4>
+                <ul>
+                    <li><strong>Oxalato de cálcio:</strong> Formato de envelope. Litíase renal.</li>
+                    <li><strong>Urato amorfo:</strong> Urina ácida. Gota, hiperuricemia.</li>
+                    <li><strong>Fosfato amorfo:</strong> Urina alcalina. Normal.</li>
+                    <li><strong>Cistina:</strong> Hexagonais. Cistinúria (distúrbio hereditário).</li>
+                </ul>
+                <h4>4. Microrganismos</h4>
+                <ul>
+                    <li><strong>Bactérias:</strong> ITU (bacteriúria &gt;100.000 UFC/mL).</li>
+                    <li><strong>Leveduras (Candida):</strong> Diabetes, imunossupressão.</li>
+                    <li><strong>Parasitas:</strong> Trichomonas vaginalis, Schistosoma hematobium.</li>
+                </ul>
+            </div>
+
+            <!-- 5. GALERIA DO SEDIMENTO URINÁRIO -->
+            <div class="content-card" id="galeria">
+                <h3><i class="fas fa-images" style="color:#1a5276;"></i> Galeria do Sedimento Urinário</h3>
+                <p>Visualize os principais elementos encontrados na sedimentoscopia. O aluno aprende muito mais vendo do que apenas lendo:</p>
+                <div class="galeria-grid">
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #e74c3c 30%, #fadbd8 55%, #fff 65%);">🔴</div>
+                        <h5>Hemácias</h5>
+                        <small>0-3/campo</small>
+                    </div>
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #f39c12 25%, #fef9e7 50%, #fff 60%);">🟡</div>
+                        <h5>Leucócitos</h5>
+                        <small>0-5/campo</small>
+                    </div>
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #8e44ad 25%, #d7bde2 55%, #fff 65%);">🟣</div>
+                        <h5>Bactérias</h5>
+                        <small>ITU</small>
+                    </div>
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #2980b9 25%, #aed6f1 55%, #fff 65%);">🔵</div>
+                        <h5>Leveduras</h5>
+                        <small>Candida sp.</small>
+                    </div>
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #27ae60 25%, #d5f5e3 55%, #fff 65%);">🟢</div>
+                        <h5>Cristais</h5>
+                        <small>Oxalato/Urato</small>
+                    </div>
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #aab7c4 25%, #e6edf6 55%, #fff 65%);">⚪</div>
+                        <h5>Cilindros Hialinos</h5>
+                        <small>Proteína</small>
+                    </div>
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #7f8c8d 25%, #d5dbdb 55%, #fff 65%);">🔘</div>
+                        <h5>Cilindros Granulosos</h5>
+                        <small>Lesão tubular</small>
+                    </div>
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #e67e22 25%, #fdebd0 55%, #fff 65%);">🟠</div>
+                        <h5>Células Epiteliais</h5>
+                        <small>Escamosas</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. VALORES DE REFERÊNCIA -->
+            <div class="content-card" id="valores-ref">
+                <h3><i class="fas fa-clipboard-list" style="color:#1a5276;"></i> Valores de Referência</h3>
+                <p>Consulte rapidamente os principais parâmetros da urinálise:</p>
+                <div class="valores-grid">
+                    <div class="valor-card"><h5>pH</h5><div class="vr-valor">5,0–8,0</div></div>
+                    <div class="valor-card"><h5>Densidade</h5><div class="vr-valor">1.005–1.030</div></div>
+                    <div class="valor-card"><h5>Proteína</h5><div class="vr-valor">Negativa (&lt;30 mg/dL)</div></div>
+                    <div class="valor-card"><h5>Glicose</h5><div class="vr-valor">Negativa</div></div>
+                    <div class="valor-card"><h5>Nitrito</h5><div class="vr-valor">Negativo</div></div>
+                    <div class="valor-card"><h5>Bilirrubina</h5><div class="vr-valor">Negativa</div></div>
+                    <div class="valor-card"><h5>Cetonas</h5><div class="vr-valor">Negativa</div></div>
+                    <div class="valor-card"><h5>Sangue</h5><div class="vr-valor">Ausente</div></div>
+                    <div class="valor-card"><h5>Leucócitos</h5><div class="vr-valor">Negativo / 0-5/campo</div></div>
+                    <div class="valor-card"><h5>Hemácias</h5><div class="vr-valor">0-3/campo</div></div>
+                </div>
+            </div>
+
+            <!-- DOENÇAS RENAIS -->
+            <div class="content-card" id="doencas">
+                <h3><i class="fas fa-kidney" style="color:#1a5276;"></i> Doenças Renais e Urinálise</h3>
+                <h4>1. Glomerulonefrite Aguda</h4>
+                <ul>
+                    <li><strong>Urinálise:</strong> Hematúria dismórfica, proteinúria, cilindros hemáticos.</li>
+                    <li><strong>Causas:</strong> Pós-infecciosa (estreptococo), IgA nefropatia, LES.</li>
+                </ul>
+                <h4>2. Síndrome Nefrótica</h4>
+                <ul>
+                    <li><strong>Urinálise:</strong> Proteinúria maciça (&gt;3,5 g/24h), cilindros gordurosos, lipidúria.</li>
+                </ul>
+                <h4>3. Infecção do Trato Urinário (ITU)</h4>
+                <ul>
+                    <li><strong>Urinálise:</strong> Piúria, esterase leucocitária positiva, nitritos positivos, bacteriúria.</li>
+                    <li><strong>Urocultura:</strong> Padrão-ouro (&gt;100.000 UFC/mL).</li>
+                </ul>
+                <h4>4. Insuficiência Renal Aguda (IRA)</h4>
+                <ul>
+                    <li><strong>Pré-renal:</strong> Densidade elevada, baixa Na⁺ urinário.</li>
+                    <li><strong>Renal (NTA):</strong> Cilindros granulosos e epiteliais, densidade baixa.</li>
+                </ul>
+            </div>
+
+            <!-- 13. CURIOSIDADES -->
+            <div class="content-card" id="curiosidades">
+                <h3><i class="fas fa-lightbulb" style="color:#f39c12;"></i> 💡 Você Sabia?</h3>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🔄</div>
+                    <div><strong>Os rins filtram aproximadamente 180 litros de plasma por dia,</strong> mas eliminam apenas 1 a 2 litros de urina. Mais de 99% da água filtrada é reabsorvida pelos túbulos renais.</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">💧</div>
+                    <div><strong>Mais de 99% da água filtrada é reabsorvida pelos túbulos renais.</strong> Se não houvesse reabsorção, perderíamos todo o volume sanguíneo em menos de 30 minutos.</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🍬</div>
+                    <div><strong>A urina de pacientes com diabetes era usada para diagnóstico</strong> na antiguidade: médicos provavam a urina para detectar o sabor adocicado (glicosúria).</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🧪</div>
+                    <div><strong>A cor da urina pode ser alterada por alimentos</strong> como beterraba (vermelha), aspargos (odor característico) e medicamentos como rifampicina (alaranjada).</div>
+                </div>
+            </div>
+
+            <!-- 10. ERROS COMUNS -->
+            <div class="content-card" id="erros-comuns">
+                <h3><i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> ❌ Erros Comuns</h3>
+                <div class="erro-item">
+                    <div class="erro-icon">❌</div>
+                    <div><strong>Urina escura nem sempre indica doença.</strong> Pode ser causada por desidratação, alimentação (beterraba) ou medicamentos. É necessário correlacionar com outros parâmetros.</div>
+                </div>
+                <div class="erro-item">
+                    <div class="erro-icon">❌</div>
+                    <div><strong>Glicose na urina não confirma diabetes sozinha.</strong> É necessário dosar a glicemia de jejum e/ou HbA1c. A glicosúria pode ocorrer na gravidez e na glicosúria renal.</div>
+                </div>
+                <div class="erro-item">
+                    <div class="erro-icon">❌</div>
+                    <div><strong>Nem toda bactéria observada significa infecção.</strong> Pode haver contaminação na coleta. O diagnóstico de ITU requer correlação com sintomas clínicos e urocultura.</div>
+                </div>
+                <div class="erro-item">
+                    <div class="erro-icon">❌</div>
+                    <div><strong>Proteinúria na fita reagente não detecta todas as proteínas.</strong> A fita é mais sensível para albumina. Proteínas de Bence Jones (mieloma) podem não ser detectadas.</div>
+                </div>
+            </div>
+
+            <!-- 8. CASOS CLÍNICOS -->
+            <div class="content-card" id="casos-clinicos">
+                <h3><i class="fas fa-stethoscope" style="color:#1a5276;"></i> 🩺 Casos Clínicos</h3>
+                <p>Teste seus conhecimentos com casos clínicos interativos de interpretação de urinálise:</p>
+
+                <!-- CASO 1 -->
+                <div class="caso-card" id="caso1">
+                    <div class="paciente-info">
+                        <div class="paciente-icon">🧑</div>
+                        <div>
+                            <strong>Paciente:</strong> Adulto, 25 anos<br>
+                            <strong>Urinálise:</strong> Glicose +, Cetonas +<br>
+                            <strong>Sintomas:</strong> Poliúria, polidipsia, emagrecimento
+                        </div>
+                    </div>
+                    <p><strong>❓ Qual hipótese diagnóstica?</strong></p>
+                    <div class="quiz-opcoes">
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'C')">A) Infecção urinária</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'C')">B) Glomerulonefrite</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'C')">C) Cetoacidose diabética</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'C')">D) Síndrome nefrótica</div>
+                    </div>
+                    <div class="quiz-feedback" id="caso1-feedback"></div>
+                </div>
+
+                <!-- CASO 2 -->
+                <div class="caso-card" id="caso2">
+                    <div class="paciente-info">
+                        <div class="paciente-icon">👩</div>
+                        <div>
+                            <strong>Paciente:</strong> Mulher, 30 anos<br>
+                            <strong>Urinálise:</strong> Nitrito +, Leucócitos +, Bactérias +<br>
+                            <strong>Sintomas:</strong> Disúria, polaciúria, urgência miccional
+                        </div>
+                    </div>
+                    <p><strong>❓ Qual é o diagnóstico mais provável?</strong></p>
+                    <div class="quiz-opcoes">
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'B')">A) Diabetes mellitus</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'B')">B) Infecção do trato urinário</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'B')">C) Glomerulonefrite</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'B')">D) Nefrolitíase</div>
+                    </div>
+                    <div class="quiz-feedback" id="caso2-feedback"></div>
+                </div>
+
+                <!-- CASO 3 -->
+                <div class="caso-card" id="caso3">
+                    <div class="paciente-info">
+                        <div class="paciente-icon">👨</div>
+                        <div>
+                            <strong>Paciente:</strong> Homem, 45 anos<br>
+                            <strong>Urinálise:</strong> Proteína ++, Cilindros hemáticos<br>
+                            <strong>Sintomas:</strong> Edema, hipertensão, urina espumosa
+                        </div>
+                    </div>
+                    <p><strong>❓ Qual órgão provavelmente está comprometido?</strong></p>
+                    <div class="quiz-opcoes">
+                        <div class="quiz-opcao" onclick="responderCaso('caso3', this, 'A')">A) Rins (glomérulos)</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso3', this, 'A')">B) Fígado</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso3', this, 'A')">C) Pâncreas</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso3', this, 'A')">D) Bexiga</div>
+                    </div>
+                    <div class="quiz-feedback" id="caso3-feedback"></div>
+                </div>
+            </div>
+
+            <!-- 14. INTEGRAÇÃO COM OUTRAS DISCIPLINAS -->
+            <div class="content-card" id="integracao">
+                <h3><i class="fas fa-link" style="color:#1a5276;"></i> 🔗 Integração com Outras Disciplinas</h3>
+                <p>A urinálise se conecta com diversas áreas do conhecimento. Explore os conteúdos relacionados:</p>
+                <div class="integracao-grid">
+                    <a href="bioquimica.html" class="integracao-card">
+                        <i class="fas fa-flask"></i>
+                        <span>Glicose urinária → <strong>Bioquímica</strong> (metabolismo da glicose)</span>
+                    </a>
+                    <a href="imunologia.html" class="integracao-card">
+                        <i class="fas fa-shield-virus"></i>
+                        <span>Leucócitos na urina → <strong>Imunologia</strong> (resposta inflamatória)</span>
+                    </a>
+                    <a href="microbiologia.html" class="integracao-card">
+                        <i class="fas fa-bacteria"></i>
+                        <span>Bactérias na urina → <strong>Microbiologia</strong> (infecção urinária)</span>
+                    </a>
+                    <a href="hematologia.html" class="integracao-card">
+                        <i class="fas fa-tint"></i>
+                        <span>Hemácias na urina → <strong>Hematologia</strong> (hematúria e distúrbios)</span>
+                    </a>
+                </div>
+                <p style="font-size:0.9rem; color:#5c7f9a; margin-top:0.8rem;">Essa integração reforça a ideia de que o LabEnsina é uma plataforma de aprendizado conectada.</p>
+            </div>
+
+            <!-- MÉTODOS DIAGNÓSTICOS -->
+            <div class="content-card" id="metodos">
+                <h3><i class="fas fa-microscope" style="color:#1a5276;"></i> Métodos Diagnósticos Complementares</h3>
+                <h4>1. Urocultura</h4>
+                <p>Identifica o microrganismo causador da ITU e determina a sensibilidade antimicrobiana. Crescimento &gt;100.000 UFC/mL é significativo.</p>
+                <h4>2. Proteinúria de 24 Horas</h4>
+                <p>Quantificação da excreção proteica total. Normal: &lt;150 mg/24h. Síndrome nefrótica: &gt;3,5 g/24h.</p>
+                <h4>3. Microalbuminúria</h4>
+                <p>Detecta pequenas quantidades de albumina (30-300 mg/24h). Marcador precoce de nefropatia diabética.</p>
+                <h4>4. Clearance de Creatinina</h4>
+                <p>Estima a TFG. Normal: 90-120 mL/min/1,73m².</p>
+            </div>
+
+            <!-- AVANÇOS -->
+            <div class="content-card" id="avancos">
+                <h3><i class="fas fa-robot" style="color:#1a5276;"></i> Avanços Tecnológicos em Urinálise</h3>
+                <h4>1. Automação da Urinálise</h4>
+                <p>Sistemas automatizados integram leitura da fita reagente e análise microscópica do sedimento.</p>
+                <h4>2. Análise de Imagem por IA</h4>
+                <p>Algoritmos de inteligência artificial identificam células, cilindros, cristais e microrganismos.</p>
+                <h4>3. Dispositivos Point-of-Care</h4>
+                <p>Dispositivos portáteis para urinálise à beira do leito, integrados a sistemas de telemedicina.</p>
+            </div>
+
+            <!-- 11. QUIZ FINAL -->
+            <div class="content-card quiz-final" id="quiz-final">
+                <h3><i class="fas fa-question-circle" style="color:#1a5276;"></i> ❓ Quiz Final</h3>
+                <p><strong>Qual parâmetro sugere infecção urinária bacteriana?</strong></p>
+                <div class="quiz-opcoes" id="quizFinalOpcoes">
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="A">○ Glicose</div>
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="B">○ Bilirrubina</div>
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="C">○ Nitrito</div>
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="D">○ Creatinina</div>
+                </div>
+                <button class="btn-responder" id="btnResponderQuiz" onclick="responderQuiz()">Responder</button>
+                <p id="quizFinalFeedback" style="margin-top:1rem; font-weight:600;"></p>
+            </div>
+
+            <!-- 12. RESUMO FINAL -->
+            <div class="content-card" id="resumo">
+                <h3><i class="fas fa-clipboard-check" style="color:#27ae60;"></i> ✅ Resumo</h3>
+                <ul class="resumo-list">
+                    <li><i class="fas fa-check-circle"></i> A <strong>urinálise</strong> possui exame físico, químico e microscópico.</li>
+                    <li><i class="fas fa-check-circle"></i> O <strong>sedimento urinário</strong> é essencial para o diagnóstico de doenças renais.</li>
+                    <li><i class="fas fa-check-circle"></i> O <strong>nitrito</strong> auxilia na identificação de infecções urinárias bacterianas.</li>
+                    <li><i class="fas fa-check-circle"></i> A <strong>proteinúria</strong> pode indicar lesão renal glomerular ou tubular.</li>
+                    <li><i class="fas fa-check-circle"></i> A presença de <strong>glicose</strong> deve ser correlacionada com a glicemia.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Cilindros hemáticos</strong> sugerem glomerulonefrite.</li>
+                </ul>
+            </div>
+
+            <!-- REFERÊNCIAS -->
+            <div class="content-card" id="referencias">
+                <h3><i class="fas fa-book" style="color:#1a5276;"></i> Referências Bibliográficas</h3>
+                <ul>
+                    <li><strong>Kouri, T., Fogazzi, G., Gant, V., Hallander, H., Hofmann, W., & Guder, W.G.</strong> Urinalysis: A Review of Methods and Procedures. 2nd ed. Wiley-Blackwell, 2019.</li>
+                    <li><strong>Guder, W.G. & Hoffmann, G.E.</strong> The Urine: Composition and Formation. In: Clinical Chemistry. 3rd ed. Elsevier, 2018.</li>
+                    <li><strong>Schumann, G.B. & Schumann, J.L.</strong> Urinalysis and Body Fluids. 7th ed. F.A. Davis, 2019.</li>
+                    <li><strong>National Kidney Foundation (NKF).</strong> KDOQI Clinical Practice Guidelines for Chronic Kidney Disease.</li>
+                    <li><strong>Sociedade Brasileira de Patologia Clínica (SBPC).</strong> Recomendações para a realização de urinálise.</li>
+                </ul>
+                <p style="margin-top:1rem; font-size:0.9rem; color:#5c7f9a;">Última atualização: Junho 2026</p>
+            </div>
+
+            <!-- NAVEGAÇÃO ENTRE DISCIPLINAS -->
+            <div class="navegacao-disciplinas">
+                <a href="microbiologia.html" class="nav-disciplina anterior">
+                    <i class="fas fa-arrow-left" style="color:#1a5276;"></i>
+                    <div>
+                        <div class="nav-label">← Disciplina Anterior</div>
+                        <div class="nav-titulo">Microbiologia</div>
+                    </div>
+                </a>
+                <a href="hematologia.html" class="nav-disciplina proxima">
+                    <div>
+                        <div class="nav-label">Próxima Disciplina →</div>
+                        <div class="nav-titulo">Hematologia</div>
+                    </div>
+                    <i class="fas fa-arrow-right" style="color:#1a5276;"></i>
+                </a>
+            </div>
+
+        </div><!-- .content-area -->
+    </div><!-- .main-wrapper -->
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3 style="color:#fff;"><i class="fas fa-flask" style="margin-right:6px;"></i>LabEnsina</h3>
+                <p style="font-size:0.85rem;">Plataforma colaborativa para ensino em análises clínicas.</p>
+            </div>
+            <div class="footer-links">
+                <a>Contato</a>
+                <a>Sobre</a>
+                <a>Colaboradores</a>
+            </div>
+            <small>© 2026 LabEnsina • Conteúdo científico atualizado</small>
+        </div>
+    </footer>
+
+    <!-- CHATBOT -->
+    <div class="chat-float">
+        <button class="chat-toggle" onclick="toggleChat()">
+            <i class="fas fa-robot"></i>
+            <span class="badge-notif">1</span>
+        </button>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h4><i class="fas fa-robot"></i> Assistente Urinálise</h4>
+            <button class="chat-close" onclick="toggleChat()">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">
+                👋 Olá! Tire suas dúvidas sobre urinálise: exame físico, químico, sedimentoscopia, doenças renais e ITU.
+                <span class="msg-time">Agora</span>
+            </div>
+        </div>
+        <div class="chat-suggestions">
+            <button onclick="enviarMensagem('O que significa proteinúria?')">Proteinúria</button>
+            <button onclick="enviarMensagem('Como interpretar sedimentoscopia?')">Sedimentoscopia</button>
+            <button onclick="enviarMensagem('O que é ITU?')">ITU</button>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Digite sua pergunta..." onkeypress="if(event.key==='Enter') enviarMensagem()" />
+            <button onclick="enviarMensagem()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // ===== CHATBOT =====
+        function toggleChat() { document.getElementById('chatWindow').classList.toggle('aberto'); }
+        function enviarMensagem(msg) {
+            const input = document.getElementById('chatInput');
+            const texto = msg || input.value.trim();
+            if (!texto) return;
+            input.value = '';
+            const container = document.getElementById('chatMessages');
+            const userDiv = document.createElement('div');
+            userDiv.className = 'chat-msg user';
+            userDiv.innerHTML = texto + '<span class="msg-time">Agora</span>';
+            container.appendChild(userDiv);
+            let resposta = 'Desculpe, não entendi. Pergunte sobre: proteinúria, sedimentoscopia, ITU, densidade, glicosúria, etc.';
+            const lower = texto.toLowerCase();
+            if (lower.includes('proteinúria') || lower.includes('proteina')) {
+                resposta = 'Proteinúria: normal <150 mg/24h. Causas: glomerular (albumina, nefropatia), tubular, sobrecarga (mieloma). Microalbuminúria (30-300 mg/24h) é marcador precoce de nefropatia diabética.';
+            } else if (lower.includes('sedimentoscopia') || lower.includes('cilindro')) {
+                resposta = 'Sedimentoscopia: avalia células (hemácias, leucócitos, epiteliais), cilindros (hialinos, hemáticos, leucocitários, granulosos, céreos), cristais (oxalato, urato, cistina) e microrganismos.';
+            } else if (lower.includes('itu') || lower.includes('infecção urinária')) {
+                resposta = 'ITU: sintomas (disúria, polaciúria). Urinálise: piúria, esterase leucocitária +, nitritos +, bacteriúria. Urocultura: padrão-ouro (>100.000 UFC/mL).';
+            } else if (lower.includes('densidade')) {
+                resposta = 'Densidade urinária: normal 1,005-1,030. Baixa: insuficiência renal, diabetes insipidus. Alta: desidratação, diabetes mellitus (glicose).';
+            } else if (lower.includes('glicosúria') || lower.includes('glicose')) {
+                resposta = 'Glicosúria: glicose na urina. Normal: ausente. Limiar renal: 180 mg/dL. Causas: diabetes mellitus, glicosúria renal, gravidez.';
+            } else if (lower.includes('hematuria') || lower.includes('sangue na urina')) {
+                resposta = 'Hematúria: sangue na urina. Causas: glomerulonefrite (hemácias dismórficas, cilindros hemáticos), infecção, cálculos, neoplasia, trauma.';
+            } else {
+                resposta = 'Posso ajudar com: proteinúria, sedimentoscopia, ITU, densidade, glicosúria, hematúria, urocultura. Qual sua dúvida?';
+            }
+            setTimeout(() => {
+                const botDiv = document.createElement('div');
+                botDiv.className = 'chat-msg bot';
+                botDiv.innerHTML = '🤖 ' + resposta + '<span class="msg-time">Agora</span>';
+                container.appendChild(botDiv);
+                container.scrollTop = container.scrollHeight;
+            }, 400);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // ===== CASOS CLÍNICOS =====
+        function responderCaso(casoId, elemento, respostaCorreta) {
+            const caso = document.getElementById(casoId);
+            const opcoes = caso.querySelectorAll('.quiz-opcao');
+            const feedback = document.getElementById(casoId + '-feedback');
+            if (caso.dataset.respondido === 'true') return;
+            caso.dataset.respondido = 'true';
+            const respostaUsuario = elemento.textContent.charAt(0);
+            opcoes.forEach(op => {
+                op.style.pointerEvents = 'none';
+                const letra = op.textContent.charAt(0);
+                if (letra === respostaCorreta) op.classList.add('correta');
+                else if (op === elemento && letra !== respostaCorreta) op.classList.add('errada');
+            });
+            if (respostaUsuario === respostaCorreta) {
+                feedback.textContent = '✅ Correto! Muito bem!';
+                feedback.style.color = '#27ae60';
+            } else {
+                feedback.textContent = '❌ Incorreto. A resposta correta é a opção ' + respostaCorreta + '.';
+                feedback.style.color = '#e74c3c';
+            }
+            feedback.style.display = 'block';
+        }
+
+        // ===== QUIZ FINAL =====
+        let quizSelecionado = null;
+        function selecionarQuiz(elemento) {
+            const opcoes = document.querySelectorAll('#quizFinalOpcoes .quiz-opcao');
+            opcoes.forEach(op => op.classList.remove('selecionada'));
+            elemento.classList.add('selecionada');
+            quizSelecionado = elemento.dataset.resposta;
+        }
+        function responderQuiz() {
+            if (!quizSelecionado) { alert('Selecione uma resposta antes de clicar em Responder.'); return; }
+            const feedback = document.getElementById('quizFinalFeedback');
+            const opcoes = document.querySelectorAll('#quizFinalOpcoes .quiz-opcao');
+            const btnResponder = document.getElementById('btnResponderQuiz');
+            opcoes.forEach(op => {
+                op.style.pointerEvents = 'none';
+                if (op.dataset.resposta === 'C') op.classList.add('correta');
+                else if (op.classList.contains('selecionada') && op.dataset.resposta !== 'C') op.classList.add('errada');
+            });
+            if (quizSelecionado === 'C') {
+                feedback.textContent = '✅ Correto! O nitrito positivo sugere infecção urinária por bactérias redutoras de nitrato.';
+                feedback.style.color = '#27ae60';
+            } else {
+                feedback.textContent = '❌ Incorreto. O nitrito é o parâmetro que sugere infecção urinária bacteriana.';
+                feedback.style.color = '#e74c3c';
+            }
+            btnResponder.disabled = true;
+            btnResponder.textContent = 'Respondido ✓';
+        }
+
+        // ===== ÍNDICE LATERAL =====
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const sections = document.querySelectorAll('div[id]');
+        function highlightSidebarLink() {
+            let currentId = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 200;
+                if (window.scrollY >= sectionTop) currentId = section.getAttribute('id');
+            });
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentId) link.classList.add('active');
+            });
+        }
+        window.addEventListener('scroll', highlightSidebarLink);
+        highlightSidebarLink();
+
+        // ===== PESQUISA =====
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const termo = document.getElementById('searchInput').value.trim();
+            if (termo) alert('🔍 Buscando por: ' + termo + ' em Urinálise...');
+        });
+    </script>
+    <script src="utils.js"></script>
+    <script src="conhecimento.js"></script>
+    <script src="pesquisa.js"></script>
+    <script src="sugestoes.js"></script>
+    <script src="historico.js"></script>
+    <script src="quiz.js"></script>
+    <script src="casos.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>

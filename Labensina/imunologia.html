@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LabEnsina • Imunologia - Guia Completo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; }
+        body { background: #f0f6fb; color: #1a2a3a; line-height: 1.8; scroll-behavior: smooth; }
+        .header {
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo img { height: 50px; width: 50px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.3); }
+        .logo h1 { font-size: 1.8rem; font-weight: 700; }
+        .logo h1 span { font-weight: 300; color: #6fc2f0; }
+        .logo small { display: block; font-size: 0.6rem; opacity: 0.7; letter-spacing: 1px; }
+        .header-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        .search-box {
+            background: #fff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+        .search-box input { border: none; padding: 0.5rem 0.8rem; font-size: 0.95rem; width: 200px; outline: none; background: transparent; color: #1a2a3a; }
+        .search-box button { background: transparent; border: none; color: #1a3f62; font-size: 1.1rem; cursor: pointer; }
+        .btn-chat {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-chat:hover { background: rgba(255, 255, 255, 0.22); }
+        .btn-chat i { color: #6fc2f0; }
+
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 0.6rem 2rem;
+            border-bottom: 1px solid #dce5ef;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.8rem;
+            position: sticky;
+            top: 72px;
+            z-index: 99;
+        }
+        .nav-bar a {
+            color: #1e3b5a;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.2rem 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+        .nav-bar a:hover,
+        .nav-bar a.active { color: #0077be; border-bottom-color: #0077be; }
+        .nav-bar a i { font-size: 0.85rem; color: #3d7ea6; }
+
+        .hero {
+            background: linear-gradient(135deg, #e8daef, #d4b8e0);
+            padding: 2.5rem 2rem;
+            margin: 1.2rem 1.5rem;
+            border-radius: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .hero-text h2 { font-size: 2.4rem; font-weight: 700; color: #6c3483; }
+        .hero-text p { font-size: 1.05rem; color: #4a2a5a; max-width: 650px; }
+        .hero-text .badge { background: #6c3483; color: #fff; padding: 0.3rem 1.4rem; border-radius: 30px; font-size: 0.85rem; display: inline-block; }
+        .hero-image { font-size: 5rem; color: #6c3483; opacity: 0.25; }
+
+        /* ===== LAYOUT PRINCIPAL COM SIDEBAR ===== */
+        .main-wrapper {
+            max-width: 1400px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 140px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0, 20, 40, 0.06);
+            border: 1px solid #e6edf6;
+            max-height: calc(100vh - 160px);
+            overflow-y: auto;
+        }
+        .sidebar h3 {
+            font-size: 1rem;
+            color: #0b2a44;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sidebar h3 i { color: #6c3483; }
+        .sidebar a {
+            display: block;
+            padding: 0.5rem 0.8rem;
+            color: #1e3b5a;
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            transition: 0.2s;
+            margin-bottom: 2px;
+        }
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #e8daef;
+            color: #6c3483;
+            font-weight: 600;
+        }
+        .content-area { flex: 1; min-width: 0; }
+
+        /* ===== VISÃO GERAL ===== */
+        .visao-geral {
+            background: #fff;
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 6px 18px rgba(0, 20, 40, 0.05);
+            border: 1px solid #e6edf6;
+        }
+        .visao-geral h2 {
+            font-size: 1.6rem;
+            color: #0b2a44;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .visao-geral .subtitulo {
+            color: #5c7f9a;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+        .topicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.6rem;
+        }
+        .topico-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.5rem 0.8rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e3b5a;
+            transition: 0.2s;
+        }
+        .topico-item:hover { background: #e8daef; }
+        .topico-item i { color: #6c3483; }
+
+        /* ===== CONTENT CARDS ===== */
+        .content-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 6px 18px rgba(0, 20, 40, 0.05);
+            border: 1px solid #e6edf6;
+        }
+        .content-card h3 { color: #0b2a44; font-size: 1.4rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; }
+        .content-card h4 { color: #6c3483; font-size: 1.1rem; margin: 1rem 0 0.5rem; }
+        .content-card p { color: #1e3b5a; margin-bottom: 0.8rem; text-align: justify; }
+        .content-card ul { margin: 0.8rem 0 0.8rem 1.8rem; }
+        .content-card ul li { margin: 0.4rem 0; color: #1e3b5a; }
+        .content-card .highlight-box {
+            background: #e8daef;
+            border-left: 5px solid #6c3483;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        .content-card .highlight-box strong { color: #0b2a44; }
+        .content-card .info-box {
+            background: #d5f5e3;
+            border-left: 5px solid #27ae60;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        .content-card .warning-box {
+            background: #fef9e7;
+            border-left: 5px solid #f39c12;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        .content-card .danger-box {
+            background: #fadbd8;
+            border-left: 5px solid #e74c3c;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        /* ===== TABELAS ===== */
+        .table-wrap { overflow-x: auto; margin: 1rem 0; }
+        .table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .table-wrap th { background: #6c3483; color: #fff; padding: 0.7rem 1rem; text-align: left; }
+        .table-wrap td { padding: 0.6rem 1rem; border-bottom: 1px solid #e6edf6; }
+        .table-wrap tr:nth-child(even) { background: #f8fafc; }
+        .table-wrap tr:hover { background: #e8daef; }
+
+        /* ===== FLUXOGRAMA / LINHA DO TEMPO ===== */
+        .fluxograma {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 16px;
+        }
+        .fluxo-box {
+            background: #6c3483;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-align: center;
+            min-width: 220px;
+            box-shadow: 0 4px 12px rgba(108, 52, 131, 0.3);
+        }
+        .fluxo-box.green { background: #27ae60; }
+        .fluxo-box.blue { background: #2980b9; }
+        .fluxo-box.orange { background: #e67e22; }
+        .fluxo-arrow {
+            font-size: 1.5rem;
+            color: #6c3483;
+            font-weight: 700;
+        }
+        .fluxo-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* ===== CARDS DE IMUNOGLOBULINAS ===== */
+        .ig-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .ig-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 1.2rem;
+            border: 2px solid #e6edf6;
+            transition: 0.3s;
+            text-align: center;
+        }
+        .ig-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-color: #6c3483;
+        }
+        .ig-card .ig-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .ig-card h5 { color: #6c3483; font-size: 1rem; margin-bottom: 0.3rem; }
+        .ig-card .ig-desc { font-size: 0.8rem; color: #5c7f9a; }
+        .ig-card .ig-destaque {
+            background: #e8daef;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #6c3483;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        /* ===== CARDS DE CÉLULAS ===== */
+        .celulas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .celula-card {
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 1.2rem 0.8rem;
+            border: 2px solid #e6edf6;
+            transition: 0.3s;
+            cursor: default;
+        }
+        .celula-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-color: #6c3483;
+        }
+        .celula-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        .celula-card h5 { font-size: 0.85rem; color: #0b2a44; }
+        .celula-card small { font-size: 0.7rem; color: #5c7f9a; display: block; margin-top: 0.2rem; }
+
+        /* ===== CASO CLÍNICO ===== */
+        .caso-card {
+            background: #fff;
+            border: 2px solid #e6edf6;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            transition: 0.3s;
+        }
+        .caso-card:hover { border-color: #6c3483; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); }
+        .caso-card .paciente-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+        .caso-card .paciente-icon {
+            font-size: 3rem;
+        }
+        .caso-card .quiz-opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+        .caso-card .quiz-opcao {
+            padding: 0.7rem 1rem;
+            border: 2px solid #dce5ef;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+            background: #fafbfc;
+        }
+        .caso-card .quiz-opcao:hover { border-color: #6c3483; background: #e8daef; }
+        .caso-card .quiz-opcao.correta { border-color: #27ae60; background: #d5f5e3; color: #1e8449; }
+        .caso-card .quiz-opcao.errada { border-color: #e74c3c; background: #fadbd8; color: #c0392b; }
+        .caso-card .quiz-feedback { margin-top: 0.8rem; font-weight: 600; display: none; }
+
+        /* ===== CURIOSIDADES ===== */
+        .curiosidade-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 16px;
+            margin: 0.6rem 0;
+            border: 1px solid #e6edf6;
+            transition: 0.3s;
+        }
+        .curiosidade-item:hover { border-color: #f39c12; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+        .curiosidade-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        /* ===== ERROS COMUNS ===== */
+        .erro-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: #fadbd8;
+            border-radius: 16px;
+            margin: 0.6rem 0;
+            border: 1px solid #f5c6c6;
+            transition: 0.3s;
+        }
+        .erro-item:hover { border-color: #e74c3c; }
+        .erro-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        /* ===== QUIZ FINAL ===== */
+        .quiz-final .quiz-opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin: 1rem 0;
+        }
+        .quiz-final .quiz-opcao {
+            padding: 0.8rem 1.2rem;
+            border: 2px solid #dce5ef;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+            background: #fafbfc;
+            font-size: 0.95rem;
+        }
+        .quiz-final .quiz-opcao:hover { border-color: #6c3483; }
+        .quiz-final .quiz-opcao.selecionada { border-color: #6c3483; background: #e8daef; }
+        .quiz-final .quiz-opcao.correta { border-color: #27ae60; background: #d5f5e3; }
+        .quiz-final .quiz-opcao.errada { border-color: #e74c3c; background: #fadbd8; }
+        .btn-responder {
+            background: #6c3483;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .btn-responder:hover { background: #4a235a; }
+        .btn-responder:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ===== RESUMO ===== */
+        .resumo-list {
+            list-style: none;
+            padding: 0;
+        }
+        .resumo-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e6edf6;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .resumo-list li i { color: #27ae60; }
+
+        /* ===== NAVEGAÇÃO ENTRE DISCIPLINAS ===== */
+        .navegacao-disciplinas {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .nav-disciplina {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 1.5rem;
+            background: #fff;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #1e3b5a;
+            font-weight: 500;
+            border: 2px solid #e6edf6;
+            transition: 0.3s;
+            flex: 1;
+            min-width: 200px;
+        }
+        .nav-disciplina:hover { border-color: #6c3483; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); }
+        .nav-disciplina.anterior { text-align: left; }
+        .nav-disciplina.proxima { text-align: right; justify-content: flex-end; }
+        .nav-disciplina .nav-label { font-size: 0.75rem; color: #5c7f9a; }
+        .nav-disciplina .nav-titulo { font-size: 1rem; font-weight: 600; color: #0b2a44; }
+
+        /* ===== CIENTISTA CARD ===== */
+        .cientista-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid #e6edf6;
+        }
+        .cientista-card h4 { color: #0b2a44; font-size: 1.2rem; }
+        .cientista-card .area { color: #6c3483; font-weight: 500; font-size: 0.9rem; }
+
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+        @media (max-width: 768px) {
+            .grid-2col { grid-template-columns: 1fr; }
+            .hero { flex-direction: column; text-align: center; }
+            .hero-text h2 { font-size: 1.8rem; }
+            .nav-bar { top: 110px; overflow-x: auto; flex-wrap: nowrap; }
+            .nav-bar a { font-size: 0.8rem; white-space: nowrap; }
+            .header { flex-direction: column; align-items: stretch; gap: 0.8rem; padding: 1rem; }
+            .search-box input { width: 120px; }
+            .main-wrapper { flex-direction: column; padding: 0 0.8rem; }
+            .sidebar {
+                position: static;
+                width: 100%;
+                max-height: none;
+                margin-bottom: 1rem;
+            }
+            .sidebar a { display: inline-block; margin: 2px; }
+            .topicos-grid { grid-template-columns: repeat(2, 1fr); }
+            .celulas-grid { grid-template-columns: repeat(2, 1fr); }
+            .ig-grid { grid-template-columns: 1fr 1fr; }
+            .fluxo-row { flex-direction: column; align-items: center; }
+            .navegacao-disciplinas { flex-direction: column; }
+        }
+
+        .footer {
+            background: #0f263a;
+            color: #cfdde9;
+            padding: 2.5rem 1.5rem 1.8rem;
+            margin-top: 3rem;
+            border-radius: 40px 40px 0 0;
+        }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 1.8rem; }
+        .footer-links a { color: #b2ccdf; font-size: 0.9rem; cursor: pointer; text-decoration: none; }
+        .footer-links a:hover { color: #fff; }
+
+        /* ===== CHATBOT ===== */
+        .chat-float { position: fixed; bottom: 28px; right: 28px; z-index: 1000; }
+        .chat-toggle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(11, 42, 74, 0.4);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .chat-toggle:hover { transform: scale(1.05); }
+        .chat-toggle .badge-notif {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #e74c3c;
+            color: #fff;
+            font-size: 0.6rem;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        .chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 28px;
+            width: 380px;
+            max-width: 90vw;
+            max-height: 550px;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #dce5ef;
+            z-index: 1000;
+            animation: slideUp 0.3s ease;
+        }
+        .chat-window.aberto { display: flex; }
+        @keyframes slideUp {
+            from { opacity: 0;
+            transform: translateY(20px) scale(0.95); }
+            to { opacity: 1;
+            transform: translateY(0) scale(1); }
+        }
+        .chat-header {
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            padding: 1rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header h4 { font-weight: 500; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+        .chat-header h4 i { color: #6fc2f0; }
+        .chat-close { background: none; border: none; color: rgba(255, 255, 255, 0.7); font-size: 1.4rem; cursor: pointer; }
+        .chat-close:hover { color: #fff; }
+        .chat-messages { flex: 1; padding: 1rem 1.2rem; overflow-y: auto; max-height: 350px; background: #f8fafc; display: flex; flex-direction: column; }
+        .chat-msg { margin-bottom: 0.8rem; padding: 0.6rem 1rem; border-radius: 16px; max-width: 85%; font-size: 0.9rem; line-height: 1.5; animation: msgIn 0.25s ease; }
+        @keyframes msgIn {
+            from { opacity: 0;
+            transform: translateY(8px); }
+            to { opacity: 1;
+            transform: translateY(0); }
+        }
+        .chat-msg.bot { background: #e8daef; color: #1e3b5a; align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-msg.user { background: #1a3f62; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-msg .msg-time { font-size: 0.6rem; opacity: 0.6; margin-top: 4px; display: block; }
+        .chat-input-area { display: flex; padding: 0.8rem 1rem; border-top: 1px solid #e6edf6; background: #fff; gap: 8px; }
+        .chat-input-area input { flex: 1; border: 1px solid #dce5ef; border-radius: 30px; padding: 0.6rem 1rem; font-size: 0.9rem; outline: none; }
+        .chat-input-area input:focus { border-color: #0077be; }
+        .chat-input-area button { background: #1a3f62; color: #fff; border: none; border-radius: 30px; padding: 0.6rem 1.2rem; font-weight: 500; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
+        .chat-input-area button:hover { background: #0b2a4a; }
+        .chat-suggestions { display: flex; flex-wrap: wrap; gap: 6px; padding: 0.5rem 1rem 0.8rem; background: #f8fafc; border-top: 1px solid #e6edf6; }
+        .chat-suggestions button { background: #e8daef; border: none; border-radius: 20px; padding: 0.2rem 0.8rem; font-size: 0.75rem; color: #6c3483; cursor: pointer; transition: 0.2s; }
+        .chat-suggestions button:hover { background: #d4b8e0; }
+
+        html { scroll-behavior: smooth; scroll-padding-top: 150px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="labensina.png" alt="LabEnsina" onerror="this.style.display='none'" />
+            <div>
+                <h1>Lab<span>Ensina</span></h1>
+                <small>imunologia • guia completo</small>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="search-box">
+                <input type="text" placeholder="Pesquisar..." id="searchInput" />
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            <button class="btn-chat" onclick="toggleChat()">
+                <i class="fas fa-robot"></i> Assistente
+            </button>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <a href="index.html"><i class="fas fa-home"></i> Início</a>
+        <a href="hematologia.html"><i class="fas fa-microscope"></i> Hematologia</a>
+        <a href="bioquimica.html"><i class="fas fa-vial"></i> Bioquímica</a>
+        <a href="microbiologia.html"><i class="fas fa-bacteria"></i> Microbiologia</a>
+        <a href="imunologia.html" class="active"><i class="fas fa-shield-virus"></i> Imunologia</a>
+        <a href="urinalise.html"><i class="fas fa-heartbeat"></i> Urinálise</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-text">
+            <span class="badge"><i class="fas fa-shield-virus"></i> Imunologia</span>
+            <h2>Guia Completo de Imunologia</h2>
+            <p>Fundamentos do sistema imunológico, imunidade inata e adaptativa, vacinas, doenças autoimunes, imunodeficiências, alergias e imunoterapia.</p>
+        </div>
+        <div class="hero-image"><i class="fas fa-shield-virus"></i></div>
+    </div>
+
+    <!-- ===== LAYOUT PRINCIPAL COM SIDEBAR ===== -->
+    <div class="main-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <h3><i class="fas fa-list"></i> Nesta página</h3>
+            <a href="#visao-geral">📋 Visão Geral</a>
+            <a href="#introducao">📖 Introdução</a>
+            <a href="#historia">📜 História</a>
+            <a href="#cientistas">👨‍🔬 Cientistas</a>
+            <a href="#fluxograma">🔀 Fluxograma da Resposta Imune</a>
+            <a href="#comparacao">⚖️ Imunidade Inata vs Adaptativa</a>
+            <a href="#sistema">🛡️ Sistema Imunológico</a>
+            <a href="#linha-tempo">⏱️ Linha do Tempo</a>
+            <a href="#celulas">🔬 Células do Sistema Imune</a>
+            <a href="#imunoglobulinas">💉 Imunoglobulinas</a>
+            <a href="#doencas">🏥 Doenças Imunológicas</a>
+            <a href="#vacinas">💉 Vacinas</a>
+            <a href="#imunoterapia">🧬 Imunoterapia</a>
+            <a href="#diagnostico">🔍 Métodos Diagnósticos</a>
+            <a href="#curiosidades">💡 Você Sabia?</a>
+            <a href="#erros-comuns">❌ Erros Comuns</a>
+            <a href="#casos-clinicos">🩺 Casos Clínicos</a>
+            <a href="#quiz-final">❓ Quiz Final</a>
+            <a href="#resumo">✅ Resumo</a>
+            <a href="#referencias">📚 Referências</a>
+        </aside>
+
+        <div class="content-area">
+
+            <!-- 1. VISÃO GERAL / BANNER EDUCATIVO -->
+            <div class="visao-geral" id="visao-geral">
+                <h2><i class="fas fa-shield-virus" style="color:#6c3483;"></i> 🛡️ IMUNOLOGIA</h2>
+                <p class="subtitulo">Entenda como o organismo reconhece, combate e cria memória contra microrganismos.</p>
+                <p style="margin-bottom:1rem; font-weight:500;">📖 <strong>Nesta aula você aprenderá:</strong></p>
+                <div class="topicos-grid">
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Sistema imunológico</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Imunidade inata</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Imunidade adaptativa</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Anticorpos</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Linfócitos</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Vacinas</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Hipersensibilidade</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Doenças autoimunes</div>
+                </div>
+            </div>
+
+            <!-- INTRODUÇÃO -->
+            <div class="content-card" id="introducao">
+                <h3><i class="fas fa-book-open" style="color:#6c3483;"></i> Introdução à Imunologia</h3>
+                <p>A <strong>Imunologia</strong> é a ciência que estuda o sistema imunológico — o complexo sistema de defesa do organismo contra agentes infecciosos, células tumorais e substâncias estranhas. O sistema imunológico é composto por órgãos linfoides (medula óssea, timo, baço, linfonodos, tecido linfóide associado às mucosas), células (linfócitos, macrófagos, células dendríticas, neutrófilos, eosinófilos, basófilos, mastócitos) e moléculas (anticorpos, citocinas, complemento, receptores celulares).</p>
+                <p>A imunologia clínica aplica esses conhecimentos para o diagnóstico e tratamento de doenças relacionadas ao sistema imune, incluindo imunodeficiências, alergias, doenças autoimunes e neoplasias. A imunologia também é a base da vacinação, um dos maiores avanços da medicina moderna.</p>
+                <div class="info-box">
+                    <strong>🟢 Importante:</strong> Distúrbios do sistema imunológico afetam milhões de pessoas mundialmente. As doenças autoimunes, como artrite reumatoide e lúpus, atingem cerca de 5-8% da população.
+                </div>
+                <div class="warning-box">
+                    <strong>⚠️ Atenção:</strong> As alergias afetam mais de 30% da população em países desenvolvidos. Nem toda reação alérgica significa imunidade baixa!
+                </div>
+            </div>
+
+            <!-- 2. FLUXOGRAMA DA RESPOSTA IMUNE -->
+            <div class="content-card" id="fluxograma">
+                <h3><i class="fas fa-project-diagram" style="color:#6c3483;"></i> Fluxograma da Resposta Imune</h3>
+                <p>A imunologia é muito mais fácil de entender quando apresentada em etapas:</p>
+                <div class="fluxograma">
+                    <div class="fluxo-box">🦠 Microrganismo</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box blue">🛡️ Barreiras físicas</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box orange">🟠 Macrófagos</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box">📋 Apresentação do antígeno</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box green">🔵 Linfócito T</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box">🟢 Linfócito B</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box green">💉 Anticorpos</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box blue">🧠 Memória imunológica</div>
+                </div>
+                <p style="text-align:center; font-size:0.9rem; color:#5c7f9a; margin-top:0.5rem;">Esse esquema visual resume a resposta imune completa, desde a entrada do patógeno até a memória.</p>
+            </div>
+
+            <!-- 3. COMPARAÇÃO IMUNIDADE INATA VS ADAPTATIVA -->
+            <div class="content-card" id="comparacao">
+                <h3><i class="fas fa-balance-scale" style="color:#6c3483;"></i> Comparação: Imunidade Inata vs Adaptativa</h3>
+                <p>Uma tabela ajuda muito na revisão:</p>
+                <div class="table-wrap">
+                    <table>
+                        <tr><th>Característica</th><th>🛡️ Inata</th><th>🎯 Adaptativa</th></tr>
+                        <tr><td>Rapidez</td><td>Imediata (minutos)</td><td>Mais lenta (dias)</td></tr>
+                        <tr><td>Especificidade</td><td>Baixa (reconhece padrões)</td><td>Alta (antígeno específico)</td></tr>
+                        <tr><td>Memória</td><td>❌ Não</td><td>✅ Sim</td></tr>
+                        <tr><td>Principais células</td><td>Neutrófilos e macrófagos</td><td>Linfócitos T e B</td></tr>
+                        <tr><td>Receptores</td><td>PRRs (TLRs, NLRs)</td><td>BCR (B), TCR (T)</td></tr>
+                        <tr><td>Efetores</td><td>Fagócitos, NK, complemento</td><td>Anticorpos, linfócitos T</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- HISTÓRIA -->
+            <div class="content-card" id="historia">
+                <h3><i class="fas fa-history" style="color:#6c3483;"></i> História da Imunologia</h3>
+                <p>A história da imunologia é marcada por descobertas que salvaram milhões de vidas:</p>
+                <ul>
+                    <li><strong>430 a.C.</strong> — Tucídides descreve que sobreviventes da peste não adoecem novamente (imunidade).</li>
+                    <li><strong>1796</strong> — Edward Jenner desenvolve a primeira vacina (varíola).</li>
+                    <li><strong>1857</strong> — Louis Pasteur descobre a teoria dos germes e desenvolve vacinas.</li>
+                    <li><strong>1888</strong> — Émile Roux e Alexandre Yersin identificam a toxina diftérica.</li>
+                    <li><strong>1890</strong> — Emil von Behring e Shibasaburo Kitasato descobrem as antitoxinas.</li>
+                    <li><strong>1901</strong> — Karl Landsteiner descobre os grupos sanguíneos ABO.</li>
+                    <li><strong>1908</strong> — Metchnikoff (fagocitose) e Ehrlich ganham o Nobel.</li>
+                    <li><strong>1950</strong> — Frank Macfarlane Burnet propõe a teoria da seleção clonal.</li>
+                    <li><strong>1975</strong> — Köhler e Milstein criam os anticorpos monoclonais (Nobel 1984).</li>
+                    <li><strong>2018</strong> — James Allison e Tasuku Honjo ganham o Nobel por inibidores de checkpoint.</li>
+                    <li><strong>2020</strong> — Vacinas de mRNA (COVID-19) representam um marco na imunologia.</li>
+                </ul>
+            </div>
+
+            <!-- CIENTISTAS -->
+            <div class="content-card" id="cientistas">
+                <h3><i class="fas fa-user-graduate" style="color:#6c3483;"></i> Cientistas Pioneiros da Imunologia</h3>
+
+                <div class="cientista-card">
+                    <h4>Edward Jenner (1749-1823)</h4>
+                    <span class="area">Médico inglês • Pai da vacinação</span>
+                    <p>Desenvolveu a primeira vacina contra a varíola em 1796, utilizando o vírus da vaccínia (cowpox). A varíola foi erradicada em 1980 graças à vacinação.</p>
+                </div>
+
+                <div class="cientista-card">
+                    <h4>Louis Pasteur (1822-1895)</h4>
+                    <span class="area">Químico e microbiologista francês</span>
+                    <p>Desenvolveu vacinas contra cólera aviária, antraz e raiva. Estabeleceu a teoria dos germes e criou a pasteurização.</p>
+                </div>
+
+                <div class="cientista-card">
+                    <h4>Paul Ehrlich (1854-1915)</h4>
+                    <span class="area">Imunologista alemão • Prêmio Nobel 1908</span>
+                    <p>Desenvolveu a teoria das cadeias laterais para explicar a formação de anticorpos. Pioneiro na quimioterapia.</p>
+                </div>
+
+                <div class="cientista-card">
+                    <h4>Elie Metchnikoff (1845-1916)</h4>
+                    <span class="area">Zoólogo russo • Prêmio Nobel 1908</span>
+                    <p>Descobriu a fagocitose, estabelecendo a base da imunidade inata e da imunologia celular.</p>
+                </div>
+
+                <div class="cientista-card">
+                    <h4>Frank Macfarlane Burnet (1899-1985)</h4>
+                    <span class="area">Virologista australiano • Prêmio Nobel 1960</span>
+                    <p>Propôs a teoria da seleção clonal para explicar a diversidade de anticorpos e a tolerância imunológica.</p>
+                </div>
+
+                <div class="cientista-card">
+                    <h4>James P. Allison e Tasuku Honjo</h4>
+                    <span class="area">Imunologistas • Prêmio Nobel 2018</span>
+                    <p>Descobriram os inibidores de checkpoint imunológico (CTLA-4 e PD-1), revolucionando a imunoterapia oncológica.</p>
+                </div>
+            </div>
+
+            <!-- SISTEMA IMUNOLÓGICO -->
+            <div class="content-card" id="sistema">
+                <h3><i class="fas fa-shield-alt" style="color:#6c3483;"></i> Sistema Imunológico: Componentes e Funções</h3>
+
+                <h4>1. Imunidade Inata (Natural ou Inespecífica)</h4>
+                <p>Resposta imediata, não específica, presente desde o nascimento.</p>
+                <ul>
+                    <li><strong>Barreiras físicas:</strong> Pele, mucosas, cílios, ácido gástrico, lisozima.</li>
+                    <li><strong>Células:</strong> Fagócitos (neutrófilos, macrófagos, células dendríticas), células NK, mastócitos.</li>
+                    <li><strong>Proteínas:</strong> Sistema complemento, citocinas (IL-1, IL-6, TNF-α), interferons tipo I.</li>
+                    <li><strong>Receptores:</strong> TLRs (Toll-like receptors), NLRs, RLRs (reconhecem PAMPs e DAMPs).</li>
+                </ul>
+
+                <h4>2. Imunidade Adaptativa (Adquirida ou Específica)</h4>
+                <p>Resposta específica, com memória imunológica, desenvolvida após exposição a antígenos.</p>
+                <ul>
+                    <li><strong>Imunidade humoral:</strong> Linfócitos B produzem anticorpos (imunoglobulinas) contra antígenos extracelulares.</li>
+                    <li><strong>Imunidade celular:</strong> Linfócitos T CD4+ (auxiliares) e T CD8+ (citotóxicos) atuam contra antígenos intracelulares.</li>
+                    <li><strong>APCs:</strong> Células dendríticas, macrófagos, linfócitos B apresentam antígenos via MHC.</li>
+                </ul>
+
+                <h4>3. Órgãos Linfoides</h4>
+                <ul>
+                    <li><strong>Órgãos primários:</strong> Medula óssea (produção de células-tronco, maturação de linfócitos B), timo (maturação de linfócitos T).</li>
+                    <li><strong>Órgãos secundários:</strong> Linfonodos, baço, MALT, amígdalas, placas de Peyer.</li>
+                </ul>
+            </div>
+
+            <!-- 8. LINHA DO TEMPO DA RESPOSTA IMUNOLÓGICA -->
+            <div class="content-card" id="linha-tempo">
+                <h3><i class="fas fa-clock" style="color:#6c3483;"></i> Linha do Tempo da Resposta Imunológica</h3>
+                <p>Acompanhe a sequência dos acontecimentos após uma infecção:</p>
+                <div class="fluxograma">
+                    <div class="fluxo-box" style="background:#e74c3c;">🦠 Infecção</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box" style="background:#e67e22;">🔥 Inflamação</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box" style="background:#f39c12;">🟠 Fagocitose</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box" style="background:#6c3483;">📋 Apresentação do antígeno</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box" style="background:#2980b9;">🔵 Ativação dos linfócitos</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box" style="background:#27ae60;">💉 Produção de anticorpos</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box" style="background:#2c3e50;">🧠 Memória imunológica</div>
+                </div>
+            </div>
+
+            <!-- 7. INFOGRÁFICO DAS CÉLULAS DO SISTEMA IMUNE -->
+            <div class="content-card" id="celulas">
+                <h3><i class="fas fa-microscope" style="color:#6c3483;"></i> Células do Sistema Imune</h3>
+                <p>Conheça as principais células e suas funções:</p>
+                <div class="celulas-grid">
+                    <div class="celula-card">
+                        <div class="celula-img" style="background: radial-gradient(circle, #27ae60 30%, #d5f5e3 60%, #fff 70%);">🟢</div>
+                        <h5>Linfócito B</h5>
+                        <small>Produz anticorpos</small>
+                    </div>
+                    <div class="celula-card">
+                        <div class="celula-img" style="background: radial-gradient(circle, #2980b9 30%, #aed6f1 60%, #fff 70%);">🔵</div>
+                        <h5>Linfócito T CD4</h5>
+                        <small>Coordena a resposta imune</small>
+                    </div>
+                    <div class="celula-card">
+                        <div class="celula-img" style="background: radial-gradient(circle, #e74c3c 30%, #fadbd8 60%, #fff 70%);">🔴</div>
+                        <h5>Linfócito T CD8</h5>
+                        <small>Destrói células infectadas</small>
+                    </div>
+                    <div class="celula-card">
+                        <div class="celula-img" style="background: radial-gradient(circle, #e67e22 30%, #fdebd0 60%, #fff 70%);">🟠</div>
+                        <h5>Macrófago</h5>
+                        <small>Fagocita microrganismos</small>
+                    </div>
+                    <div class="celula-card">
+                        <div class="celula-img" style="background: radial-gradient(circle, #8e44ad 30%, #d7bde2 60%, #fff 70%);">🟣</div>
+                        <h5>Neutrófilo</h5>
+                        <small>Primeira linha de defesa</small>
+                    </div>
+                    <div class="celula-card">
+                        <div class="celula-img" style="background: radial-gradient(circle, #f1c40f 30%, #fef9e7 60%, #fff 70%);">🟡</div>
+                        <h5>Célula NK</h5>
+                        <small>Elimina células infectadas e tumorais</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. EXPLICAÇÃO VISUAL DOS ANTICORPOS -->
+            <div class="content-card" id="imunoglobulinas">
+                <h3><i class="fas fa-syringe" style="color:#6c3483;"></i> Imunoglobulinas (Anticorpos)</h3>
+                <p>Cada tipo de anticorpo tem uma função específica no organismo:</p>
+                <div class="ig-grid">
+                    <div class="ig-card">
+                        <div class="ig-icon">💚</div>
+                        <h5>IgG</h5>
+                        <p class="ig-desc">Mais abundante (75%)</p>
+                        <p class="ig-desc">Atravessa a placenta</p>
+                        <span class="ig-destaque">Proteção duradoura</span>
+                    </div>
+                    <div class="ig-card">
+                        <div class="ig-icon">💛</div>
+                        <h5>IgA</h5>
+                        <p class="ig-desc">Presente em secreções</p>
+                        <p class="ig-desc">Leite materno, saliva, lágrimas</p>
+                        <span class="ig-destaque">Proteção de mucosas</span>
+                    </div>
+                    <div class="ig-card">
+                        <div class="ig-icon">💜</div>
+                        <h5>IgM</h5>
+                        <p class="ig-desc">Primeira a ser produzida</p>
+                        <p class="ig-desc">Resposta primária</p>
+                        <span class="ig-destaque">Infecção aguda</span>
+                    </div>
+                    <div class="ig-card">
+                        <div class="ig-icon">❤️</div>
+                        <h5>IgE</h5>
+                        <p class="ig-desc">Alergias e parasitas</p>
+                        <p class="ig-desc">Ativa mastócitos</p>
+                        <span class="ig-destaque">Hipersensibilidade tipo I</span>
+                    </div>
+                    <div class="ig-card">
+                        <div class="ig-icon">🤍</div>
+                        <h5>IgD</h5>
+                        <p class="ig-desc">Receptor de linfócitos B</p>
+                        <p class="ig-desc">Ativação inicial</p>
+                        <span class="ig-destaque">Função regulatória</span>
+                    </div>
+                </div>
+                <div class="info-box">
+                    <strong>🟢 Dica de memorização:</strong> <strong>G</strong> = <strong>G</strong>rande (mais abundante), <strong>A</strong> = <strong>A</strong>mbiente (mucosas), <strong>M</strong> = <strong>M</strong>ais rápida (primeira), <strong>E</strong> = <strong>E</strong>ncrenca (alergias).
+                </div>
+            </div>
+
+            <!-- DOENÇAS IMUNOLÓGICAS -->
+            <div class="content-card" id="doencas">
+                <h3><i class="fas fa-heartbeat" style="color:#6c3483;"></i> Doenças do Sistema Imunológico</h3>
+
+                <h4>1. Imunodeficiências</h4>
+                <p><strong>Primárias (congênitas):</strong></p>
+                <ul>
+                    <li><strong>SCID:</strong> Ausência de linfócitos T e B. "Doença dos meninos-bolha".</li>
+                    <li><strong>Síndrome de DiGeorge:</strong> Aplasia do timo, deficiência de células T.</li>
+                    <li><strong>Doença Granulomatosa Crônica:</strong> Fagócitos não matam bactérias.</li>
+                </ul>
+                <p><strong>Secundárias (adquiridas):</strong></p>
+                <ul>
+                    <li><strong>AIDS (HIV):</strong> Destruição de linfócitos T CD4+.</li>
+                    <li><strong>Imunossupressão iatrogênica:</strong> Quimioterapia, corticoides.</li>
+                </ul>
+
+                <h4>2. Doenças Autoimunes</h4>
+                <ul>
+                    <li><strong>Lúpus Eritematoso Sistêmico (LES):</strong> Autoanticorpos ANA, anti-dsDNA.</li>
+                    <li><strong>Artrite Reumatoide:</strong> Fator reumatoide, anti-CCP.</li>
+                    <li><strong>Diabetes Tipo 1:</strong> Autoanticorpos contra ilhotas pancreáticas.</li>
+                    <li><strong>Doença de Graves:</strong> Anticorpo anti-receptor TSH.</li>
+                    <li><strong>Esclerose Múltipla:</strong> Desmielinização autoimune do SNC.</li>
+                    <li><strong>Doença Celíaca:</strong> Anti-transglutaminase, anti-endomísio.</li>
+                </ul>
+
+                <h4>3. Alergias (Hipersensibilidades)</h4>
+                <ul>
+                    <li><strong>Tipo I (Imediata):</strong> IgE, mastócitos. Ex: anafilaxia, asma, rinite.</li>
+                    <li><strong>Tipo II (Citotóxica):</strong> IgG/IgM. Ex: anemia hemolítica.</li>
+                    <li><strong>Tipo III (Imunecomplexos):</strong> Deposição de complexos. Ex: LES, glomerulonefrite.</li>
+                    <li><strong>Tipo IV (Tardia):</strong> Células T. Ex: dermatite de contato, PPD.</li>
+                </ul>
+            </div>
+
+            <!-- VACINAS -->
+            <div class="content-card" id="vacinas">
+                <h3><i class="fas fa-syringe" style="color:#6c3483;"></i> Vacinas e Imunização</h3>
+                <p>A vacinação é a intervenção mais eficaz em saúde pública, prevenindo milhões de mortes anualmente.</p>
+
+                <h4>Tipos de Vacinas</h4>
+                <ul>
+                    <li><strong>Vírus atenuados:</strong> Vírus vivos enfraquecidos. Ex: MMR, febre amarela, varicela.</li>
+                    <li><strong>Vírus inativados:</strong> Vírus mortos. Ex: poliomielite (Salk), raiva, gripe.</li>
+                    <li><strong>Toxóides:</strong> Toxinas inativadas. Ex: difteria, tétano.</li>
+                    <li><strong>Subunidades:</strong> Fragmentos antigênicos. Ex: hepatite B, HPV.</li>
+                    <li><strong>Conjugadas:</strong> Polissacarídeos + proteínas. Ex: Hib, pneumocócicas.</li>
+                    <li><strong>Vacinas de mRNA:</strong> RNA mensageiro. Ex: COVID-19 (Pfizer, Moderna).</li>
+                    <li><strong>Vacinas de vetor viral:</strong> Vetor não patogênico. Ex: AstraZeneca, Janssen.</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>🛡️ Imunidade de rebanho:</strong> Quando uma alta proporção da população está vacinada, a circulação do patógeno é reduzida, protegendo indivíduos não vacinados.
+                </div>
+            </div>
+
+            <!-- IMUNOTERAPIA -->
+            <div class="content-card" id="imunoterapia">
+                <h3><i class="fas fa-dna" style="color:#6c3483;"></i> Imunoterapia</h3>
+                <p>A imunoterapia utiliza o sistema imunológico para tratar doenças, especialmente o câncer.</p>
+
+                <h4>1. Inibidores de Checkpoint Imunológico</h4>
+                <ul>
+                    <li><strong>Anti-CTLA-4:</strong> Ipilimumab — libera inibição inicial de T.</li>
+                    <li><strong>Anti-PD-1:</strong> Nivolumab, Pembrolizumab — libera inibição efetora.</li>
+                    <li><strong>Anti-PD-L1:</strong> Atezolizumab, Durvalumab.</li>
+                </ul>
+
+                <h4>2. CAR-T Cells</h4>
+                <p>Células T geneticamente modificadas com receptores quiméricos. Ex: Kymriah (anti-CD19) para LLA.</p>
+
+                <h4>3. Anticorpos Monoclonais</h4>
+                <ul>
+                    <li><strong>Rituximab (anti-CD20):</strong> Linfomas e LLC.</li>
+                    <li><strong>Trastuzumab (anti-HER2):</strong> Câncer de mama HER2+.</li>
+                    <li><strong>Bevacizumab (anti-VEGF):</strong> Câncer de cólon, pulmão.</li>
+                </ul>
+            </div>
+
+            <!-- MÉTODOS DIAGNÓSTICOS -->
+            <div class="content-card" id="diagnostico">
+                <h3><i class="fas fa-microscope" style="color:#6c3483;"></i> Métodos Diagnósticos em Imunologia</h3>
+
+                <h4>1. Sorologia</h4>
+                <ul>
+                    <li><strong>ELISA:</strong> Detecta anticorpos ou antígenos. Ex: HIV, hepatites, sífilis.</li>
+                    <li><strong>Quimiluminescência:</strong> Alta sensibilidade para hormônios, marcadores tumorais.</li>
+                    <li><strong>Western Blot:</strong> Confirmação de resultados positivos (ex: HIV).</li>
+                    <li><strong>Imunofluorescência:</strong> Ex: FAN (fator antinúcleo) para LES.</li>
+                </ul>
+
+                <h4>2. Citometria de Fluxo</h4>
+                <p>Analisa características das células. Importante para leucemias, linfomas e imunodeficiências.</p>
+
+                <h4>3. Imunofenotipagem</h4>
+                <p>Identifica subpopulações: T CD4+, T CD8+, B (CD19/20), NK (CD16/56).</p>
+
+                <h4>4. Testes de Hipersensibilidade</h4>
+                <ul>
+                    <li><strong>Prick Test:</strong> Alergias tipo I.</li>
+                    <li><strong>PPD:</strong> Tuberculose (tipo IV).</li>
+                    <li><strong>Patch Test:</strong> Dermatite de contato.</li>
+                </ul>
+            </div>
+
+            <!-- 5. CURIOSIDADES -->
+            <div class="content-card" id="curiosidades">
+                <h3><i class="fas fa-lightbulb" style="color:#f39c12;"></i> 💡 Você Sabia?</h3>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🧬</div>
+                    <div><strong>O corpo produz milhões de anticorpos diferentes</strong> graças à recombinação dos genes das imunoglobulinas. Um número limitado de genes gera uma diversidade quase infinita!</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🧠</div>
+                    <div><strong>Após algumas vacinas, células de memória podem permanecer por décadas.</strong> É por isso que a vacina contra febre amarela pode proteger por toda a vida.</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">👶</div>
+                    <div><strong>O leite materno contém IgA</strong> que protege o recém-nascido contra infecções intestinais e respiratórias nos primeiros meses de vida.</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🦠</div>
+                    <div><strong>O sistema imune pode reconhecer e destruir células cancerosas</strong> naturalmente. A imunoterapia potencializa essa capacidade.</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🤧</div>
+                    <div><strong>Uma pessoa alérgica não tem imunidade baixa.</strong> Pelo contrário, seu sistema imune está hiper-reativo a substâncias inofensivas como pólen e ácaros.</div>
+                </div>
+            </div>
+
+            <!-- 9. ERROS COMUNS -->
+            <div class="content-card" id="erros-comuns">
+                <h3><i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> ❌ Erros Comuns e Mitos</h3>
+                <div class="erro-item">
+                    <div class="erro-icon">❌</div>
+                    <div><strong>Antibióticos não combatem vírus.</strong> Antibióticos são eficazes apenas contra bactérias. Infecções virais como gripe e resfriado não respondem a antibióticos.</div>
+                </div>
+                <div class="erro-item">
+                    <div class="erro-icon">❌</div>
+                    <div><strong>Toda alergia não significa imunidade baixa.</strong> Alergias são uma resposta exagerada do sistema imune, não uma deficiência. O sistema está hiperativo, não enfraquecido.</div>
+                </div>
+                <div class="erro-item">
+                    <div class="erro-icon">❌</div>
+                    <div><strong>Vacinas não causam a doença que previnem.</strong> Vacinas de vírus atenuados podem causar sintomas leves, mas não a doença completa. Vacinas inativadas e de mRNA não têm capacidade de causar a doença.</div>
+                </div>
+                <div class="erro-item">
+                    <div class="erro-icon">❌</div>
+                    <div><strong>Autoimune não é contagioso.</strong> Doenças autoimunes não são transmitidas de pessoa para pessoa. Elas resultam de fatores genéticos e ambientais.</div>
+                </div>
+            </div>
+
+            <!-- 6. CASOS CLÍNICOS -->
+            <div class="content-card" id="casos-clinicos">
+                <h3><i class="fas fa-stethoscope" style="color:#6c3483;"></i> 🩺 Casos Clínicos</h3>
+                <p>Teste seus conhecimentos com casos clínicos interativos:</p>
+
+                <!-- CASO 1 -->
+                <div class="caso-card" id="caso1">
+                    <div class="paciente-info">
+                        <div class="paciente-icon">👶</div>
+                        <div>
+                            <strong>Paciente:</strong> Criança, 3 anos<br>
+                            <strong>Sintomas:</strong> Febre, erupções na pele<br>
+                            <strong>Histórico:</strong> Não vacinada
+                        </div>
+                    </div>
+                    <p><strong>❓ Qual mecanismo imunológico será ativado primeiro?</strong></p>
+                    <div class="quiz-opcoes">
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'A')">A) Imunidade inata</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'A')">B) Imunidade adaptativa humoral</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'A')">C) Imunidade adaptativa celular</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'A')">D) Memória imunológica</div>
+                    </div>
+                    <div class="quiz-feedback" id="caso1-feedback"></div>
+                </div>
+
+                <!-- CASO 2 -->
+                <div class="caso-card" id="caso2">
+                    <div class="paciente-info">
+                        <div class="paciente-icon">🧑</div>
+                        <div>
+                            <strong>Paciente:</strong> Adulto, 30 anos<br>
+                            <strong>Sintomas:</strong> Alergia após picada de abelha<br>
+                            <strong>Sinais:</strong> Urticária, inchaço, dificuldade respiratória
+                        </div>
+                    </div>
+                    <p><strong>❓ Qual imunoglobulina está mais relacionada a este quadro?</strong></p>
+                    <div class="quiz-opcoes">
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'D')">A) IgA</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'D')">B) IgM</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'D')">C) IgG</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'D')">D) IgE</div>
+                    </div>
+                    <div class="quiz-feedback" id="caso2-feedback"></div>
+                </div>
+            </div>
+
+            <!-- 11. QUIZ FINAL -->
+            <div class="content-card quiz-final" id="quiz-final">
+                <h3><i class="fas fa-question-circle" style="color:#6c3483;"></i> ❓ Quiz Final</h3>
+                <p><strong>Qual imunoglobulina é produzida primeiro em uma infecção?</strong></p>
+                <div class="quiz-opcoes" id="quizFinalOpcoes">
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="A">○ IgA</div>
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="B">○ IgG</div>
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="C">○ IgM</div>
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="D">○ IgE</div>
+                </div>
+                <button class="btn-responder" id="btnResponderQuiz" onclick="responderQuiz()">Responder</button>
+                <p id="quizFinalFeedback" style="margin-top:1rem; font-weight:600;"></p>
+            </div>
+
+            <!-- 10. RESUMO RÁPIDO -->
+            <div class="content-card" id="resumo">
+                <h3><i class="fas fa-clipboard-check" style="color:#27ae60;"></i> ✅ Resumo</h3>
+                <ul class="resumo-list">
+                    <li><i class="fas fa-check-circle"></i> O sistema imune protege contra agentes infecciosos.</li>
+                    <li><i class="fas fa-check-circle"></i> A <strong>imunidade inata</strong> é rápida e inespecífica.</li>
+                    <li><i class="fas fa-check-circle"></i> A <strong>imunidade adaptativa</strong> gera memória e é específica.</li>
+                    <li><i class="fas fa-check-circle"></i> Os <strong>linfócitos B</strong> produzem anticorpos (imunidade humoral).</li>
+                    <li><i class="fas fa-check-circle"></i> Os <strong>linfócitos T</strong> coordenam e eliminam células infectadas.</li>
+                    <li><i class="fas fa-check-circle"></i> A <strong>IgM</strong> é a primeira imunoglobulina produzida em uma infecção.</li>
+                    <li><i class="fas fa-check-circle"></i> A <strong>IgG</strong> é a mais abundante e atravessa a placenta.</li>
+                    <li><i class="fas fa-check-circle"></i> A <strong>IgE</strong> está relacionada a alergias e parasitas.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Vacinas</strong> estimulam a imunidade adaptativa sem causar a doença.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Doenças autoimunes</strong> resultam da perda da tolerância imunológica.</li>
+                </ul>
+            </div>
+
+            <!-- REFERÊNCIAS -->
+            <div class="content-card" id="referencias">
+                <h3><i class="fas fa-book" style="color:#6c3483;"></i> Referências Bibliográficas</h3>
+                <ul>
+                    <li><strong>Abbas, A.K., Lichtman, A.H., Pillai, S.</strong> Cellular and Molecular Immunology. 10th ed. Elsevier, 2021.</li>
+                    <li><strong>Murphy, K., Weaver, C.</strong> Janeway's Immunobiology. 9th ed. Garland Science, 2016.</li>
+                    <li><strong>Parham, P.</strong> The Immune System. 5th ed. Garland Science, 2021.</li>
+                    <li><strong>Sompayrac, L.</strong> How the Immune System Works. 6th ed. Wiley-Blackwell, 2019.</li>
+                    <li><strong>Kumar, V., Abbas, A.K., Aster, J.C.</strong> Robbins & Cotran Pathologic Basis of Disease. 10th ed. Elsevier, 2020.</li>
+                </ul>
+                <p style="margin-top:1rem; font-size:0.9rem; color:#5c7f9a;">Última atualização: Junho 2026</p>
+            </div>
+
+            <!-- 12. PRÓXIMOS ESTUDOS -->
+            <div class="navegacao-disciplinas">
+                <a href="hematologia.html" class="nav-disciplina anterior">
+                    <i class="fas fa-arrow-left" style="color:#6c3483;"></i>
+                    <div>
+                        <div class="nav-label">← Disciplina Anterior</div>
+                        <div class="nav-titulo">Hematologia</div>
+                    </div>
+                </a>
+                <a href="microbiologia.html" class="nav-disciplina proxima">
+                    <div>
+                        <div class="nav-label">Próxima Disciplina →</div>
+                        <div class="nav-titulo">Microbiologia</div>
+                    </div>
+                    <i class="fas fa-arrow-right" style="color:#6c3483;"></i>
+                </a>
+            </div>
+
+        </div><!-- .content-area -->
+    </div><!-- .main-wrapper -->
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3 style="color:#fff;"><i class="fas fa-flask" style="margin-right:6px;"></i>LabEnsina</h3>
+                <p style="font-size:0.85rem;">Plataforma colaborativa para ensino em análises clínicas.</p>
+            </div>
+            <div class="footer-links">
+                <a>Contato</a>
+                <a>Sobre</a>
+                <a>Colaboradores</a>
+            </div>
+            <small>© 2026 LabEnsina • Conteúdo científico atualizado</small>
+        </div>
+    </footer>
+
+    <!-- CHATBOT -->
+    <div class="chat-float">
+        <button class="chat-toggle" onclick="toggleChat()">
+            <i class="fas fa-robot"></i>
+            <span class="badge-notif">1</span>
+        </button>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h4><i class="fas fa-robot"></i> Assistente Imunologia</h4>
+            <button class="chat-close" onclick="toggleChat()">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">
+                👋 Olá! Tire suas dúvidas sobre imunologia: sistema imune, vacinas, autoimunes, alergias, imunoterapia e mais.
+                <span class="msg-time">Agora</span>
+            </div>
+        </div>
+        <div class="chat-suggestions">
+            <button onclick="enviarMensagem('O que é imunidade adaptativa?')">Imunidade</button>
+            <button onclick="enviarMensagem('Como funcionam as vacinas?')">Vacinas</button>
+            <button onclick="enviarMensagem('O que são doenças autoimunes?')">Autoimunes</button>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Digite sua pergunta..." onkeypress="if(event.key==='Enter') enviarMensagem()" />
+            <button onclick="enviarMensagem()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // ===== CHATBOT =====
+        function toggleChat() {
+            document.getElementById('chatWindow').classList.toggle('aberto');
+        }
+        function enviarMensagem(msg) {
+            const input = document.getElementById('chatInput');
+            const texto = msg || input.value.trim();
+            if (!texto) return;
+            input.value = '';
+            const container = document.getElementById('chatMessages');
+
+            const userDiv = document.createElement('div');
+            userDiv.className = 'chat-msg user';
+            userDiv.innerHTML = texto + '<span class="msg-time">Agora</span>';
+            container.appendChild(userDiv);
+
+            let resposta = 'Desculpe, não entendi. Pergunte sobre: imunidade, vacinas, autoimunes, alergias, imunoterapia, linfócitos, anticorpos, etc.';
+            const lower = texto.toLowerCase();
+
+            if (lower.includes('imunidade adaptativa') || lower.includes('imunidade inata')) {
+                resposta = 'Imunidade inata: resposta imediata, inespecífica (barreiras, fagócitos, NK). Imunidade adaptativa: específica, com memória (linfócitos B e T).';
+            } else if (lower.includes('vacina') || lower.includes('vacinação')) {
+                resposta = 'Vacinas estimulam a imunidade adaptativa. Tipos: atenuadas (MMR), inativadas (pólio), toxóides (difteria), subunidades (HPV), mRNA (COVID-19), vetor viral (AstraZeneca).';
+            } else if (lower.includes('autoimune') || lower.includes('autoimunes')) {
+                resposta = 'Doenças autoimunes: perda da tolerância, ataque a tecidos próprios. Ex: LES (ANA, anti-dsDNA), AR (FR, anti-CCP), Diabetes tipo 1, Graves, EM.';
+            } else if (lower.includes('alergia') || lower.includes('alérgica') || lower.includes('hipersensibilidade')) {
+                resposta = 'Alergias: hipersensibilidade tipo I (IgE, mastócitos). Ex: asma, rinite, anafilaxia. Tratamento: antihistamínicos, corticoides.';
+            } else if (lower.includes('imunoterapia')) {
+                resposta = 'Imunoterapia usa o sistema imune contra doenças. Ex: inibidores de checkpoint (anti-PD-1/CTLA-4), CAR-T cells, anticorpos monoclonais.';
+            } else if (lower.includes('linfócito') || lower.includes('celulas t') || lower.includes('celulas b')) {
+                resposta = 'Linfócitos T: maturam no timo, CD4+ (auxiliares) e CD8+ (citotóxicos). Linfócitos B: maturam na medula, produzem anticorpos.';
+            } else if (lower.includes('anticorpo') || lower.includes('imunoglobulina')) {
+                resposta = 'Imunoglobulinas: IgG (75%, atravessa placenta), IgA (mucosas), IgM (primeira resposta), IgE (alergias), IgD (receptor de linfócito B).';
+            } else {
+                resposta = 'Posso ajudar com: imunidade inata/adaptativa, vacinas, doenças autoimunes, alergias, imunoterapia, linfócitos T/B, anticorpos. Qual sua dúvida?';
+            }
+
+            setTimeout(() => {
+                const botDiv = document.createElement('div');
+                botDiv.className = 'chat-msg bot';
+                botDiv.innerHTML = '🤖 ' + resposta + '<span class="msg-time">Agora</span>';
+                container.appendChild(botDiv);
+                container.scrollTop = container.scrollHeight;
+            }, 400);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // ===== CASOS CLÍNICOS =====
+        function responderCaso(casoId, elemento, respostaCorreta) {
+            const caso = document.getElementById(casoId);
+            const opcoes = caso.querySelectorAll('.quiz-opcao');
+            const feedback = document.getElementById(casoId + '-feedback');
+
+            if (caso.dataset.respondido === 'true') return;
+            caso.dataset.respondido = 'true';
+
+            const respostaUsuario = elemento.textContent.charAt(0);
+
+            opcoes.forEach(op => {
+                op.style.pointerEvents = 'none';
+                const letra = op.textContent.charAt(0);
+                if (letra === respostaCorreta) {
+                    op.classList.add('correta');
+                } else if (op === elemento && letra !== respostaCorreta) {
+                    op.classList.add('errada');
+                }
+            });
+
+            if (respostaUsuario === respostaCorreta) {
+                feedback.textContent = '✅ Correto! Muito bem!';
+                feedback.style.color = '#27ae60';
+            } else {
+                feedback.textContent = '❌ Incorreto. A resposta correta é a opção ' + respostaCorreta + '.';
+                feedback.style.color = '#e74c3c';
+            }
+            feedback.style.display = 'block';
+        }
+
+        // ===== QUIZ FINAL =====
+        let quizSelecionado = null;
+
+        function selecionarQuiz(elemento) {
+            const opcoes = document.querySelectorAll('#quizFinalOpcoes .quiz-opcao');
+            opcoes.forEach(op => op.classList.remove('selecionada'));
+            elemento.classList.add('selecionada');
+            quizSelecionado = elemento.dataset.resposta;
+        }
+
+        function responderQuiz() {
+            if (!quizSelecionado) {
+                alert('Selecione uma resposta antes de clicar em Responder.');
+                return;
+            }
+
+            const feedback = document.getElementById('quizFinalFeedback');
+            const opcoes = document.querySelectorAll('#quizFinalOpcoes .quiz-opcao');
+            const btnResponder = document.getElementById('btnResponderQuiz');
+
+            opcoes.forEach(op => {
+                op.style.pointerEvents = 'none';
+                if (op.dataset.resposta === 'C') {
+                    op.classList.add('correta');
+                } else if (op.classList.contains('selecionada') && op.dataset.resposta !== 'C') {
+                    op.classList.add('errada');
+                }
+            });
+
+            if (quizSelecionado === 'C') {
+                feedback.textContent = '✅ Correto! A IgM é a primeira imunoglobulina produzida em uma infecção (resposta primária).';
+                feedback.style.color = '#27ae60';
+            } else {
+                feedback.textContent = '❌ Incorreto. A IgM é a primeira imunoglobulina produzida em uma infecção.';
+                feedback.style.color = '#e74c3c';
+            }
+
+            btnResponder.disabled = true;
+            btnResponder.textContent = 'Respondido ✓';
+        }
+
+        // ===== ÍNDICE LATERAL - DESTAQUE ATIVO AO ROLAR =====
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const sections = document.querySelectorAll('div[id]');
+
+        function highlightSidebarLink() {
+            let currentId = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 200;
+                if (window.scrollY >= sectionTop) {
+                    currentId = section.getAttribute('id');
+                }
+            });
+
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightSidebarLink);
+        highlightSidebarLink();
+
+        // ===== PESQUISA =====
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const termo = document.getElementById('searchInput').value.trim();
+            if (termo) {
+                alert('🔍 Buscando por: ' + termo + ' em Imunologia...');
+            }
+        });
+    </script>
+    <script src="utils.js"></script>
+    <script src="conhecimento.js"></script>
+    <script src="pesquisa.js"></script>
+    <script src="sugestoes.js"></script>
+    <script src="historico.js"></script>
+    <script src="quiz.js"></script>
+    <script src="casos.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>

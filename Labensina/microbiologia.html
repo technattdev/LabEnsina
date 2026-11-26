@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LabEnsina • Microbiologia - Guia Completo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; }
+        body { background: #f0f6fb; color: #1a2a3a; line-height: 1.8; scroll-behavior: smooth; }
+        .header {
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo img { height: 50px; width: 50px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.3); }
+        .logo h1 { font-size: 1.8rem; font-weight: 700; }
+        .logo h1 span { font-weight: 300; color: #6fc2f0; }
+        .logo small { display: block; font-size: 0.6rem; opacity: 0.7; letter-spacing: 1px; }
+        .header-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        .search-box { background: #fff; padding: 0.3rem 0.8rem; border-radius: 40px; display: flex; align-items: center; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); }
+        .search-box input { border: none; padding: 0.5rem 0.8rem; font-size: 0.95rem; width: 200px; outline: none; background: transparent; color: #1a2a3a; }
+        .search-box button { background: transparent; border: none; color: #1a3f62; font-size: 1.1rem; cursor: pointer; }
+        .btn-chat { background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; padding: 0.5rem 1.2rem; border-radius: 40px; cursor: pointer; font-weight: 500; font-size: 0.9rem; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .btn-chat:hover { background: rgba(255, 255, 255, 0.22); }
+        .btn-chat i { color: #6fc2f0; }
+
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 0.6rem 2rem;
+            border-bottom: 1px solid #dce5ef;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.8rem;
+            position: sticky;
+            top: 72px;
+            z-index: 99;
+        }
+        .nav-bar a { color: #1e3b5a; font-weight: 500; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; padding: 0.2rem 0; border-bottom: 2px solid transparent; transition: 0.2s; text-decoration: none; }
+        .nav-bar a:hover, .nav-bar a.active { color: #0077be; border-bottom-color: #0077be; }
+        .nav-bar a i { font-size: 0.85rem; color: #3d7ea6; }
+
+        .hero {
+            background: linear-gradient(135deg, #d5f5e3, #abebc6);
+            padding: 2.5rem 2rem;
+            margin: 1.2rem 1.5rem;
+            border-radius: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .hero-text h2 { font-size: 2.4rem; font-weight: 700; color: #1a7a3a; }
+        .hero-text p { font-size: 1.05rem; color: #1a4a2a; max-width: 650px; }
+        .hero-text .badge { background: #1a7a3a; color: #fff; padding: 0.3rem 1.4rem; border-radius: 30px; font-size: 0.85rem; display: inline-block; }
+        .hero-image { font-size: 5rem; color: #1a7a3a; opacity: 0.25; }
+
+        /* ===== LAYOUT PRINCIPAL COM SIDEBAR ===== */
+        .main-wrapper { max-width: 1400px; margin: 1.5rem auto; padding: 0 1.5rem; display: flex; gap: 2rem; align-items: flex-start; }
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 140px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0, 20, 40, 0.06);
+            border: 1px solid #e6edf6;
+            max-height: calc(100vh - 160px);
+            overflow-y: auto;
+        }
+        .sidebar h3 { font-size: 1rem; color: #0b2a44; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+        .sidebar h3 i { color: #1a7a3a; }
+        .sidebar a { display: block; padding: 0.5rem 0.8rem; color: #1e3b5a; text-decoration: none; font-size: 0.85rem; border-radius: 8px; transition: 0.2s; margin-bottom: 2px; }
+        .sidebar a:hover, .sidebar a.active { background: #d5f5e3; color: #1a7a3a; font-weight: 600; }
+        .content-area { flex: 1; min-width: 0; }
+
+        /* ===== VISÃO GERAL ===== */
+        .visao-geral { background: #fff; border-radius: 24px; padding: 2rem; margin-bottom: 1.5rem; box-shadow: 0 6px 18px rgba(0, 20, 40, 0.05); border: 1px solid #e6edf6; }
+        .visao-geral h2 { font-size: 1.6rem; color: #0b2a44; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 10px; }
+        .visao-geral .subtitulo { color: #5c7f9a; margin-bottom: 1.2rem; font-size: 0.95rem; }
+        .topicos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.6rem; }
+        .topico-item { display: flex; align-items: center; gap: 8px; padding: 0.5rem 0.8rem; background: #f8fafc; border-radius: 10px; font-size: 0.9rem; font-weight: 500; color: #1e3b5a; transition: 0.2s; }
+        .topico-item:hover { background: #d5f5e3; }
+        .topico-item i { color: #1a7a3a; }
+
+        /* ===== CONTENT CARDS ===== */
+        .content-card { background: #fff; border-radius: 24px; padding: 2rem; margin: 1.5rem 0; box-shadow: 0 6px 18px rgba(0, 20, 40, 0.05); border: 1px solid #e6edf6; }
+        .content-card h3 { color: #0b2a44; font-size: 1.4rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; }
+        .content-card h4 { color: #1a7a3a; font-size: 1.1rem; margin: 1rem 0 0.5rem; }
+        .content-card p { color: #1e3b5a; margin-bottom: 0.8rem; text-align: justify; }
+        .content-card ul { margin: 0.8rem 0 0.8rem 1.8rem; }
+        .content-card ul li { margin: 0.4rem 0; color: #1e3b5a; }
+        .content-card .highlight-box { background: #d5f5e3; border-left: 5px solid #1a7a3a; padding: 1rem 1.5rem; border-radius: 12px; margin: 1rem 0; }
+        .content-card .highlight-box strong { color: #0b2a44; }
+        .content-card .info-box { background: #d5f5e3; border-left: 5px solid #27ae60; padding: 1rem 1.5rem; border-radius: 12px; margin: 1rem 0; }
+        .content-card .warning-box { background: #fef9e7; border-left: 5px solid #f39c12; padding: 1rem 1.5rem; border-radius: 12px; margin: 1rem 0; }
+        .content-card .danger-box { background: #fadbd8; border-left: 5px solid #e74c3c; padding: 1rem 1.5rem; border-radius: 12px; margin: 1rem 0; }
+
+        /* ===== TABELAS ===== */
+        .table-wrap { overflow-x: auto; margin: 1rem 0; }
+        .table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .table-wrap th { background: #1a7a3a; color: #fff; padding: 0.7rem 1rem; text-align: left; }
+        .table-wrap td { padding: 0.6rem 1rem; border-bottom: 1px solid #e6edf6; }
+        .table-wrap tr:nth-child(even) { background: #f8fafc; }
+        .table-wrap tr:hover { background: #d5f5e3; }
+
+        /* ===== CARDS DE CLASSIFICAÇÃO ===== */
+        .classificacao-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin: 1rem 0; }
+        .class-card { background: #fff; border-radius: 20px; padding: 1.8rem 1.5rem; border: 2px solid #e6edf6; transition: 0.3s; text-align: center; cursor: default; }
+        .class-card:hover { transform: translateY(-6px); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1); }
+        .class-card .class-icon { font-size: 3.5rem; margin-bottom: 0.8rem; }
+        .class-card h4 { color: #0b2a44; font-size: 1.2rem; margin-bottom: 0.3rem; }
+        .class-card p { font-size: 0.85rem; color: #5c7f9a; }
+        .class-card.bacteria { border-color: #e74c3c; }
+        .class-card.bacteria:hover { border-color: #e74c3c; background: #fef5f5; }
+        .class-card.virus { border-color: #8e44ad; }
+        .class-card.virus:hover { border-color: #8e44ad; background: #fdf5fe; }
+        .class-card.fungo { border-color: #f39c12; }
+        .class-card.fungo:hover { border-color: #f39c12; background: #fffdf5; }
+        .class-card.proto { border-color: #2980b9; }
+        .class-card.proto:hover { border-color: #2980b9; background: #f5fafe; }
+
+        /* ===== FLUXOGRAMA ===== */
+        .fluxograma { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; margin: 1.5rem 0; padding: 1.5rem; background: #f8fafc; border-radius: 16px; }
+        .fluxo-box { background: #1a7a3a; color: #fff; padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 600; text-align: center; min-width: 200px; box-shadow: 0 4px 12px rgba(26, 122, 58, 0.3); }
+        .fluxo-box.blue { background: #2980b9; }
+        .fluxo-box.purple { background: #8e44ad; }
+        .fluxo-box.orange { background: #e67e22; }
+        .fluxo-arrow { font-size: 1.5rem; color: #1a7a3a; font-weight: 700; }
+
+        /* ===== GALERIA DE IMAGENS ===== */
+        .galeria-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .galeria-card { text-align: center; background: #f8fafc; border-radius: 16px; padding: 1rem 0.6rem; border: 2px solid #e6edf6; transition: 0.3s; cursor: default; }
+        .galeria-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); border-color: #1a7a3a; }
+        .galeria-img { width: 70px; height: 70px; border-radius: 50%; margin: 0 auto 0.5rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+        .galeria-card h5 { font-size: 0.8rem; color: #0b2a44; }
+        .galeria-card small { font-size: 0.65rem; color: #5c7f9a; display: block; margin-top: 0.1rem; }
+
+        /* ===== CARDS DE MÉTODOS ===== */
+        .metodos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .metodo-card { background: #f8fafc; border-radius: 16px; padding: 1.5rem; border: 2px solid #e6edf6; transition: 0.3s; text-align: center; }
+        .metodo-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); border-color: #1a7a3a; }
+        .metodo-card .metodo-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .metodo-card h5 { color: #1a7a3a; font-size: 1rem; margin-bottom: 0.3rem; }
+        .metodo-card p { font-size: 0.8rem; color: #5c7f9a; }
+
+        /* ===== RESISTÊNCIA ===== */
+        .resistencia-flow { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; margin: 1.5rem 0; padding: 1.5rem; background: #fef9e7; border-radius: 16px; border: 2px solid #f39c12; }
+        .resist-box { background: #e74c3c; color: #fff; padding: 0.7rem 1.2rem; border-radius: 10px; font-weight: 600; text-align: center; min-width: 200px; font-size: 0.9rem; }
+        .resist-arrow { color: #e74c3c; font-size: 1.3rem; font-weight: 700; }
+
+        /* ===== CURIOSIDADES ===== */
+        .curiosidade-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: #fff; border-radius: 16px; margin: 0.6rem 0; border: 1px solid #e6edf6; transition: 0.3s; }
+        .curiosidade-item:hover { border-color: #f39c12; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+        .curiosidade-icon { font-size: 2rem; flex-shrink: 0; }
+
+        /* ===== CASO CLÍNICO ===== */
+        .caso-card { background: #fff; border: 2px solid #e6edf6; border-radius: 20px; padding: 1.5rem; margin: 1rem 0; transition: 0.3s; }
+        .caso-card:hover { border-color: #1a7a3a; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); }
+        .caso-card .paciente-info { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 0.8rem; }
+        .caso-card .paciente-icon { font-size: 3rem; }
+        .caso-card .quiz-opcoes { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.8rem; }
+        .caso-card .quiz-opcao { padding: 0.7rem 1rem; border: 2px solid #dce5ef; border-radius: 12px; cursor: pointer; font-weight: 500; transition: 0.2s; background: #fafbfc; }
+        .caso-card .quiz-opcao:hover { border-color: #1a7a3a; background: #d5f5e3; }
+        .caso-card .quiz-opcao.correta { border-color: #27ae60; background: #d5f5e3; color: #1e8449; }
+        .caso-card .quiz-opcao.errada { border-color: #e74c3c; background: #fadbd8; color: #c0392b; }
+        .caso-card .quiz-feedback { margin-top: 0.8rem; font-weight: 600; display: none; }
+
+        /* ===== QUIZ FINAL ===== */
+        .quiz-final .quiz-opcoes { display: flex; flex-direction: column; gap: 0.6rem; margin: 1rem 0; }
+        .quiz-final .quiz-opcao { padding: 0.8rem 1.2rem; border: 2px solid #dce5ef; border-radius: 14px; cursor: pointer; font-weight: 500; transition: 0.2s; background: #fafbfc; font-size: 0.95rem; }
+        .quiz-final .quiz-opcao:hover { border-color: #1a7a3a; }
+        .quiz-final .quiz-opcao.selecionada { border-color: #1a7a3a; background: #d5f5e3; }
+        .quiz-final .quiz-opcao.correta { border-color: #27ae60; background: #d5f5e3; }
+        .quiz-final .quiz-opcao.errada { border-color: #e74c3c; background: #fadbd8; }
+        .btn-responder { background: #1a7a3a; color: #fff; border: none; padding: 0.8rem 2rem; border-radius: 30px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: 0.3s; }
+        .btn-responder:hover { background: #145a2a; }
+        .btn-responder:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ===== RESUMO ===== */
+        .resumo-list { list-style: none; padding: 0; }
+        .resumo-list li { padding: 0.5rem 0; border-bottom: 1px solid #e6edf6; display: flex; align-items: center; gap: 10px; }
+        .resumo-list li i { color: #27ae60; }
+
+        /* ===== NAVEGAÇÃO ENTRE DISCIPLINAS ===== */
+        .navegacao-disciplinas { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+        .nav-disciplina { display: flex; align-items: center; gap: 10px; padding: 1rem 1.5rem; background: #fff; border-radius: 16px; text-decoration: none; color: #1e3b5a; font-weight: 500; border: 2px solid #e6edf6; transition: 0.3s; flex: 1; min-width: 200px; }
+        .nav-disciplina:hover { border-color: #1a7a3a; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); }
+        .nav-disciplina.anterior { text-align: left; }
+        .nav-disciplina.proxima { text-align: right; justify-content: flex-end; }
+        .nav-disciplina .nav-label { font-size: 0.75rem; color: #5c7f9a; }
+        .nav-disciplina .nav-titulo { font-size: 1rem; font-weight: 600; color: #0b2a44; }
+
+        /* ===== CIENTISTA CARD ===== */
+        .cientista-card { background: #f8fafc; border-radius: 16px; padding: 1.5rem; margin: 1rem 0; border: 1px solid #e6edf6; }
+        .cientista-card h4 { color: #0b2a44; font-size: 1.2rem; }
+        .cientista-card .area { color: #1a7a3a; font-weight: 500; font-size: 0.9rem; }
+
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+        @media (max-width: 768px) {
+            .grid-2col { grid-template-columns: 1fr; }
+            .hero { flex-direction: column; text-align: center; }
+            .hero-text h2 { font-size: 1.8rem; }
+            .nav-bar { top: 110px; overflow-x: auto; flex-wrap: nowrap; }
+            .nav-bar a { font-size: 0.8rem; white-space: nowrap; }
+            .header { flex-direction: column; align-items: stretch; gap: 0.8rem; padding: 1rem; }
+            .search-box input { width: 120px; }
+            .main-wrapper { flex-direction: column; padding: 0 0.8rem; }
+            .sidebar { position: static; width: 100%; max-height: none; margin-bottom: 1rem; }
+            .sidebar a { display: inline-block; margin: 2px; }
+            .topicos-grid { grid-template-columns: repeat(2, 1fr); }
+            .classificacao-grid { grid-template-columns: 1fr 1fr; }
+            .galeria-grid { grid-template-columns: repeat(3, 1fr); }
+            .metodos-grid { grid-template-columns: 1fr 1fr; }
+            .navegacao-disciplinas { flex-direction: column; }
+        }
+
+        .footer { background: #0f263a; color: #cfdde9; padding: 2.5rem 1.5rem 1.8rem; margin-top: 3rem; border-radius: 40px 40px 0 0; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 1.8rem; }
+        .footer-links a { color: #b2ccdf; font-size: 0.9rem; cursor: pointer; text-decoration: none; }
+        .footer-links a:hover { color: #fff; }
+
+        /* ===== CHATBOT ===== */
+        .chat-float { position: fixed; bottom: 28px; right: 28px; z-index: 1000; }
+        .chat-toggle { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(145deg, #0b2a4a, #1a3f62); color: #fff; border: none; font-size: 1.8rem; cursor: pointer; box-shadow: 0 6px 24px rgba(11, 42, 74, 0.4); transition: 0.3s; display: flex; align-items: center; justify-content: center; position: relative; }
+        .chat-toggle:hover { transform: scale(1.05); }
+        .chat-toggle .badge-notif { position: absolute; top: -4px; right: -4px; background: #e74c3c; color: #fff; font-size: 0.6rem; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .chat-window { position: fixed; bottom: 100px; right: 28px; width: 380px; max-width: 90vw; max-height: 550px; background: #fff; border-radius: 24px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2); display: none; flex-direction: column; overflow: hidden; border: 1px solid #dce5ef; z-index: 1000; animation: slideUp 0.3s ease; }
+        .chat-window.aberto { display: flex; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .chat-header { background: linear-gradient(145deg, #0b2a4a, #1a3f62); color: #fff; padding: 1rem 1.2rem; display: flex; justify-content: space-between; align-items: center; }
+        .chat-header h4 { font-weight: 500; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+        .chat-header h4 i { color: #6fc2f0; }
+        .chat-close { background: none; border: none; color: rgba(255, 255, 255, 0.7); font-size: 1.4rem; cursor: pointer; }
+        .chat-close:hover { color: #fff; }
+        .chat-messages { flex: 1; padding: 1rem 1.2rem; overflow-y: auto; max-height: 350px; background: #f8fafc; display: flex; flex-direction: column; }
+        .chat-msg { margin-bottom: 0.8rem; padding: 0.6rem 1rem; border-radius: 16px; max-width: 85%; font-size: 0.9rem; line-height: 1.5; animation: msgIn 0.25s ease; }
+        @keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .chat-msg.bot { background: #d5f5e3; color: #1e3b5a; align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-msg.user { background: #1a3f62; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-msg .msg-time { font-size: 0.6rem; opacity: 0.6; margin-top: 4px; display: block; }
+        .chat-input-area { display: flex; padding: 0.8rem 1rem; border-top: 1px solid #e6edf6; background: #fff; gap: 8px; }
+        .chat-input-area input { flex: 1; border: 1px solid #dce5ef; border-radius: 30px; padding: 0.6rem 1rem; font-size: 0.9rem; outline: none; }
+        .chat-input-area input:focus { border-color: #0077be; }
+        .chat-input-area button { background: #1a3f62; color: #fff; border: none; border-radius: 30px; padding: 0.6rem 1.2rem; font-weight: 500; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
+        .chat-input-area button:hover { background: #0b2a4a; }
+        .chat-suggestions { display: flex; flex-wrap: wrap; gap: 6px; padding: 0.5rem 1rem 0.8rem; background: #f8fafc; border-top: 1px solid #e6edf6; }
+        .chat-suggestions button { background: #d5f5e3; border: none; border-radius: 20px; padding: 0.2rem 0.8rem; font-size: 0.75rem; color: #1a7a3a; cursor: pointer; transition: 0.2s; }
+        .chat-suggestions button:hover { background: #abebc6; }
+
+        html { scroll-behavior: smooth; scroll-padding-top: 150px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="labensina.png" alt="LabEnsina" onerror="this.style.display='none'" />
+            <div>
+                <h1>Lab<span>Ensina</span></h1>
+                <small>microbiologia • guia completo</small>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="search-box">
+                <input type="text" placeholder="Pesquisar..." id="searchInput" />
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            <button class="btn-chat" onclick="toggleChat()">
+                <i class="fas fa-robot"></i> Assistente
+            </button>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <a href="index.html"><i class="fas fa-home"></i> Início</a>
+        <a href="hematologia.html"><i class="fas fa-microscope"></i> Hematologia</a>
+        <a href="bioquimica.html"><i class="fas fa-vial"></i> Bioquímica</a>
+        <a href="microbiologia.html" class="active"><i class="fas fa-bacteria"></i> Microbiologia</a>
+        <a href="imunologia.html"><i class="fas fa-shield-virus"></i> Imunologia</a>
+        <a href="urinalise.html"><i class="fas fa-heartbeat"></i> Urinálise</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-text">
+            <span class="badge"><i class="fas fa-bacteria"></i> Microbiologia</span>
+            <h2>Guia Completo de Microbiologia</h2>
+            <p>Estudo dos microrganismos: bactérias, vírus, fungos e parasitas. Fundamentos, patogênese, diagnóstico laboratorial, tratamento e prevenção de infecções.</p>
+        </div>
+        <div class="hero-image"><i class="fas fa-bacteria"></i></div>
+    </div>
+
+    <!-- ===== LAYOUT PRINCIPAL COM SIDEBAR ===== -->
+    <div class="main-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <h3><i class="fas fa-list"></i> Nesta página</h3>
+            <a href="#visao-geral">📋 Visão Geral</a>
+            <a href="#classificacao">🦠 Classificação Visual</a>
+            <a href="#tabela-comparativa">📊 Tabela Comparativa</a>
+            <a href="#introducao">📖 Introdução</a>
+            <a href="#historia">📜 História</a>
+            <a href="#cientistas">👨‍🔬 Cientistas</a>
+            <a href="#fluxograma">🔍 Fluxograma de Diagnóstico</a>
+            <a href="#bacteriologia">🧫 Bacteriologia</a>
+            <a href="#galeria">🖼️ Galeria de Microrganismos</a>
+            <a href="#virologia">🦠 Virologia</a>
+            <a href="#micologia">🍄 Micologia</a>
+            <a href="#parasitologia">🦟 Parasitologia</a>
+            <a href="#metodos-diagnosticos">🔬 Métodos Diagnósticos</a>
+            <a href="#metodos-cards">📦 Cards de Métodos</a>
+            <a href="#resistencia">⚠️ Resistência Bacteriana</a>
+            <a href="#curiosidades">💡 Você Sabia?</a>
+            <a href="#casos-clinicos">🩺 Casos Clínicos</a>
+            <a href="#quiz-final">❓ Quiz Final</a>
+            <a href="#resumo">✅ Resumo</a>
+            <a href="#referencias">📚 Referências</a>
+        </aside>
+
+        <div class="content-area">
+
+            <!-- 1. BANNER INICIAL / VISÃO GERAL -->
+            <div class="visao-geral" id="visao-geral">
+                <h2><i class="fas fa-bacteria" style="color:#1a7a3a;"></i> 🦠 MICROBIOLOGIA</h2>
+                <p class="subtitulo">Descubra o mundo dos microrganismos e sua relação com a saúde, as doenças e os exames laboratoriais.</p>
+                <p style="margin-bottom:1rem; font-weight:500;">📖 <strong>Nesta matéria você aprenderá:</strong></p>
+                <div class="topicos-grid">
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Bactérias</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Vírus</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Fungos</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Protozoários</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Parasitas</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Métodos de diagnóstico</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Antibióticos</div>
+                    <div class="topico-item"><i class="fas fa-check-circle"></i> Resistência bacteriana</div>
+                </div>
+            </div>
+
+            <!-- 2. CLASSIFICAÇÃO VISUAL DOS MICRORGANISMOS -->
+            <div class="content-card" id="classificacao">
+                <h3><i class="fas fa-layer-group" style="color:#1a7a3a;"></i> Classificação Visual dos Microrganismos</h3>
+                <p>Conheça os quatro grandes grupos de microrganismos estudados na microbiologia clínica:</p>
+                <div class="classificacao-grid">
+                    <div class="class-card bacteria">
+                        <div class="class-icon">🦠</div>
+                        <h4>Bactérias</h4>
+                        <p>Procariontes com parede celular de peptidoglicano. Reprodução por divisão binária.</p>
+                    </div>
+                    <div class="class-card virus">
+                        <div class="class-icon">🧬</div>
+                        <h4>Vírus</h4>
+                        <p>Parasitas intracelulares obrigatórios. Acelulares, dependem da célula hospedeira.</p>
+                    </div>
+                    <div class="class-card fungo">
+                        <div class="class-icon">🍄</div>
+                        <h4>Fungos</h4>
+                        <p>Leveduras e bolores. Eucariontes, parede de quitina. Importantes na indústria e saúde.</p>
+                    </div>
+                    <div class="class-card proto">
+                        <div class="class-icon">🦟</div>
+                        <h4>Protozoários</h4>
+                        <p>Eucariontes unicelulares. Causam doenças como malária, Chagas e toxoplasmose.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. TABELA COMPARATIVA -->
+            <div class="content-card" id="tabela-comparativa">
+                <h3><i class="fas fa-table" style="color:#1a7a3a;"></i> Tabela Comparativa dos Microrganismos</h3>
+                <p>Uma das melhores ferramentas para estudo e revisão para provas:</p>
+                <div class="table-wrap">
+                    <table>
+                        <tr><th>Característica</th><th>🦠 Bactéria</th><th>🧬 Vírus</th><th>🍄 Fungo</th><th>🦟 Protozoário</th></tr>
+                        <tr><td>Tipo celular</td><td>Procarionte</td><td>Acelular</td><td>Eucarionte</td><td>Eucarionte</td></tr>
+                        <tr><td>Possui núcleo</td><td>❌ Não</td><td>❌ Não</td><td>✅ Sim</td><td>✅ Sim</td></tr>
+                        <tr><td>Reprodução</td><td>Divisão binária</td><td>Usa célula hospedeira</td><td>Brotamento/Esporos</td><td>Divisão celular</td></tr>
+                        <tr><td>Tratamento</td><td>Antibióticos</td><td>Antivirais</td><td>Antifúngicos</td><td>Antiparasitários</td></tr>
+                        <tr><td>Parede celular</td><td>Peptidoglicano</td><td>Ausente</td><td>Quitina</td><td>Ausente/variável</td></tr>
+                        <tr><td>Tamanho</td><td>1-10 µm</td><td>20-300 nm</td><td>5-100 µm</td><td>10-200 µm</td></tr>
+                    </table>
+                </div>
+                <div class="info-box">
+                    <strong>🟢 Dica de prova:</strong> Esta tabela comparativa costuma ser muito cobrada em concursos e provas de residência. Memorize as diferenças fundamentais entre os grupos!
+                </div>
+            </div>
+
+            <!-- INTRODUÇÃO -->
+            <div class="content-card" id="introducao">
+                <h3><i class="fas fa-book-open" style="color:#1a7a3a;"></i> Introdução à Microbiologia</h3>
+                <p>A <strong>Microbiologia</strong> é a ciência que estuda os microrganismos — seres vivos de dimensões microscópicas — incluindo bactérias, vírus, fungos, protozoários e algas. Estes organismos são encontrados em todos os ambientes do planeta, desde oceanos profundos até o corpo humano, onde habitam como microbiota residente (comensais) ou patógenos oportunistas.</p>
+                <p>A microbiologia médica foca nos microrganismos que causam doenças em humanos, incluindo a patogênese, epidemiologia, diagnóstico laboratorial, tratamento antimicrobiano e prevenção de infecções.</p>
+                <div class="info-box">
+                    <strong>🟢 Importante:</strong> Nem toda bactéria causa doenças. Muitas fazem parte da <strong>microbiota normal</strong> e são essenciais para o organismo, auxiliando na digestão, produção de vitaminas e proteção contra patógenos.
+                </div>
+                <div class="warning-box">
+                    <strong>⚠️ Atenção:</strong> Antibióticos <strong>não atuam contra vírus</strong>. Infecções virais como gripe, resfriado e COVID-19 não respondem a antibióticos. O uso inadequado contribui para a resistência bacteriana.
+                </div>
+            </div>
+
+            <!-- 4. FLUXOGRAMA DE DIAGNÓSTICO -->
+            <div class="content-card" id="fluxograma">
+                <h3><i class="fas fa-search" style="color:#1a7a3a;"></i> Fluxograma de Diagnóstico Laboratorial</h3>
+                <p>Veja como um laboratório de microbiologia identifica um microrganismo, conectando o conteúdo com a rotina laboratorial:</p>
+                <div class="fluxograma">
+                    <div class="fluxo-box">🧪 Coleta da amostra</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box blue">🔬 Microscopia</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box purple">🎨 Coloração (Gram, Ziehl-Neelsen)</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box orange">🧫 Cultura em meios específicos</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box">🔍 Identificação bioquímica</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box blue">💊 Antibiograma (TSA)</div>
+                    <div class="fluxo-arrow">⬇</div>
+                    <div class="fluxo-box" style="background:#27ae60;">📋 Laudo microbiológico</div>
+                </div>
+            </div>
+
+            <!-- HISTÓRIA -->
+            <div class="content-card" id="historia">
+                <h3><i class="fas fa-history" style="color:#1a7a3a;"></i> História da Microbiologia</h3>
+                <ul>
+                    <li><strong>1676</strong> — Antonie van Leeuwenhoek observa "animálculos" (bactérias) ao microscópio.</li>
+                    <li><strong>1796</strong> — Edward Jenner cria a primeira vacina (varíola).</li>
+                    <li><strong>1857</strong> — Louis Pasteur refuta a teoria da geração espontânea.</li>
+                    <li><strong>1876</strong> — Robert Koch descobre o Bacillus anthracis, estabelecendo os Postulados de Koch.</li>
+                    <li><strong>1882</strong> — Koch descobre o Mycobacterium tuberculosis.</li>
+                    <li><strong>1884</strong> — Hans Christian Gram desenvolve a coloração de Gram.</li>
+                    <li><strong>1892</strong> — Dmitri Ivanovsky descobre os vírus.</li>
+                    <li><strong>1928</strong> — Alexander Fleming descobre a penicilina.</li>
+                    <li><strong>1977</strong> — Carl Woese identifica o domínio Archaea.</li>
+                    <li><strong>1983</strong> — Marshall e Warren descobrem o Helicobacter pylori.</li>
+                    <li><strong>2020</strong> — Vacinas de mRNA contra SARS-CoV-2.</li>
+                </ul>
+            </div>
+
+            <!-- CIENTISTAS -->
+            <div class="content-card" id="cientistas">
+                <h3><i class="fas fa-user-graduate" style="color:#1a7a3a;"></i> Cientistas Pioneiros da Microbiologia</h3>
+                <div class="cientista-card">
+                    <h4>Antonie van Leeuwenhoek (1632-1723)</h4>
+                    <span class="area">Comerciante e cientista holandês • Pai da microbiologia</span>
+                    <p>Primeiro a observar microrganismos com microscópios de sua própria fabricação. Descreveu bactérias, protozoários e espermatozoides.</p>
+                </div>
+                <div class="cientista-card">
+                    <h4>Louis Pasteur (1822-1895)</h4>
+                    <span class="area">Químico e microbiologista francês</span>
+                    <p>Refutou a geração espontânea, desenvolveu a pasteurização e criou vacinas contra raiva, antraz e cólera aviária.</p>
+                </div>
+                <div class="cientista-card">
+                    <h4>Robert Koch (1843-1910)</h4>
+                    <span class="area">Médico alemão • Prêmio Nobel 1905</span>
+                    <p>Descobriu o bacilo da tuberculose e do cólera. Formulou os Postulados de Koch para estabelecer a relação causal entre microrganismo e doença.</p>
+                </div>
+                <div class="cientista-card">
+                    <h4>Alexander Fleming (1881-1955)</h4>
+                    <span class="area">Bacteriologista britânico • Prêmio Nobel 1945</span>
+                    <p>Descobriu a penicilina em 1928, o primeiro antibiótico, revolucionando o tratamento de infecções bacterianas.</p>
+                </div>
+            </div>
+
+            <!-- 5. GALERIA DE IMAGENS -->
+            <div class="content-card" id="galeria">
+                <h3><i class="fas fa-images" style="color:#1a7a3a;"></i> Galeria de Microrganismos</h3>
+                <p>Visualize as diferentes morfologias e estruturas dos microrganismos:</p>
+                <div class="galeria-grid">
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #e74c3c 30%, #fadbd8 60%, #fff 70%);">🟤</div>
+                        <h5>Cocos</h5>
+                        <small>Esféricos</small>
+                    </div>
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #c0392b 20%, #f5c6c6 50%, #fff 60%);">📏</div>
+                        <h5>Bacilos</h5>
+                        <small>Bastonetes</small>
+                    </div>
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #e67e22 25%, #fdebd0 55%, #fff 65%);">🌀</div>
+                        <h5>Espirilos</h5>
+                        <small>Espiralados</small>
+                    </div>
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #8e44ad 25%, #d7bde2 55%, #fff 65%);">🦠</div>
+                        <h5>Vírus</h5>
+                        <small>Acelulares</small>
+                    </div>
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #f39c12 25%, #fef9e7 55%, #fff 65%);">🍄</div>
+                        <h5>Fungo</h5>
+                        <small>Levedura</small>
+                    </div>
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #2980b9 25%, #aed6f1 55%, #fff 65%);">🔵</div>
+                        <h5>Colônias</h5>
+                        <small>Placa de Petri</small>
+                    </div>
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #1a7a3a 25%, #d5f5e3 55%, #fff 65%);">🔬</div>
+                        <h5>Microscópio</h5>
+                        <small>Visualização</small>
+                    </div>
+                    <div class="galeria-card">
+                        <div class="galeria-img" style="background: radial-gradient(circle, #2c3e50 25%, #aab7c4 55%, #fff 65%);">💊</div>
+                        <h5>Antibiograma</h5>
+                        <small>Difusão em disco</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BACTERIOLOGIA -->
+            <div class="content-card" id="bacteriologia">
+                <h3><i class="fas fa-biohazard" style="color:#1a7a3a;"></i> Bacteriologia</h3>
+                <p>A <strong>bacteriologia</strong> é o estudo das bactérias, organismos procariontes (sem núcleo organizado) que possuem parede celular de peptidoglicano.</p>
+                <h4>Estrutura Bacteriana</h4>
+                <ul>
+                    <li><strong>Parede celular:</strong> Determina a forma e protege contra lise osmótica. Composta por peptidoglicano (mureína).</li>
+                    <li><strong>Membrana plasmática:</strong> Bicamada lipídica com proteínas, controla permeabilidade.</li>
+                    <li><strong>Citoplasma:</strong> Contém nucleoide (DNA circular), ribossomos 70S, plasmídeos.</li>
+                    <li><strong>Cápsula:</strong> Camada de polissacarídeos, protege contra fagocitose.</li>
+                    <li><strong>Flagelos:</strong> Estruturas de locomoção.</li>
+                    <li><strong>Pili (fímbrias):</strong> Adesão a células hospedeiras.</li>
+                    <li><strong>Esporos:</strong> Formas de resistência (Clostridium, Bacillus).</li>
+                </ul>
+                <h4>Classificação (Coloração de Gram)</h4>
+                <ul>
+                    <li><strong>Gram-positivas:</strong> Parede celular espessa (peptidoglicano + ácido teicoico). Cor roxa. Ex: Staphylococcus, Streptococcus.</li>
+                    <li><strong>Gram-negativas:</strong> Parede celular fina + membrana externa com LPS. Cor vermelha. Ex: Escherichia coli, Pseudomonas.</li>
+                </ul>
+                <div class="table-wrap">
+                    <table>
+                        <tr><th>Bactéria</th><th>Gram</th><th>Doenças</th><th>Tratamento</th></tr>
+                        <tr><td>Staphylococcus aureus</td><td>+</td><td>Infecções cutâneas, pneumonia, sepse</td><td>Oxacilina, vancomicina</td></tr>
+                        <tr><td>Streptococcus pyogenes</td><td>+</td><td>Faringite, febre reumática</td><td>Penicilina</td></tr>
+                        <tr><td>Streptococcus pneumoniae</td><td>+</td><td>Pneumonia, meningite, otite</td><td>Penicilina, ceftriaxona</td></tr>
+                        <tr><td>Escherichia coli</td><td>-</td><td>ITU, diarreia, sepse</td><td>Ciprofloxacino, cefalosporinas</td></tr>
+                        <tr><td>Pseudomonas aeruginosa</td><td>-</td><td>Infecções hospitalares</td><td>Piperacilina-tazobactam</td></tr>
+                        <tr><td>Neisseria meningitidis</td><td>-</td><td>Meningite, sepse</td><td>Penicilina, ceftriaxona</td></tr>
+                        <tr><td>Mycobacterium tuberculosis</td><td>+ (álcool-ácido)</td><td>Tuberculose</td><td>Rifampicina, isoniazida</td></tr>
+                        <tr><td>Clostridium tetani</td><td>+</td><td>Tétano</td><td>Antitoxina, metronidazol</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- VIROLOGIA -->
+            <div class="content-card" id="virologia">
+                <h3><i class="fas fa-virus" style="color:#1a7a3a;"></i> Virologia</h3>
+                <p>A <strong>virologia</strong> estuda os vírus — partículas subcelulares que se replicam dentro de células hospedeiras. São menores que bactérias (20-300 nm).</p>
+                <h4>Estrutura Viral</h4>
+                <ul>
+                    <li><strong>Ácido nucleico:</strong> DNA ou RNA (fita simples ou dupla).</li>
+                    <li><strong>Capsídeo:</strong> Camada proteica que envolve o ácido nucleico.</li>
+                    <li><strong>Envelope (opcional):</strong> Membrana lipídica com glicoproteínas.</li>
+                </ul>
+                <div class="table-wrap">
+                    <table>
+                        <tr><th>Vírus</th><th>Família</th><th>Genoma</th><th>Doenças</th></tr>
+                        <tr><td>HIV</td><td>Retroviridae</td><td>ssRNA (+) RT</td><td>AIDS</td></tr>
+                        <tr><td>Vírus da Gripe</td><td>Orthomyxoviridae</td><td>ssRNA (-)</td><td>Influenza</td></tr>
+                        <tr><td>SARS-CoV-2</td><td>Coronaviridae</td><td>ssRNA (+)</td><td>COVID-19</td></tr>
+                        <tr><td>Vírus da Hepatite B</td><td>Hepadnaviridae</td><td>dsDNA RT</td><td>Hepatite B</td></tr>
+                        <tr><td>Vírus da Hepatite C</td><td>Flaviviridae</td><td>ssRNA (+)</td><td>Hepatite C</td></tr>
+                        <tr><td>HPV</td><td>Papillomaviridae</td><td>dsDNA</td><td>Verrugas, câncer de colo de útero</td></tr>
+                        <tr><td>Herpes Simplex</td><td>Herpesviridae</td><td>dsDNA</td><td>Herpes oral, genital</td></tr>
+                        <tr><td>Vírus da Dengue</td><td>Flaviviridae</td><td>ssRNA (+)</td><td>Dengue, febre hemorrágica</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- MICOLOGIA -->
+            <div class="content-card" id="micologia">
+                <h3><i class="fas fa-seedling" style="color:#1a7a3a;"></i> Micologia</h3>
+                <p>A <strong>micologia</strong> estuda os fungos, organismos eucariontes que incluem leveduras e bolores.</p>
+                <h4>Estrutura Fúngica</h4>
+                <ul>
+                    <li><strong>Leveduras:</strong> Unicelulares, reprodução por brotamento. Ex: Candida, Cryptococcus.</li>
+                    <li><strong>Bolores:</strong> Multicelulares, formam hifas e micélios. Ex: Aspergillus, Penicillium.</li>
+                    <li><strong>Fungos dimórficos:</strong> Levedura no hospedeiro, bolor no ambiente. Ex: Histoplasma.</li>
+                </ul>
+                <div class="table-wrap">
+                    <table>
+                        <tr><th>Fungo</th><th>Doença</th><th>Fatores de Risco</th><th>Tratamento</th></tr>
+                        <tr><td>Candida albicans</td><td>Candidíase oral, vaginal, sepse</td><td>HIV, diabetes, antibióticos</td><td>Fluconazol, anfotericina B</td></tr>
+                        <tr><td>Cryptococcus neoformans</td><td>Meningite criptocócica</td><td>HIV, imunossupressão</td><td>Anfotericina B + fluconazol</td></tr>
+                        <tr><td>Aspergillus fumigatus</td><td>Aspergilose pulmonar</td><td>Neutropenia, transplante</td><td>Voriconazol</td></tr>
+                        <tr><td>Histoplasma capsulatum</td><td>Histoplasmose</td><td>Endêmica (vales de rios)</td><td>Itraconazol</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PARASITOLOGIA -->
+            <div class="content-card" id="parasitologia">
+                <h3><i class="fas fa-bug" style="color:#1a7a3a;"></i> Parasitologia</h3>
+                <p>A <strong>parasitologia</strong> estuda os parasitas — organismos que vivem sobre ou dentro de um hospedeiro, causando doenças.</p>
+                <h4>Protozoários</h4>
+                <ul>
+                    <li><strong>Plasmodium spp.:</strong> Malária. Transmissão por mosquito Anopheles.</li>
+                    <li><strong>Trypanosoma cruzi:</strong> Doença de Chagas. Transmissão por barbeiro.</li>
+                    <li><strong>Leishmania spp.:</strong> Leishmaniose. Transmissão por flebotomíneos.</li>
+                    <li><strong>Toxoplasma gondii:</strong> Toxoplasmose. Fezes de gato, carnes cruas.</li>
+                    <li><strong>Giardia lamblia:</strong> Giardíase. Transmissão fecal-oral.</li>
+                    <li><strong>Entamoeba histolytica:</strong> Amebíase. Transmissão fecal-oral.</li>
+                </ul>
+                <h4>Helmintos (Vermes)</h4>
+                <ul>
+                    <li><strong>Nematódeos:</strong> Ascaris, Ancylostoma, Strongyloides, Enterobius.</li>
+                    <li><strong>Cestódeos:</strong> Taenia solium (teníase, cisticercose), Taenia saginata.</li>
+                    <li><strong>Trematódeos:</strong> Schistosoma mansoni (esquistossomose).</li>
+                </ul>
+            </div>
+
+            <!-- 9. MÉTODOS LABORATORIAIS EM CARDS -->
+            <div class="content-card" id="metodos-cards">
+                <h3><i class="fas fa-flask" style="color:#1a7a3a;"></i> Métodos Laboratoriais</h3>
+                <p>Conheça os principais métodos utilizados no diagnóstico microbiológico:</p>
+                <div class="metodos-grid">
+                    <div class="metodo-card">
+                        <div class="metodo-icon">🔬</div>
+                        <h5>Microscopia</h5>
+                        <p>Visualização direta do microrganismo. Colorações: Gram, Ziehl-Neelsen, fresco.</p>
+                    </div>
+                    <div class="metodo-card">
+                        <div class="metodo-icon">🧫</div>
+                        <h5>Cultura</h5>
+                        <p>Crescimento do microrganismo em meios específicos. Permite identificação e antibiograma.</p>
+                    </div>
+                    <div class="metodo-card">
+                        <div class="metodo-icon">🧪</div>
+                        <h5>PCR</h5>
+                        <p>Detecta DNA/RNA com alta sensibilidade. Ex: SARS-CoV-2, HIV, tuberculose.</p>
+                    </div>
+                    <div class="metodo-card">
+                        <div class="metodo-icon">🧬</div>
+                        <h5>Sorologia</h5>
+                        <p>Pesquisa anticorpos (IgG, IgM) e antígenos. Ex: HIV, hepatites, sífilis, dengue.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MÉTODOS DIAGNÓSTICOS (CONTEÚDO EXISTENTE) -->
+            <div class="content-card" id="metodos-diagnosticos">
+                <h3><i class="fas fa-microscope" style="color:#1a7a3a;"></i> Métodos Diagnósticos em Microbiologia</h3>
+                <h4>1. Microscopia</h4>
+                <ul>
+                    <li><strong>Coloração de Gram:</strong> Diferencia Gram+ e Gram-.</li>
+                    <li><strong>Coloração álcool-ácido (Ziehl-Neelsen):</strong> Micobactérias.</li>
+                    <li><strong>Exame a fresco:</strong> Parasitas (fezes, urina, secreções).</li>
+                    <li><strong>Microscopia de fluorescência:</strong> Imunofluorescência.</li>
+                </ul>
+                <h4>2. Cultura</h4>
+                <ul>
+                    <li><strong>Meios de cultura:</strong> Ágar sangue, MacConkey, Sabouraud, Thayer-Martin.</li>
+                    <li><strong>Antibiograma:</strong> Difusão em disco, E-test, microdiluição.</li>
+                    <li><strong>Testes bioquímicos:</strong> Catalase, coagulase, oxidase, API 20E.</li>
+                </ul>
+                <h4>3. Biologia Molecular</h4>
+                <ul>
+                    <li><strong>PCR:</strong> Detecta DNA/RNA de patógenos.</li>
+                    <li><strong>PCR em Tempo Real (RT-PCR):</strong> Quantificação.</li>
+                    <li><strong>Sequenciamento (NGS):</strong> Identificação e epidemiologia.</li>
+                </ul>
+                <h4>4. Sorologia</h4>
+                <ul>
+                    <li><strong>ELISA:</strong> Detecção de anticorpos e antígenos.</li>
+                    <li><strong>Western Blot:</strong> Confirmação (HIV).</li>
+                    <li><strong>Testes rápidos:</strong> Imunocromatografia.</li>
+                </ul>
+            </div>
+
+            <!-- 7. RESISTÊNCIA BACTERIANA -->
+            <div class="content-card" id="resistencia">
+                <h3><i class="fas fa-shield-virus" style="color:#e74c3c;"></i> 🧫 Resistência aos Antibióticos</h3>
+                <p>A resistência antimicrobiana é uma das maiores ameaças à saúde global. Entenda o processo:</p>
+                <div class="resistencia-flow">
+                    <div class="resist-box">💊 Uso inadequado de antibióticos</div>
+                    <div class="resist-arrow">⬇</div>
+                    <div class="resist-box" style="background:#c0392b;">🧬 Seleção de bactérias resistentes</div>
+                    <div class="resist-arrow">⬇</div>
+                    <div class="resist-box" style="background:#922b21;">🏥 Infecções mais difíceis de tratar</div>
+                </div>
+                <h4>Mecanismos de Resistência</h4>
+                <ul>
+                    <li><strong>Beta-lactamases:</strong> Inativação de penicilinas (ESBL, carbapenemases).</li>
+                    <li><strong>Bomba de efluxo:</strong> Remove antibióticos da célula.</li>
+                    <li><strong>Alteração do alvo:</strong> Mutação (MRSA — gene mecA).</li>
+                    <li><strong>Plasmídeos de resistência:</strong> Transferência horizontal de genes.</li>
+                </ul>
+                <div class="danger-box">
+                    <strong>🔴 Exemplos críticos:</strong> MRSA (S. aureus resistente à meticilina), VRE (Enterococcus resistente à vancomicina), KPC (Klebsiella pneumoniae carbapenemase), MDR-TB (tuberculose multirresistente).
+                </div>
+                <div class="info-box">
+                    <strong>🟢 Prevenção:</strong> Uso racional de antimicrobianos, lavagem das mãos, vacinação e controle de infecções hospitalares são as principais estratégias para combater a resistência.
+                </div>
+            </div>
+
+            <!-- CONTROLE DE INFECÇÕES -->
+            <div class="content-card" id="controle">
+                <h3><i class="fas fa-hand-sanitizer" style="color:#1a7a3a;"></i> Controle de Infecções</h3>
+                <h4>Medidas de Controle</h4>
+                <ul>
+                    <li><strong>Lavagem das mãos:</strong> Principal medida de prevenção de infecções.</li>
+                    <li><strong>Desinfecção e esterilização:</strong> Álcool 70%, hipoclorito, autoclave, radiação.</li>
+                    <li><strong>Precauções de isolamento:</strong> Contato, gotículas, aerossóis.</li>
+                    <li><strong>Vacinação:</strong> Imunização ativa contra patógenos.</li>
+                    <li><strong>Uso racional de antimicrobianos:</strong> Reduz resistência.</li>
+                </ul>
+            </div>
+
+            <!-- 10. CURIOSIDADES -->
+            <div class="content-card" id="curiosidades">
+                <h3><i class="fas fa-lightbulb" style="color:#f39c12;"></i> 💡 Você Sabia?</h3>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🦠</div>
+                    <div><strong>Apenas uma pequena porcentagem das bactérias é patogênica.</strong> A grande maioria é inofensiva ou benéfica. O corpo humano abriga trilhões de bactérias que formam a microbiota.</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🍄</div>
+                    <div><strong>Algumas espécies de fungos produzem antibióticos naturais.</strong> A penicilina, descoberta por Fleming, é produzida pelo fungo Penicillium notatum.</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🧬</div>
+                    <div><strong>Os vírus não conseguem se reproduzir sozinhos.</strong> Eles precisam infectar uma célula hospedeira e usar sua maquinaria para se replicar.</div>
+                </div>
+                <div class="curiosidade-item">
+                    <div class="curiosidade-icon">🧪</div>
+                    <div><strong>O microbioma humano contém mais genes bacterianos do que genes humanos.</strong> Estima-se que tenhamos cerca de 100 vezes mais genes microbianos do que nossos próprios genes.</div>
+                </div>
+            </div>
+
+            <!-- 8. CASOS CLÍNICOS -->
+            <div class="content-card" id="casos-clinicos">
+                <h3><i class="fas fa-stethoscope" style="color:#1a7a3a;"></i> 🩺 Casos Clínicos</h3>
+                <p>Teste seus conhecimentos com casos clínicos interativos:</p>
+
+                <!-- CASO 1 -->
+                <div class="caso-card" id="caso1">
+                    <div class="paciente-info">
+                        <div class="paciente-icon">🧑</div>
+                        <div>
+                            <strong>Paciente:</strong> Adulto, 35 anos<br>
+                            <strong>Sintomas:</strong> Febre, tosse produtiva<br>
+                            <strong>Exames:</strong> Cultura positiva para Streptococcus pneumoniae
+                        </div>
+                    </div>
+                    <p><strong>❓ Qual grupo de microrganismo foi identificado?</strong></p>
+                    <div class="quiz-opcoes">
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'B')">A) Vírus</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'B')">B) Bactéria Gram-positiva</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'B')">C) Fungo</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso1', this, 'B')">D) Protozoário</div>
+                    </div>
+                    <div class="quiz-feedback" id="caso1-feedback"></div>
+                </div>
+
+                <!-- CASO 2 -->
+                <div class="caso-card" id="caso2">
+                    <div class="paciente-info">
+                        <div class="paciente-icon">👩</div>
+                        <div>
+                            <strong>Paciente:</strong> Mulher, 28 anos<br>
+                            <strong>Sintomas:</strong> Disúria, polaciúria<br>
+                            <strong>Suspeita:</strong> Infecção urinária
+                        </div>
+                    </div>
+                    <p><strong>❓ Qual exame laboratorial é indicado primeiro?</strong></p>
+                    <div class="quiz-opcoes">
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'C')">A) Hemograma completo</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'C')">B) Sorologia para HIV</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'C')">C) Urinocultura com antibiograma</div>
+                        <div class="quiz-opcao" onclick="responderCaso('caso2', this, 'C')">D) PCR para COVID-19</div>
+                    </div>
+                    <div class="quiz-feedback" id="caso2-feedback"></div>
+                </div>
+            </div>
+
+            <!-- 11. QUIZ FINAL -->
+            <div class="content-card quiz-final" id="quiz-final">
+                <h3><i class="fas fa-question-circle" style="color:#1a7a3a;"></i> ❓ Quiz Final</h3>
+                <p><strong>Qual grupo de microrganismos é acelular?</strong></p>
+                <div class="quiz-opcoes" id="quizFinalOpcoes">
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="A">○ Fungos</div>
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="B">○ Protozoários</div>
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="C">○ Vírus</div>
+                    <div class="quiz-opcao" onclick="selecionarQuiz(this)" data-resposta="D">○ Bactérias</div>
+                </div>
+                <button class="btn-responder" id="btnResponderQuiz" onclick="responderQuiz()">Responder</button>
+                <p id="quizFinalFeedback" style="margin-top:1rem; font-weight:600;"></p>
+            </div>
+
+            <!-- 12. RESUMO VISUAL -->
+            <div class="content-card" id="resumo">
+                <h3><i class="fas fa-clipboard-check" style="color:#27ae60;"></i> ✅ Resumo</h3>
+                <ul class="resumo-list">
+                    <li><i class="fas fa-check-circle"></i> <strong>Bactérias</strong> são procariontes com parede celular de peptidoglicano.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Vírus</strong> são acelulares e dependem da célula hospedeira.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Fungos</strong> são eucariontes, incluem leveduras e bolores.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Protozoários</strong> também são eucariontes unicelulares.</li>
+                    <li><i class="fas fa-check-circle"></i> A <strong>cultura microbiológica</strong> identifica diversos agentes infecciosos.</li>
+                    <li><i class="fas fa-check-circle"></i> O <strong>antibiograma</strong> orienta a escolha do tratamento antimicrobiano.</li>
+                </ul>
+            </div>
+
+            <!-- AVANÇOS -->
+            <div class="content-card" id="avancos">
+                <h3><i class="fas fa-robot" style="color:#1a7a3a;"></i> Avanços Tecnológicos em Microbiologia</h3>
+                <h4>1. Sequenciamento de Nova Geração (NGS)</h4>
+                <p>Permite sequenciamento completo de microrganismos e identificação de patógenos em amostras clínicas.</p>
+                <h4>2. MALDI-TOF MS</h4>
+                <p>Espectrometria de massa para identificação rápida de bactérias e fungos.</p>
+                <h4>3. PCR Multiplex</h4>
+                <p>Detecta múltiplos patógenos simultaneamente.</p>
+                <h4>4. Testes Rápidos Point-of-Care</h4>
+                <p>Dispositivos portáteis para diagnóstico à beira do leito.</p>
+                <h4>5. Inteligência Artificial</h4>
+                <p>Interpretação automatizada de lâminas e predição de resistência.</p>
+            </div>
+
+            <!-- REFERÊNCIAS -->
+            <div class="content-card" id="referencias">
+                <h3><i class="fas fa-book" style="color:#1a7a3a;"></i> Referências Bibliográficas</h3>
+                <ul>
+                    <li><strong>Murray, P.R., Rosenthal, K.S., Pfaller, M.A.</strong> Medical Microbiology. 9th ed. Elsevier, 2020.</li>
+                    <li><strong>Jawetz, Melnick, & Adelberg's.</strong> Medical Microbiology. 28th ed. McGraw-Hill, 2019.</li>
+                    <li><strong>Madigan, M.T. et al.</strong> Brock Biology of Microorganisms. 15th ed. Pearson, 2018.</li>
+                    <li><strong>Willey, J.M., Sherwood, L.M., Woolverton, C.J.</strong> Prescott's Microbiology. 11th ed. McGraw-Hill, 2019.</li>
+                    <li><strong>Centers for Disease Control and Prevention (CDC).</strong> Antibiotic Resistance Threats Report, 2019.</li>
+                </ul>
+                <p style="margin-top:1rem; font-size:0.9rem; color:#5c7f9a;">Última atualização: Junho 2026</p>
+            </div>
+
+            <!-- 13. NAVEGAÇÃO ENTRE DISCIPLINAS -->
+            <div class="navegacao-disciplinas">
+                <a href="imunologia.html" class="nav-disciplina anterior">
+                    <i class="fas fa-arrow-left" style="color:#1a7a3a;"></i>
+                    <div>
+                        <div class="nav-label">← Disciplina Anterior</div>
+                        <div class="nav-titulo">Imunologia</div>
+                    </div>
+                </a>
+                <a href="urinalise.html" class="nav-disciplina proxima">
+                    <div>
+                        <div class="nav-label">Próxima Disciplina →</div>
+                        <div class="nav-titulo">Urinálise</div>
+                    </div>
+                    <i class="fas fa-arrow-right" style="color:#1a7a3a;"></i>
+                </a>
+            </div>
+
+        </div><!-- .content-area -->
+    </div><!-- .main-wrapper -->
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3 style="color:#fff;"><i class="fas fa-flask" style="margin-right:6px;"></i>LabEnsina</h3>
+                <p style="font-size:0.85rem;">Plataforma colaborativa para ensino em análises clínicas.</p>
+            </div>
+            <div class="footer-links">
+                <a>Contato</a>
+                <a>Sobre</a>
+                <a>Colaboradores</a>
+            </div>
+            <small>© 2026 LabEnsina • Conteúdo científico atualizado</small>
+        </div>
+    </footer>
+
+    <!-- CHATBOT -->
+    <div class="chat-float">
+        <button class="chat-toggle" onclick="toggleChat()">
+            <i class="fas fa-robot"></i>
+            <span class="badge-notif">1</span>
+        </button>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h4><i class="fas fa-robot"></i> Assistente Microbiologia</h4>
+            <button class="chat-close" onclick="toggleChat()">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">
+                👋 Olá! Tire suas dúvidas sobre microbiologia: bactérias, vírus, fungos, parasitas, diagnóstico e antibióticos.
+                <span class="msg-time">Agora</span>
+            </div>
+        </div>
+        <div class="chat-suggestions">
+            <button onclick="enviarMensagem('Diferença entre bactéria e vírus')">Bactéria x Vírus</button>
+            <button onclick="enviarMensagem('O que é Gram?')">Coloração de Gram</button>
+            <button onclick="enviarMensagem('O que são antibióticos?')">Antibióticos</button>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Digite sua pergunta..." onkeypress="if(event.key==='Enter') enviarMensagem()" />
+            <button onclick="enviarMensagem()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // ===== CHATBOT =====
+        function toggleChat() {
+            document.getElementById('chatWindow').classList.toggle('aberto');
+        }
+        function enviarMensagem(msg) {
+            const input = document.getElementById('chatInput');
+            const texto = msg || input.value.trim();
+            if (!texto) return;
+            input.value = '';
+            const container = document.getElementById('chatMessages');
+            const userDiv = document.createElement('div');
+            userDiv.className = 'chat-msg user';
+            userDiv.innerHTML = texto + '<span class="msg-time">Agora</span>';
+            container.appendChild(userDiv);
+
+            let resposta = 'Desculpe, não entendi. Pergunte sobre: bactérias, vírus, fungos, parasitas, Gram, antibióticos, resistência, etc.';
+            const lower = texto.toLowerCase();
+            if (lower.includes('bactéria') || lower.includes('bacteria') || lower.includes('diferença')) {
+                resposta = 'Bactérias: organismos procariontes, parede celular, reproduzem por divisão binária, sensíveis a antibióticos. Vírus: partículas acelulares, se replicam dentro de células, não sensíveis a antibióticos.';
+            } else if (lower.includes('gram') || lower.includes('coloração')) {
+                resposta = 'Coloração de Gram: Gram-positivas (roxas) têm parede espessa de peptidoglicano. Gram-negativas (vermelhas) têm parede fina + membrana externa com LPS.';
+            } else if (lower.includes('antibiótico') || lower.includes('antimicrobiano')) {
+                resposta = 'Antibióticos atuam em: parede celular (penicilinas), membrana (polimixinas), síntese proteica (tetraciclinas), DNA (fluoroquinolonas) e metabolismo (sulfas).';
+            } else if (lower.includes('vírus') || lower.includes('viral')) {
+                resposta = 'Vírus: HIV (AIDS), influenza (gripe), SARS-CoV-2 (COVID-19), hepatites B/C, HPV, herpes, dengue. Diagnóstico: PCR, sorologia. Tratamento: antivirais.';
+            } else if (lower.includes('fungo') || lower.includes('micose')) {
+                resposta = 'Fungos: Candida, Cryptococcus, Aspergillus, Histoplasma. Diagnóstico: cultura, exame direto, sorologia. Tratamento: antifúngicos (fluconazol, anfotericina B).';
+            } else if (lower.includes('parasita') || lower.includes('parasitose')) {
+                resposta = 'Parasitas: Plasmodium (malária), Trypanosoma (Chagas), Leishmania, Toxoplasma, Giardia, Ascaris, Taenia. Diagnóstico: exame parasitológico, sorologia.';
+            } else {
+                resposta = 'Posso ajudar com: bactérias, vírus, fungos, parasitas, coloração de Gram, antibióticos, resistência, PCR, sorologia. Qual sua dúvida?';
+            }
+
+            setTimeout(() => {
+                const botDiv = document.createElement('div');
+                botDiv.className = 'chat-msg bot';
+                botDiv.innerHTML = '🤖 ' + resposta + '<span class="msg-time">Agora</span>';
+                container.appendChild(botDiv);
+                container.scrollTop = container.scrollHeight;
+            }, 400);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // ===== CASOS CLÍNICOS =====
+        function responderCaso(casoId, elemento, respostaCorreta) {
+            const caso = document.getElementById(casoId);
+            const opcoes = caso.querySelectorAll('.quiz-opcao');
+            const feedback = document.getElementById(casoId + '-feedback');
+            if (caso.dataset.respondido === 'true') return;
+            caso.dataset.respondido = 'true';
+            const respostaUsuario = elemento.textContent.charAt(0);
+            opcoes.forEach(op => {
+                op.style.pointerEvents = 'none';
+                const letra = op.textContent.charAt(0);
+                if (letra === respostaCorreta) op.classList.add('correta');
+                else if (op === elemento && letra !== respostaCorreta) op.classList.add('errada');
+            });
+            if (respostaUsuario === respostaCorreta) {
+                feedback.textContent = '✅ Correto! Muito bem!';
+                feedback.style.color = '#27ae60';
+            } else {
+                feedback.textContent = '❌ Incorreto. A resposta correta é a opção ' + respostaCorreta + '.';
+                feedback.style.color = '#e74c3c';
+            }
+            feedback.style.display = 'block';
+        }
+
+        // ===== QUIZ FINAL =====
+        let quizSelecionado = null;
+        function selecionarQuiz(elemento) {
+            const opcoes = document.querySelectorAll('#quizFinalOpcoes .quiz-opcao');
+            opcoes.forEach(op => op.classList.remove('selecionada'));
+            elemento.classList.add('selecionada');
+            quizSelecionado = elemento.dataset.resposta;
+        }
+        function responderQuiz() {
+            if (!quizSelecionado) { alert('Selecione uma resposta antes de clicar em Responder.'); return; }
+            const feedback = document.getElementById('quizFinalFeedback');
+            const opcoes = document.querySelectorAll('#quizFinalOpcoes .quiz-opcao');
+            const btnResponder = document.getElementById('btnResponderQuiz');
+            opcoes.forEach(op => {
+                op.style.pointerEvents = 'none';
+                if (op.dataset.resposta === 'C') op.classList.add('correta');
+                else if (op.classList.contains('selecionada') && op.dataset.resposta !== 'C') op.classList.add('errada');
+            });
+            if (quizSelecionado === 'C') {
+                feedback.textContent = '✅ Correto! Os vírus são acelulares — não possuem estrutura celular completa.';
+                feedback.style.color = '#27ae60';
+            } else {
+                feedback.textContent = '❌ Incorreto. Os vírus são acelulares. Fungos, protozoários e bactérias possuem organização celular.';
+                feedback.style.color = '#e74c3c';
+            }
+            btnResponder.disabled = true;
+            btnResponder.textContent = 'Respondido ✓';
+        }
+
+        // ===== ÍNDICE LATERAL =====
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const sections = document.querySelectorAll('div[id]');
+        function highlightSidebarLink() {
+            let currentId = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 200;
+                if (window.scrollY >= sectionTop) currentId = section.getAttribute('id');
+            });
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentId) link.classList.add('active');
+            });
+        }
+        window.addEventListener('scroll', highlightSidebarLink);
+        highlightSidebarLink();
+
+        // ===== PESQUISA =====
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const termo = document.getElementById('searchInput').value.trim();
+            if (termo) alert('🔍 Buscando por: ' + termo + ' em Microbiologia...');
+        });
+    </script>
+    <script src="utils.js"></script>
+    <script src="conhecimento.js"></script>
+    <script src="pesquisa.js"></script>
+    <script src="sugestoes.js"></script>
+    <script src="historico.js"></script>
+    <script src="quiz.js"></script>
+    <script src="casos.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>

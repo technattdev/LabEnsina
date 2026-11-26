@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LabEnsina • Matéria</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== ESTILOS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            background: #f4f8fc;
+            color: #1e2b3c;
+            line-height: 1.7;
+        }
+        .header {
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .logo h1 span {
+            font-weight: 300;
+            color: #6fc2f0;
+        }
+        .logo small {
+            display: block;
+            font-size: 0.65rem;
+            opacity: 0.7;
+            font-weight: 300;
+            margin-top: -2px;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .search-box {
+            background: #fff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .search-box input {
+            border: none;
+            padding: 0.5rem 0.8rem;
+            font-size: 0.95rem;
+            width: 200px;
+            outline: none;
+            background: transparent;
+            color: #1e2b3c;
+        }
+        .search-box button {
+            background: transparent;
+            border: none;
+            color: #1a3f62;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0 6px;
+        }
+        .btn-chat {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-chat:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        .btn-chat i {
+            color: #6fc2f0;
+        }
+        .nav-bar {
+            background: #fff;
+            padding: 0.6rem 2rem;
+            border-bottom: 1px solid #dce5ef;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            position: sticky;
+            top: 70px;
+            z-index: 99;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+        }
+        .nav-bar a {
+            color: #1e3b5a;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.2rem 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .nav-bar a:hover,
+        .nav-bar a.active {
+            color: #0077be;
+            border-bottom-color: #0077be;
+        }
+        .nav-bar a i {
+            font-size: 0.85rem;
+            color: #3d7ea6;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #e8f0f8, #d4e4f0);
+            padding: 2rem 2rem;
+            margin: 1.2rem 1.5rem;
+            border-radius: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .hero-text h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0a2a44;
+        }
+        .hero-text .breadcrumb {
+            font-size: 0.85rem;
+            color: #5c7f9a;
+            margin: 0.2rem 0 0.5rem;
+        }
+        .hero-text .breadcrumb a {
+            color: #0077be;
+            text-decoration: none;
+        }
+        .hero-text .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .hero-text .badge {
+            background: #1a3f62;
+            color: #fff;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+        .hero-image {
+            font-size: 4rem;
+            color: #1a3f62;
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .conteudo-box {
+            background: #fff;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 6px 18px rgba(0, 20, 40, 0.06);
+            border: 1px solid #e6edf6;
+            margin-bottom: 2rem;
+        }
+        .conteudo-box h3 {
+            color: #0a2a44;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        .conteudo-box .meta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: #5c7f9a;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #eef4fa;
+        }
+        .conteudo-box .meta span i {
+            margin-right: 4px;
+        }
+        .conteudo-box p {
+            color: #1e3b5a;
+            margin-bottom: 1rem;
+        }
+        .conteudo-box ul {
+            margin: 0.8rem 0 0.8rem 1.5rem;
+        }
+        .conteudo-box ul li {
+            margin: 0.4rem 0;
+        }
+        .conteudo-box .tag {
+            background: #eef4fa;
+            padding: 0.15rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #005a8c;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        .artigos-relacionados {
+            margin-top: 2rem;
+        }
+        .artigos-relacionados h3 {
+            font-size: 1.3rem;
+            color: #0a2a44;
+            margin-bottom: 1rem;
+        }
+        .artigo-mini {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 0.8rem;
+            border-left: 4px solid #1a6390;
+            transition: 0.2s;
+        }
+        .artigo-mini:hover {
+            background: #f0f5fa;
+        }
+        .artigo-mini h4 {
+            font-size: 1rem;
+            color: #0f314b;
+        }
+        .artigo-mini p {
+            font-size: 0.85rem;
+            color: #5c7f9a;
+        }
+        .artigo-mini .meta-mini {
+            font-size: 0.7rem;
+            color: #8a9fb0;
+            margin-top: 0.3rem;
+        }
+
+        .footer {
+            background: #0f263a;
+            color: #cfdde9;
+            padding: 2rem 1.5rem 1.5rem;
+            margin-top: 2.5rem;
+            border-radius: 40px 40px 0 0;
+        }
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .footer-links a {
+            color: #b2ccdf;
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        /* ===== CHATBOT ===== */
+        .chat-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 1000;
+        }
+        .chat-toggle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(11, 42, 74, 0.4);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .chat-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 32px rgba(11, 42, 74, 0.5);
+        }
+        .chat-toggle .badge-notif {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #e74c3c;
+            color: #fff;
+            font-size: 0.6rem;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 28px;
+            width: 380px;
+            max-width: 90vw;
+            max-height: 550px;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #dce5ef;
+            z-index: 1000;
+            animation: slideUp 0.3s ease;
+        }
+        .chat-window.aberto {
+            display: flex;
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .chat-header {
+            background: linear-gradient(145deg, #0b2a4a, #1a3f62);
+            color: #fff;
+            padding: 1rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header h4 {
+            font-weight: 500;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .chat-header h4 i {
+            color: #6fc2f0;
+        }
+        .chat-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+        .chat-close:hover {
+            color: #fff;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem 1.2rem;
+            overflow-y: auto;
+            max-height: 350px;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-msg {
+            margin-bottom: 0.8rem;
+            padding: 0.6rem 1rem;
+            border-radius: 16px;
+            max-width: 85%;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            animation: msgIn 0.25s ease;
+        }
+        @keyframes msgIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .chat-msg.bot {
+            background: #e3eefa;
+            color: #1e3b5a;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .chat-msg.user {
+            background: #1a3f62;
+            color: #fff;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .chat-msg .msg-time {
+            font-size: 0.6rem;
+            opacity: 0.6;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 0.8rem 1rem;
+            border-top: 1px solid #e6edf6;
+            background: #fff;
+            gap: 8px;
+        }
+        .chat-input-area input {
+            flex: 1;
+            border: 1px solid #dce5ef;
+            border-radius: 30px;
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.2s;
+        }
+        .chat-input-area input:focus {
+            border-color: #0077be;
+        }
+        .chat-input-area button {
+            background: #1a3f62;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            padding: 0.6rem 1.2rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+        .chat-input-area button:hover {
+            background: #0b2a4a;
+        }
+
+        .chat-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 0.5rem 1rem 0.8rem;
+            background: #f8fafc;
+            border-top: 1px solid #e6edf6;
+        }
+        .chat-suggestions button {
+            background: #e3eefa;
+            border: none;
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.75rem;
+            color: #1a3f62;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .chat-suggestions button:hover {
+            background: #c5d9eb;
+        }
+
+        #modalSimples {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        #modalSimples .modal-content {
+            background: #fff;
+            border-radius: 24px;
+            max-width: 550px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+        #modalSimples .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            color: #6b8ba5;
+            cursor: pointer;
+        }
+        #modalSimples .modal-close:hover {
+            color: #1a3f62;
+        }
+        #modalSimples h3 {
+            color: #0a2a44;
+            margin-bottom: 0.5rem;
+            padding-right: 30px;
+        }
+        #modalSimples .modal-tag {
+            display: inline-block;
+            background: #1a3f62;
+            color: #fff;
+            padding: 0.1rem 1rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            margin-bottom: 0.8rem;
+        }
+        #modalSimples p {
+            color: #1e3b5a;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.8rem;
+                padding: 1rem;
+            }
+            .logo img {
+                height: 40px;
+                width: 40px;
+            }
+            .header-actions {
+                justify-content: space-between;
+            }
+            .search-box input {
+                width: 140px;
+            }
+            .nav-bar {
+                top: 120px;
+                padding: 0.5rem 1rem;
+                gap: 0.3rem 1rem;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+            .nav-bar a {
+                font-size: 0.8rem;
+                white-space: nowrap;
+            }
+            .hero {
+                margin: 0.8rem 0.5rem;
+                padding: 1.5rem;
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-text h2 {
+                font-size: 1.6rem;
+            }
+            .hero-image {
+                font-size: 3rem;
+                margin-top: 0.5rem;
+            }
+            .container {
+                padding: 0 0.8rem;
+            }
+            .chat-window {
+                width: 92vw;
+                right: 4vw;
+                bottom: 90px;
+                max-height: 70vh;
+            }
+            .chat-float {
+                bottom: 16px;
+                right: 16px;
+            }
+            .chat-toggle {
+                width: 56px;
+                height: 56px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="labensina.png" alt="LabEnsina Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" />
+            <div>
+                <h1>Lab<span>Ensina</span></h1>
+                <small>conteúdo da matéria</small>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="search-box">
+                <input type="text" placeholder="Pesquisar..." id="searchInput" />
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            <button class="btn-chat" onclick="toggleChat()">
+                <i class="fas fa-robot"></i> Assistente
+            </button>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <a href="index.html"><i class="fas fa-home"></i> Início</a>
+        <a href="hematologia.html"><i class="fas fa-microscope"></i> Hematologia</a>
+        <a href="bioquimica.html"><i class="fas fa-vial"></i> Bioquímica</a>
+        <a href="microbiologia.html"><i class="fas fa-bacteria"></i> Microbiologia</a>
+        <a href="imunologia.html"><i class="fas fa-shield-virus"></i> Imunologia</a>
+        <a href="urinalise.html"><i class="fas fa-heartbeat"></i> Urinálise</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-text">
+            <span class="badge" id="materiaBadge"><i class="fas fa-book"></i> Matéria</span>
+            <div class="breadcrumb" id="breadcrumb">
+                <a href="index.html">Início</a> &gt;
+                <a id="areaLink" href="#">Área</a> &gt;
+                <span id="materiaNome">Matéria</span>
+            </div>
+            <h2 id="materiaTitulo">Título da Matéria</h2>
+            <p id="materiaDesc">Descrição da matéria</p>
+        </div>
+        <div class="hero-image" id="materiaIcon"><i class="fas fa-book"></i></div>
+    </div>
+
+    <div class="container">
+        <div class="conteudo-box">
+            <h3 id="conteudoTitulo">Conteúdo da Matéria</h3>
+            <div class="meta" id="conteudoMeta">
+                <span><i class="far fa-file-alt"></i> <span id="artigosCount">0</span> artigos</span>
+                <span><i class="far fa-video"></i> <span id="videosCount">0</span> vídeos</span>
+                <span><i class="far fa-calendar-alt"></i> Atualizado em <span id="dataAtualizacao">junho 2026</span></span>
+            </div>
+            <div id="conteudoBody">
+                <p>Carregando conteúdo...</p>
+            </div>
+        </div>
+
+        <div class="artigos-relacionados">
+            <h3><i class="fas fa-newspaper"></i> Artigos Relacionados</h3>
+            <div id="artigosRelacionados">
+                <div class="artigo-mini">
+                    <h4>Carregando artigos...</h4>
+                    <p>...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3 style="color:#fff;"><i class="fas fa-flask" style="margin-right:6px;"></i>LabEnsina</h3>
+                <p style="font-size:0.85rem;">Plataforma colaborativa para ensino em análises clínicas.</p>
+            </div>
+            <div class="footer-links">
+                <a>Contato</a>
+                <a>Sobre</a>
+                <a>Colaboradores</a>
+            </div>
+            <small>© 2026 LabEnsina</small>
+        </div>
+    </footer>
+
+    <div id="modalSimples">
+        <div class="modal-content">
+            <button class="modal-close" onclick="fecharModal()">&times;</button>
+            <h3 id="modalSimplesTitulo">Título</h3>
+            <span class="modal-tag" id="modalSimplesTag">Análises Clínicas</span>
+            <p id="modalSimplesConteudo">Conteúdo da resposta...</p>
+        </div>
+    </div>
+
+    <div class="chat-float">
+        <button class="chat-toggle" onclick="toggleChat()">
+            <i class="fas fa-robot"></i>
+            <span class="badge-notif">1</span>
+        </button>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h4><i class="fas fa-robot"></i> Assistente LabEnsina</h4>
+            <button class="chat-close" onclick="toggleChat()">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">
+                👋 Olá! Sou o assistente do LabEnsina.<br>
+                Tire suas dúvidas sobre análises clínicas.
+                <span class="msg-time">Agora</span>
+            </div>
+        </div>
+        <div class="chat-suggestions">
+            <button onclick="enviarMensagem('O que é hemograma?')">Hemograma</button>
+            <button onclick="enviarMensagem('O que é creatinina?')">Creatinina</button>
+            <button onclick="enviarMensagem('Como interpretar antibiograma?')">Antibiograma</button>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Digite sua pergunta..." onkeypress="if(event.key==='Enter') enviarMensagem()" />
+            <button onclick="enviarMensagem()">Enviar</button>
+        </div>
+    </div>
+
+    <script src="chatbot.js"></script>
+    <script>
+        // ===== DADOS DAS MATÉRIAS =====
+        const materiasData = {
+            // Hematologia
+            'hematologia': {
+                'anemias': {
+                    titulo: 'Anemias',
+                    descricao: 'Estudo dos tipos de anemia: ferropriva, megaloblástica, aplástica e hemolítica.',
+                    icone: 'fa-heartbeat',
+                    cor: '#c0392b',
+                    artigos: 12,
+                    videos: 2,
+                    conteudo: '<p>A <strong>anemia</strong> é definida como a redução da concentração de hemoglobina no sangue.</p><ul><li><strong>Anemia Ferropriva:</strong> Deficiência de ferro, a mais comum.</li><li><strong>Anemia Megaloblástica:</strong> Deficiência de vitamina B12 ou ácido fólico.</li><li><strong>Anemia Aplástica:</strong> Insuficiência da medula óssea.</li><li><strong>Anemia Hemolítica:</strong> Destruição precoce de hemácias.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Diagnóstico diferencial das anemias microcíticas', descricao: 'Como diferenciar ferropriva de talassemia.' }
+                    ]
+                },
+                'leucemias': {
+                    titulo: 'Leucemias e Linfomas',
+                    descricao: 'Leucemia mieloide e linfóide, linfoma de Hodgkin e não-Hodgkin.',
+                    icone: 'fa-bolt',
+                    cor: '#d68910',
+                    artigos: 9,
+                    videos: 2,
+                    conteudo: '<p>As <strong>leucemias</strong> são neoplasias que afetam as células sanguíneas na medula óssea.</p><ul><li><strong>Leucemia Mieloide Aguda (LMA):</strong> Proliferação de blastos mieloides.</li><li><strong>Leucemia Linfóide Aguda (LLA):</strong> Mais comum em crianças.</li><li><strong>Linfoma de Hodgkin:</strong> Células de Reed-Sternberg.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Leucemia mieloide crônica: diagnóstico e tratamento', descricao: 'Abordagem com inibidores de tirosina quinase.' }
+                    ]
+                },
+                'coagulopatias': {
+                    titulo: 'Hemostasia e Coagulopatias',
+                    descricao: 'Trombose, distúrbios hemorrágicos e avaliação de fatores de coagulação.',
+                    icone: 'fa-hand-holding-heart',
+                    cor: '#1a5276',
+                    artigos: 8,
+                    videos: 1,
+                    conteudo: '<p>A <strong>hemostasia</strong> é o processo de manutenção do sangue em estado líquido.</p><ul><li><strong>Trombose:</strong> Formação anormal de coágulos.</li><li><strong>Distúrbios hemorrágicos:</strong> Hemofilia A e B.</li><li><strong>Avaliação:</strong> TP, TTPA, fibrinogênio.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Trombofilias hereditárias: diagnóstico e conduta', descricao: 'Fator V Leiden, mutação da protrombina.' }
+                    ]
+                },
+                'exames': {
+                    titulo: 'Testes e Exames Hematológicos',
+                    descricao: 'Hemograma completo, testes laboratoriais e avanços técnicos em hematologia.',
+                    icone: 'fa-microscope',
+                    cor: '#1e8449',
+                    artigos: 15,
+                    videos: 3,
+                    conteudo: '<p>Os <strong>exames hematológicos</strong> são fundamentais para o diagnóstico.</p><ul><li><strong>Hemograma Completo:</strong> Série vermelha, branca e plaquetas.</li><li><strong>Testes Especiais:</strong> VHS, prova do laço.</li><li><strong>Avanços:</strong> Citometria de fluxo, biologia molecular.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Interpretação do leucograma', descricao: 'Desvios e reativos em infecções.' }
+                    ]
+                },
+                'infeccoes': {
+                    titulo: 'Infecções e Hematologia',
+                    descricao: 'Impacto de infecções bacterianas, virais, fúngicas e parasitárias.',
+                    icone: 'fa-biohazard',
+                    cor: '#6c3483',
+                    artigos: 7,
+                    videos: 1,
+                    conteudo: '<p>Infecções podem causar alterações hematológicas significativas.</p><ul><li><strong>Bacterianas:</strong> Leucocitose, neutrofilia.</li><li><strong>Virais:</strong> Citopenias, linfocitose atípica.</li><li><strong>Fúngicas:</strong> Pancitopenia em imunocomprometidos.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Alterações hematológicas na dengue', descricao: 'Trombocitopenia e leucopenia.' }
+                    ]
+                },
+                'doencas-especificas': {
+                    titulo: 'Doenças Específicas',
+                    descricao: 'Mieloma múltiplo, hemoglobinopatias, distúrbios plaquetários.',
+                    icone: 'fa-dna',
+                    cor: '#ca6f1e',
+                    artigos: 11,
+                    videos: 2,
+                    conteudo: '<p>Doenças hematológicas específicas requerem manejo especializado.</p><ul><li><strong>Mieloma Múltiplo:</strong> Neoplasia de plasmócitos.</li><li><strong>Hemoglobinopatias:</strong> Anemia falciforme, talassemias.</li><li><strong>Distúrbios Plaquetários:</strong> PTI, trombastenia.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Mieloma múltiplo: critérios diagnósticos', descricao: 'CRAB, eletroforese e biópsia.' }
+                    ]
+                }
+            },
+            // Bioquímica - dados resumidos
+            'bioquimica': {
+                'controle-qualidade': {
+                    titulo: 'Controle de Qualidade Laboratorial',
+                    descricao: 'Importância e métodos para garantir a precisão dos resultados bioquímicos.',
+                    icone: 'fa-check-double',
+                    cor: '#2980b9',
+                    artigos: 12,
+                    videos: 1,
+                    conteudo: '<p>O <strong>controle de qualidade</strong> é essencial para garantir a confiabilidade dos resultados laboratoriais.</p><ul><li><strong>Controles Internos:</strong> Monitoram precisão e exatidão.</li><li><strong>Controles Externos:</strong> Programas de proficiência.</li><li><strong>Calibração:</strong> Uso de padrões e curvas de calibração.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Controle interno: como interpretar gráficos de Levey-Jennings', descricao: 'Regras de Westgard.' }
+                    ]
+                },
+                'diagnostico-laboratorial': {
+                    titulo: 'Diagnóstico Laboratorial',
+                    descricao: 'Utilização de exames para confirmar ou descartar diagnósticos clínicos.',
+                    icone: 'fa-stethoscope',
+                    cor: '#1a7a3a',
+                    artigos: 15,
+                    videos: 2,
+                    conteudo: '<p>O <strong>diagnóstico laboratorial</strong> é fundamental para a prática médica.</p><ul><li><strong>Sensibilidade:</strong> Capacidade de detectar a doença.</li><li><strong>Especificidade:</strong> Capacidade de descartar a doença.</li><li><strong>VPP e VPN:</strong> Valores preditivos.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Curvas ROC e pontos de corte', descricao: 'Como determinar o melhor ponto de corte.' }
+                    ]
+                },
+                'doencas-renais': {
+                    titulo: 'Doenças Renais',
+                    descricao: 'Diagnóstico laboratorial e correlação clínico-laboratorial das doenças renais.',
+                    icone: 'fa-kidney',
+                    cor: '#c0392b',
+                    artigos: 14,
+                    videos: 2,
+                    conteudo: '<p>O diagnóstico laboratorial das <strong>doenças renais</strong> baseia-se em marcadores de função.</p><ul><li><strong>Clearance de Creatinina:</strong> Estima a TFG.</li><li><strong>Ureia:</strong> Marcador de função renal.</li><li><strong>Proteinúria:</strong> Indica lesão glomerular.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'CKD-EPI vs MDRD: qual a melhor fórmula?', descricao: 'Comparação entre fórmulas.' }
+                    ]
+                },
+                'doencas-endocrinas': {
+                    titulo: 'Doenças Endócrinas',
+                    descricao: 'Diagnóstico laboratorial de tireoide, adrenal, pâncreas endócrino.',
+                    icone: 'fa-thyroid',
+                    cor: '#6c3483',
+                    artigos: 13,
+                    videos: 2,
+                    conteudo: '<p>O diagnóstico laboratorial das <strong>doenças endócrinas</strong> envolve dosagem de hormônios.</p><ul><li><strong>Tireoide:</strong> TSH, T4L, T3.</li><li><strong>Adrenal:</strong> Cortisol, aldosterona.</li><li><strong>Pâncreas:</strong> Insulina, glicemia.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Diagnóstico laboratorial do hipotireoidismo', descricao: 'TSH, T4L e anticorpos.' }
+                    ]
+                },
+                'doencas-cardiacas': {
+                    titulo: 'Doenças Cardíacas',
+                    descricao: 'Troponinas, CK-MB, BNP, perfil lipídico e marcadores de inflamação.',
+                    icone: 'fa-heart',
+                    cor: '#ca6f1e',
+                    artigos: 11,
+                    videos: 1,
+                    conteudo: '<p>Os <strong>marcadores laboratoriais</strong> são essenciais para o diagnóstico de doenças cardíacas.</p><ul><li><strong>Troponinas:</strong> Marcadores específicos de lesão miocárdica.</li><li><strong>CK-MB:</strong> Menos específica que as troponinas.</li><li><strong>BNP:</strong> Marcador de insuficiência cardíaca.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Síndrome coronariana aguda: biomarcadores', descricao: 'Troponina, CK-MB e mioglobina.' }
+                    ]
+                },
+                'doencas-gastricas': {
+                    titulo: 'Doenças Gástricas',
+                    descricao: 'Sangue oculto, Helicobacter pylori, função hepática e enzimas pancreáticas.',
+                    icone: 'fa-stomach',
+                    cor: '#1e8449',
+                    artigos: 9,
+                    videos: 1,
+                    conteudo: '<p>O diagnóstico laboratorial das <strong>doenças gástricas</strong> inclui vários marcadores.</p><ul><li><strong>Sangue Oculto:</strong> Pesquisa de sangue no TGI.</li><li><strong>H. pylori:</strong> Teste respiratório, sorologia.</li><li><strong>Função Hepática:</strong> AST, ALT, FA, GGT.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Pesquisa de sangue oculto: indicações e métodos', descricao: 'Teste imunoquímico (FIT).' }
+                    ]
+                },
+                'acido-base': {
+                    titulo: 'Distúrbios Ácido-Básicos',
+                    descricao: 'Gasometria, pH, bicarbonato, ânion gap e distúrbios respiratórios e metabólicos.',
+                    icone: 'fa-vial',
+                    cor: '#1a5276',
+                    artigos: 10,
+                    videos: 1,
+                    conteudo: '<p>A <strong>gasometria arterial</strong> é o exame fundamental para avaliação do equilíbrio ácido-básico.</p><ul><li><strong>pH:</strong> Normal 7.35-7.45.</li><li><strong>pCO2:</strong> Avalia componente respiratório.</li><li><strong>HCO3:</strong> Avalia componente metabólico.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Interpretação da gasometria: passo a passo', descricao: 'Método sistematizado.' }
+                    ]
+                },
+                'doencas-metabolicas': {
+                    titulo: 'Doenças Metabólicas',
+                    descricao: 'Biomarcadores, farmacogenômica, diabetes, dislipidemias.',
+                    icone: 'fa-dna',
+                    cor: '#d68910',
+                    artigos: 16,
+                    videos: 3,
+                    conteudo: '<p>As <strong>doenças metabólicas</strong> afetam o metabolismo de carboidratos, lipídios e proteínas.</p><ul><li><strong>Diabetes:</strong> Glicemia, HbA1c.</li><li><strong>Dislipidemias:</strong> Colesterol total, LDL, HDL.</li><li><strong>Erros Inatos:</strong> Triagem neonatal.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Diabetes mellitus: diagnóstico e monitoramento', descricao: 'Glicemia, HbA1c.' }
+                    ]
+                }
+            },
+            // Microbiologia - dados resumidos
+            'microbiologia': {
+                'bacteriologia': {
+                    titulo: 'Bacteriologia',
+                    descricao: 'Estudo das bactérias, organismos procariontes importantes na saúde e indústria.',
+                    icone: 'fa-biohazard',
+                    cor: '#c0392b',
+                    artigos: 18,
+                    videos: 2,
+                    conteudo: '<p>A <strong>bacteriologia</strong> estuda as bactérias, microrganismos procariontes.</p><ul><li><strong>Estrutura:</strong> Parede celular, membrana.</li><li><strong>Classificação:</strong> Gram-positivas e Gram-negativas.</li><li><strong>Patogenicidade:</strong> Toxinas, adesinas.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Coloração de Gram: técnica e interpretação', descricao: 'Fundamental para identificação inicial.' }
+                    ]
+                },
+                'virologia': {
+                    titulo: 'Virologia',
+                    descricao: 'Estudo dos vírus, parasitas intracelulares que causam doenças.',
+                    icone: 'fa-virus',
+                    cor: '#6c3483',
+                    artigos: 15,
+                    videos: 2,
+                    conteudo: '<p>A <strong>virologia</strong> estuda os vírus, agentes infecciosos que necessitam de células hospedeiras.</p><ul><li><strong>Estrutura:</strong> Ácido nucleico, capsídeo.</li><li><strong>Replicação:</strong> Ciclo lítico e lisogênico.</li><li><strong>Doenças:</strong> Gripe, hepatites, AIDS.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'HIV: diagnóstico e monitoramento', descricao: 'Carga viral e contagem de CD4.' }
+                    ]
+                },
+                'micologia': {
+                    titulo: 'Micologia',
+                    descricao: 'Estudo dos fungos, incluindo leveduras e bolores.',
+                    icone: 'fa-seedling',
+                    cor: '#1e8449',
+                    artigos: 12,
+                    videos: 1,
+                    conteudo: '<p>A <strong>micologia</strong> estuda os fungos, organismos eucariontes.</p><ul><li><strong>Leveduras:</strong> Candida, Cryptococcus.</li><li><strong>Bolores:</strong> Aspergillus, Penicillium.</li><li><strong>Micoses:</strong> Candidíase, aspergilose.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Candidíase: diagnóstico e tratamento', descricao: 'Candida albicans.' }
+                    ]
+                },
+                'protozoologia': {
+                    titulo: 'Protozoologia',
+                    descricao: 'Estudo dos protozoários, organismos unicelulares eucariontes.',
+                    icone: 'fa-fish',
+                    cor: '#1a5276',
+                    artigos: 8,
+                    videos: 1,
+                    conteudo: '<p>A <strong>protozoologia</strong> estuda os protozoários, organismos unicelulares eucariontes.</p><ul><li><strong>Patogênicos:</strong> Plasmodium, Trypanosoma.</li><li><strong>Diagnóstico:</strong> Exame parasitológico, gota espessa.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Malária: diagnóstico e tratamento', descricao: 'Gota espessa, teste rápido.' }
+                    ]
+                },
+                'parasitologia': {
+                    titulo: 'Parasitologia',
+                    descricao: 'Estudo de parasitas e suas interações com hospedeiros.',
+                    icone: 'fa-bug',
+                    cor: '#ca6f1e',
+                    artigos: 14,
+                    videos: 2,
+                    conteudo: '<p>A <strong>parasitologia</strong> estuda os parasitas e suas relações com os hospedeiros.</p><ul><li><strong>Helmintos:</strong> Ascaris, Ancylostoma, Taenia.</li><li><strong>Transmissão:</strong> Ingestão, contato com solo, vetores.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Esquistossomose: diagnóstico e tratamento', descricao: 'Pesquisa de ovos nas fezes.' }
+                    ]
+                },
+                'controle-microbiano': {
+                    titulo: 'Controle Microbiano',
+                    descricao: 'Técnicas de esterilização, desinfecção e uso de antibióticos.',
+                    icone: 'fa-hand-sanitizer',
+                    cor: '#d68910',
+                    artigos: 10,
+                    videos: 1,
+                    conteudo: '<p>O <strong>controle microbiano</strong> envolve técnicas para eliminar ou inibir microrganismos.</p><ul><li><strong>Esterilização:</strong> Autoclave, estufa, radiação.</li><li><strong>Desinfecção:</strong> Álcool, hipoclorito.</li><li><strong>Antibióticos:</strong> Penicilinas, cefalosporinas.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Resistência bacteriana: mecanismos e prevenção', descricao: 'Uso racional de antibióticos.' }
+                    ]
+                }
+            },
+            // Imunologia - dados resumidos
+            'imunologia': {
+                'imuno-clinica': {
+                    titulo: 'Imunologia Clínica',
+                    descricao: 'Doenças causadas por disfunções do sistema imunológico.',
+                    icone: 'fa-hospital',
+                    cor: '#2471a3',
+                    artigos: 14,
+                    videos: 2,
+                    conteudo: '<p>A <strong>imunologia clínica</strong> estuda as doenças relacionadas ao sistema imune.</p><ul><li><strong>Imunodeficiências:</strong> HIV/AIDS, imunodeficiências primárias.</li><li><strong>Alergias:</strong> Asma, rinite alérgica.</li><li><strong>Autoimunes:</strong> Lúpus, artrite reumatoide.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Lúpus eritematoso sistêmico: critérios diagnósticos', descricao: 'FAN, anti-DNA.' }
+                    ]
+                },
+                'imuno-celular': {
+                    titulo: 'Imunologia Celular',
+                    descricao: 'Células envolvidas nas respostas imunes: linfócitos, macrófagos e NK.',
+                    icone: 'fa-microscope',
+                    cor: '#1a7a3a',
+                    artigos: 10,
+                    videos: 2,
+                    conteudo: '<p>A <strong>imunologia celular</strong> estuda as células do sistema imunológico.</p><ul><li><strong>Linfócitos B:</strong> Produzem anticorpos.</li><li><strong>Linfócitos T:</strong> T CD4+ e T CD8+.</li><li><strong>Células NK:</strong> Resposta a tumores.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Linfócitos T: ativação e diferenciação', descricao: 'Subtipos e funções.' }
+                    ]
+                },
+                'imunoterapia': {
+                    titulo: 'Imunoterapia',
+                    descricao: 'Utiliza o sistema imunológico para tratar doenças.',
+                    icone: 'fa-syringe',
+                    cor: '#6c3483',
+                    artigos: 9,
+                    videos: 1,
+                    conteudo: '<p>A <strong>imunoterapia</strong> utiliza o sistema imunológico para combater doenças.</p><ul><li><strong>Oncológica:</strong> Inibidores de checkpoint, CAR-T cells.</li><li><strong>Autoimunes:</strong> Imunossupressores, anticorpos monoclonais.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Imunoterapia no melanoma: inibidores de checkpoint', descricao: 'Nivolumabe, pembrolizumabe.' }
+                    ]
+                },
+                'imunogenetica': {
+                    titulo: 'Imunogenética',
+                    descricao: 'Identifica genes relacionados a doenças imunológicas.',
+                    icone: 'fa-dna',
+                    cor: '#ca6f1e',
+                    artigos: 7,
+                    videos: 1,
+                    conteudo: '<p>A <strong>imunogenética</strong> estuda a base genética das respostas imunes.</p><ul><li><strong>Sistema HLA:</strong> Complexo principal de histocompatibilidade.</li><li><strong>Genes de Suscetibilidade:</strong> HLA-B27 na espondilite anquilosante.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'HLA e transplantes: importância e tipagem', descricao: 'Compatibilidade e rejeição.' }
+                    ]
+                },
+                'imunoparasitologia': {
+                    titulo: 'Imunoparasitologia',
+                    descricao: 'Analisa a defesa do organismo contra parasitas.',
+                    icone: 'fa-bug',
+                    cor: '#1e8449',
+                    artigos: 6,
+                    videos: 1,
+                    conteudo: '<p>A <strong>imunoparasitologia</strong> estuda a interação entre o sistema imunológico e os parasitas.</p><ul><li><strong>Resposta Imune:</strong> Mecanismos celulares e humorais.</li><li><strong>Evasão Imunológica:</strong> Variação antigênica, inibição.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Evasão imunológica em parasitas', descricao: 'Mecanismos e implicações.' }
+                    ]
+                },
+                'psiconeuroimuno': {
+                    titulo: 'Psiconeuroimunologia',
+                    descricao: 'Interação entre sistema imunológico, comportamento e sistema neuroendócrino.',
+                    icone: 'fa-brain',
+                    cor: '#c0392b',
+                    artigos: 5,
+                    videos: 1,
+                    conteudo: '<p>A <strong>psiconeuroimunologia</strong> estuda a interação entre o sistema nervoso, endócrino e imunológico.</p><ul><li><strong>Eixo HHA:</strong> Ativado por estresse, libera cortisol.</li><li><strong>Citocinas e Comportamento:</strong> IL-1, IL-6, TNF-α.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Estresse e imunidade: mecanismos e implicações', descricao: 'Efeitos do cortisol.' }
+                    ]
+                }
+            },
+            // Urinálise - dados resumidos
+            'urinalise': {
+                'exame-fisico': {
+                    titulo: 'Exame Físico da Urina',
+                    descricao: 'Análise das propriedades visuais: cor, clareza, odor.',
+                    icone: 'fa-eye',
+                    cor: '#2471a3',
+                    artigos: 8,
+                    videos: 1,
+                    conteudo: '<p>O <strong>exame físico</strong> da urina avalia as características visuais da amostra.</p><ul><li><strong>Cor:</strong> Amarelo claro a âmbar.</li><li><strong>Clareza:</strong> Normalmente transparente.</li><li><strong>Odor:</strong> Característico.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Interpretação da cor da urina', descricao: 'Causas de alterações cromáticas.' }
+                    ]
+                },
+                'exame-quimico': {
+                    titulo: 'Exame Químico da Urina',
+                    descricao: 'Avaliação de pH, densidade, proteínas, glicose, cetonas.',
+                    icone: 'fa-flask',
+                    cor: '#1a7a3a',
+                    artigos: 12,
+                    videos: 2,
+                    conteudo: '<p>O <strong>exame químico</strong> da urina utiliza fitas reagentes.</p><ul><li><strong>pH:</strong> Normal 4.6-8.0.</li><li><strong>Densidade:</strong> Normal 1.005-1.030.</li><li><strong>Proteínas:</strong> < 150 mg/dia.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Fita reagente: interpretação dos parâmetros', descricao: 'Sensibilidade e especificidade.' }
+                    ]
+                },
+                'sedimentoscopia': {
+                    titulo: 'Sedimentoscopia',
+                    descricao: 'Análise microscópica do sedimento: hemácias, leucócitos, cilindros.',
+                    icone: 'fa-microscope',
+                    cor: '#6c3483',
+                    artigos: 10,
+                    videos: 2,
+                    conteudo: '<p>A <strong>sedimentoscopia</strong> é a análise microscópica do sedimento urinário.</p><ul><li><strong>Hemácias:</strong> > 3 por campo = hematúria.</li><li><strong>Leucócitos:</strong> > 5 por campo = piúria.</li><li><strong>Cilindros:</strong> Hialinos, granulosos, hemáticos.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Cilindros urinários: tipos e significados', descricao: 'Diagnóstico diferencial.' }
+                    ]
+                },
+                'doencas-renais-urina': {
+                    titulo: 'Doenças Renais',
+                    descricao: 'Proteinúria, cilindrúria, hematúria – diagnóstico de doenças renais.',
+                    icone: 'fa-kidney',
+                    cor: '#c0392b',
+                    artigos: 9,
+                    videos: 1,
+                    conteudo: '<p>A <strong>urinálise</strong> é fundamental no diagnóstico de doenças renais.</p><ul><li><strong>Proteinúria:</strong> Marcador de lesão glomerular.</li><li><strong>Cilindrúria:</strong> Cilindros hemáticos = glomerulonefrite.</li><li><strong>Hematúria:</strong> Sangue na urina.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Glomerulonefrite: diagnóstico laboratorial', descricao: 'Proteinúria, hematúria dismórfica.' }
+                    ]
+                },
+                'infeccoes-urina': {
+                    titulo: 'Infecções Urinárias',
+                    descricao: 'Urocultura, nitritos, esterase leucocitária.',
+                    icone: 'fa-bacteria',
+                    cor: '#d68910',
+                    artigos: 11,
+                    videos: 1,
+                    conteudo: '<p>As <strong>infecções urinárias</strong> são muito comuns na prática clínica.</p><ul><li><strong>Urocultura:</strong> Padrão ouro para diagnóstico.</li><li><strong>Nitritos e Esterase:</strong> Marcadores indiretos.</li><li><strong>Piúria:</strong> Leucócitos na urina.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Urocultura: coleta e interpretação', descricao: 'Como orientar o paciente.' }
+                    ]
+                },
+                'doencas-metabolicas-urina': {
+                    titulo: 'Doenças Metabólicas',
+                    descricao: 'Glicosúria, corpos cetônicos, cristalúria.',
+                    icone: 'fa-dna',
+                    cor: '#1e8449',
+                    artigos: 7,
+                    videos: 1,
+                    conteudo: '<p>A <strong>urinálise</strong> pode detectar alterações metabólicas importantes.</p><ul><li><strong>Glicosúria:</strong> Diabetes mellitus.</li><li><strong>Cetonúria:</strong> Cetoacidose, jejum prolongado.</li><li><strong>Cristalúria:</strong> Oxalato de cálcio, urato.</li></ul>',
+                    artigosRelacionados: [
+                        { titulo: 'Cristais urinários: tipos e significado clínico', descricao: 'Prevenção de litíase renal.' }
+                    ]
+                }
+            }
+        };
+
+        // ===== FUNÇÃO PARA CARREGAR A MATÉRIA =====
+        function carregarMateria() {
+            const params = new URLSearchParams(window.location.search);
+            const area = params.get('area');
+            const materia = params.get('materia');
+
+            if (!area || !materia) {
+                document.getElementById('materiaTitulo').textContent = 'Matéria não encontrada';
+                document.getElementById('conteudoBody').innerHTML = '<p>Parâmetros inválidos.</p>';
+                return;
+            }
+
+            const dados = materiasData[area]?.[materia];
+            if (!dados) {
+                document.getElementById('materiaTitulo').textContent = 'Matéria não encontrada';
+                document.getElementById('conteudoBody').innerHTML = '<p>Esta matéria não está disponível.</p>';
+                return;
+            }
+
+            const areaNomes = {
+                'hematologia': 'Hematologia',
+                'bioquimica': 'Bioquímica Clínica',
+                'microbiologia': 'Microbiologia',
+                'imunologia': 'Imunologia',
+                'urinalise': 'Urinálise'
+            };
+
+            document.getElementById('materiaBadge').innerHTML = '<i class="fas fa-' + dados.icone + '"></i> ' + dados.titulo;
+            document.getElementById('areaLink').textContent = areaNomes[area] || area;
+            document.getElementById('areaLink').href = area + '.html';
+            document.getElementById('materiaNome').textContent = dados.titulo;
+            document.getElementById('materiaTitulo').textContent = dados.titulo;
+            document.getElementById('materiaDesc').textContent = dados.descricao;
+            document.getElementById('materiaIcon').innerHTML = '<i class="fas fa-' + dados.icone + '" style="color:' + dados.cor + '"></i>';
+
+            document.getElementById('conteudoTitulo').textContent = dados.titulo;
+            document.getElementById('artigosCount').textContent = dados.artigos;
+            document.getElementById('videosCount').textContent = dados.videos;
+            document.getElementById('conteudoBody').innerHTML = dados.conteudo;
+
+            const container = document.getElementById('artigosRelacionados');
+            container.innerHTML = '';
+            if (dados.artigosRelacionados && dados.artigosRelacionados.length > 0) {
+                dados.artigosRelacionados.forEach(art => {
+                    const div = document.createElement('div');
+                    div.className = 'artigo-mini';
+                    div.innerHTML = '<h4>' + art.titulo + '</h4><p>' + art.descricao + '</p>';
+                    container.appendChild(div);
+                });
+            } else {
+                container.innerHTML = '<p style="color:#5c7f9a;">Nenhum artigo relacionado disponível.</p>';
+            }
+
+            document.title = 'LabEnsina • ' + dados.titulo;
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarMateria);
+    </script>
+</body>
+</html>
